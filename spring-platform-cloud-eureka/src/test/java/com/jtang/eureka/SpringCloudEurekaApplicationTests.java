@@ -1,0 +1,1 @@
+package com.jtang.eureka;import org.junit.jupiter.api.Test;class SpringCloudEurekaApplicationTests {    @Test    void contextLoads() {        System.out.println("aaa");    }}

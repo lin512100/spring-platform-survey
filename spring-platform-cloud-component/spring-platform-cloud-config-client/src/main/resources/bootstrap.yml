@@ -1,0 +1,34 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: spring-platform-config-client
+  cloud:
+    config:
+      name: springcloud-config
+      profile: pro
+      label: master
+      discovery:
+        enabled: true
+        service-id: spring-platform-cloud-config-server
+    bus:
+      trace:
+        enabled: true
+  rabbitmq:
+    host:
+    port:
+    username:
+    password:
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
+  server:
+    port: ${server.port}
+debug: true
