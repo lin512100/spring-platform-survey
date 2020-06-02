@@ -1,4 +1,4 @@
-package com.jtang.configserver;
+package com.linjt.configserver;
 
 import org.junit.jupiter.api.Test;
 
