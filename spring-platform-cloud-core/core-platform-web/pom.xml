@@ -13,9 +13,10 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
+
         <dependency>
             <groupId>com.jtang</groupId>
-            <artifactId>core-generator-code</artifactId>
+            <artifactId>spring-platform-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

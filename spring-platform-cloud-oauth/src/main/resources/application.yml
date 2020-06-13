@@ -4,13 +4,13 @@ eureka:
       defaultZone: http://127.0.0.1:8761/eureka/
 spring:
   application:
-    name: platform-account
+    name: platform-oauth
   profiles:
     active: thymeleaf
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/platform-account?useUnicode=true&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/platform-oauth?useUnicode=true&serverTimezone=UTC&useSSL=false
     username: root
     password: root
     hikari:
@@ -22,14 +22,10 @@ spring:
       max-lifetime: 1800000
       connection-timeout: 30000
       connection-test-query: SELECT 1
+  security:
+    user:
+      name: user
+      password: 123
+server:
+  port: 8089
 
-mybatis-plus:
-  mapper-locations: classpath:/mapper/*Mapper.xml
-  global-config:
-    banner: false
-    db-config:
-      id-type: AUTO
-      table-underline: true
-  configuration:
-    map-underscore-to-camel-case: true
-  type-aliases-package: com.jtang.entity

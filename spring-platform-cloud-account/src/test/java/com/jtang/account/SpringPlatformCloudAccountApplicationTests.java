@@ -1,22 +1,32 @@
 package com.jtang.account;
 
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
+import com.jtang.account.service.ITbRolePermissionService;
+import com.jtang.account.service.ITbUserRoleService;
 import com.jtang.generator.CodeGenerator;
 import com.jtang.generator.GeneratorParamDTO;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 @SpringBootTest
 class SpringPlatformCloudAccountApplicationTests {
+
+    @Autowired
+    private ITbRolePermissionService iTbRolePermissionService;
 
     @Test
     void contextLoads() {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://129.204.1.173:3306/platform-account?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/platform-account?useUnicode=true&serverTimezone=UTC&useSSL=false");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("Jtang!14010025");
+        dsc.setPassword("root");
 
         GeneratorParamDTO generatorParamDTO = new GeneratorParamDTO();
         // 设置生成地址
@@ -27,7 +37,7 @@ class SpringPlatformCloudAccountApplicationTests {
 
         // 设置作者
         generatorParamDTO.setAuthor("jtang");
-        generatorParamDTO.setModuleName("bussiness");
+        generatorParamDTO.setModuleName("account");
         CodeGenerator.genertor(generatorParamDTO , dsc);
 
     }

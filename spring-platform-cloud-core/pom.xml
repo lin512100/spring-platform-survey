@@ -17,6 +17,8 @@
     <modules>
         <module>core-generator-code</module>
         <module>core-platform-web</module>
+        <module>spring-platform-core</module>
+        <module>spring-platform-core-feign</module>
     </modules>
 
     <dependencies>
@@ -43,9 +45,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+    </dependencies>
 
-</dependencies>
-
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.2.6.RELEASE</version>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
