@@ -2,10 +2,7 @@ package com.jtang.account.service;
 
 import com.jtang.account.entity.TbUser;
 import com.baomidou.mybatisplus.extension.service.IService;
-import core.account.UserDetail;
-
-import java.util.List;
-import java.util.Map;
+import core.account.UserInfo;
 
 /**
 * <p>
@@ -19,7 +16,7 @@ public interface ITbUserService extends IService<TbUser> {
     /**
      * 根据用户名获取用户信息
      * @param username 用户名
-     * @return {@link UserDetail}
+     * @return {@link UserInfo}
      * */
-    UserDetail loadUserByName(String username);
+    UserInfo loadUserByName(String username);
 }

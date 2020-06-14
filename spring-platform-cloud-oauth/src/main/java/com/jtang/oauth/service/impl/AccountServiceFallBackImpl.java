@@ -1,7 +1,7 @@
-package com.jtang.service.impl;
+package com.jtang.oauth.service.impl;
 
-import com.jtang.service.AccountService;
-import core.account.UserDetail;
+import com.jtang.oauth.service.AccountService;
+import core.account.UserInfo;
 import core.constants.ServiceConstants;
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,8 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 public class AccountServiceFallBackImpl implements AccountService {
 
     @Override
-    public UserDetail getUserDetail(String username) {
+    public UserInfo getUserDetail(String username) {
         log.error(ServiceConstants.OAUTH_SERVICE + " call " + ServiceConstants.ACCOUNT_SERVICE + " error: " + username);
-        return new UserDetail();
+        return null;
     }
 }

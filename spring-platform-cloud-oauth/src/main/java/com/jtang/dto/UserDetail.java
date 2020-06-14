@@ -1,8 +1,11 @@
-package core.account;
+package com.jtang.dto;
 
+import core.account.UserStatusEnums;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -14,6 +17,7 @@ import java.util.List;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 public class UserDetail implements UserDetails {
 
     private String username;
@@ -57,5 +61,15 @@ public class UserDetail implements UserDetails {
     @Override
     public boolean isEnabled() {
         return UserStatusEnums.NORMAL.getStatus() == this.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.username.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof UserDetail && this.username.equals(((UserDetail) obj).username);
     }
 }

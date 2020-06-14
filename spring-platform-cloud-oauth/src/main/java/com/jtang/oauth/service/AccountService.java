@@ -1,7 +1,7 @@
-package com.jtang.service;
+package com.jtang.oauth.service;
 
-import com.jtang.service.impl.AccountServiceFallBackImpl;
-import core.account.UserDetail;
+import com.jtang.oauth.service.impl.AccountServiceFallBackImpl;
+import core.account.UserInfo;
 import core.constants.ServiceConstants;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +18,8 @@ public interface AccountService {
     /**
      * 获取用户信息
      * @param username 用户名
-     * @return {@link UserDetail}
+     * @return {@link UserInfo}
      * */
     @GetMapping(value = "/api/userDetail")
-    UserDetail getUserDetail(@RequestParam(value = "username") String username);
+    UserInfo getUserDetail(@RequestParam(value = "username") String username);
 }

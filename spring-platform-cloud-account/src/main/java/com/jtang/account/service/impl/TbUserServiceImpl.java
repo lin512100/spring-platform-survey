@@ -2,28 +2,20 @@ package com.jtang.account.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jtang.account.entity.TbPermission;
-import com.jtang.account.entity.TbRole;
 import com.jtang.account.entity.TbUser;
-import com.jtang.account.entity.TbUserRole;
 import com.jtang.account.mapper.TbUserMapper;
 import com.jtang.account.service.ITbPermissionService;
 import com.jtang.account.service.ITbRolePermissionService;
 import com.jtang.account.service.ITbUserRoleService;
 import com.jtang.account.service.ITbUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import core.account.UserDetail;
-import core.exception.BusinessException;
+import core.account.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.apache.commons.lang3.StringUtils;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,13 +42,13 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser> impleme
     private ITbPermissionService iTbPermissionService;
 
     @Override
-    public UserDetail loadUserByName(String username) {
+    public UserInfo loadUserByName(String username) {
         QueryWrapper<TbUser> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(TbUser::getUsername,username);
         // 查询用户信息
         TbUser user = getOne(queryWrapper);
         if(user == null){
-            throw new BusinessException("用户名不存在");
+            return new UserInfo();
         }
         // 查询角色ID
         List<Long> roleIds = iTbUserRoleService.getRoleIdByUserId(user.getId());
@@ -68,12 +60,13 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser> impleme
         List<TbPermission> permissions = iTbPermissionService.getListById(permissionIds);
 
         // 封装用户信息
-        UserDetail userDetail = new UserDetail();
-        BeanUtils.copyProperties(user,userDetail);
+        UserInfo userInfo = new UserInfo();
+        BeanUtils.copyProperties(user,userInfo);
         // 封装权限信息
-        List<GrantedAuthority> authorities = permissions.stream().map(x -> new SimpleGrantedAuthority(x.getUrl())).collect(Collectors.toList());
-        userDetail.setAuthorities(authorities);
-        return userDetail;
+        List<String> authorities = permissions.stream().map(TbPermission::getUrl).collect(Collectors.toList());
+        userInfo.setRole(authorities);
+        log.info("loadUserByName :" + username);
+        return userInfo;
     }
 
 }

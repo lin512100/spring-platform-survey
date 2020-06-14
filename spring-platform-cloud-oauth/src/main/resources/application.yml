@@ -29,3 +29,14 @@ spring:
 server:
   port: 8089
 
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  global-config:
+    banner: false
+    db-config:
+      id-type: AUTO
+      table-underline: true
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.jtang.oauth.controller.entity

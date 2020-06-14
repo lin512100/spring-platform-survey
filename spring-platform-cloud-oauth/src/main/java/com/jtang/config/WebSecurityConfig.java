@@ -1,17 +1,21 @@
 package com.jtang.config;
 
-import com.jtang.authentication.SecurityAuthenticationFailureHandler;
-import com.jtang.authentication.SecurityAuthenticationSuccessHandler;
+import com.jtang.filter.VerificationCodeFilter;
+import com.jtang.oauth.entity.TbPersistentLogin;
+import com.jtang.oauth.service.ITbPersistentLoginService;
+import com.jtang.oauth.service.impl.TokenRepositoryImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 
 /**
@@ -23,32 +27,57 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    private ITbPersistentLoginService iTbPersistentLoginService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        TokenRepositoryImpl tokenRepository = new TokenRepositoryImpl(iTbPersistentLoginService);
+
         http.authorizeRequests()
-            .antMatchers("/admin/api/**").hasRole("ADMIN")
-            .antMatchers("/user/api/**").hasRole("USER")
-            .antMatchers("/app/api/**","/myLogin.html")
-            .permitAll()
-            .anyRequest().authenticated()
+                .antMatchers("/admin/api/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/user/api/**").hasAnyAuthority("USER")
+                .antMatchers("/app/api/**", "/captcha.jpg").permitAll()
+                .anyRequest().authenticated()
             .and()
-            .formLogin().loginPage("/myLogin.html")
-            // 指定处理登录请求的路径
-            .loginProcessingUrl("/login")
-            //指定登录成功时的处理逻辑
-            .successHandler(new SecurityAuthenticationSuccessHandler())
-            .failureHandler(new SecurityAuthenticationFailureHandler())
+                .formLogin()
+//                .failureHandler(new SecurityAuthenticationFailureHandler())
+//                .successHandler(new SecurityAuthenticationSuccessHandler())
+//                .loginPage("/myLogin.html")
+//                .loginProcessingUrl("/login")
+                .permitAll()
+//            .and()
+//                .rememberMe()
+//                .userDetailsService(userDetailsService)
+//                // 2. 持久化令牌方案
+//                .tokenRepository(tokenRepository)
+//                // 7天有效期
+//                .tokenValiditySeconds(60 * 60 * 24 * 7)
+//            .and()
+//                .logout()
+//                .logoutUrl("/myLogout")
+//                // 注销成功，重定向到该路径下
+//                .logoutSuccessUrl("/")
+//                .invalidateHttpSession(true)
             .and()
-            .csrf().disable();
+            .sessionManagement()
+                // 会话过期策略
+                .invalidSessionUrl("/login")
+                .maximumSessions(1).maxSessionsPreventsLogin(true);
+//            .and()
+//                .csrf()
+//                .disable();
+        // 将过滤器添加在UsernamePasswordAuthenticationFilter之前
+//        http.addFilterBefore(new VerificationCodeFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("user").password("123").roles("USER").build());
-        manager.createUser(User.withUsername("admin").password("123").roles("USER", "ADMIN").build());
-        return manager;
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
     }
 
     @Bean

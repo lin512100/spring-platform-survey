@@ -2,15 +2,11 @@ package com.jtang.account;
 
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.jtang.account.service.ITbRolePermissionService;
-import com.jtang.account.service.ITbUserRoleService;
 import com.jtang.generator.CodeGenerator;
 import com.jtang.generator.GeneratorParamDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @SpringBootTest

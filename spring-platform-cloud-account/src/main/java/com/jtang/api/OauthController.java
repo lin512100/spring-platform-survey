@@ -1,7 +1,7 @@
 package com.jtang.api;
 
 import com.jtang.account.service.ITbUserService;
-import core.account.UserDetail;
+import core.account.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +19,7 @@ public class OauthController {
     private ITbUserService iTbUserService;
 
     @GetMapping("/userDetail")
-    public UserDetail getUserDetail(@RequestParam("username") String username){
+    public UserInfo getUserDetail(@RequestParam("username") String username){
         return iTbUserService.loadUserByName(username);
     }
 }

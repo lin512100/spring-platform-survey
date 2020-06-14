@@ -3,7 +3,7 @@ package com.jtang.account.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.jtang.business.query.TbPermissionQueryDTO;
+import com.jtang.account.query.TbPermissionQueryDTO;
 import com.jtang.account.entity.TbPermission;
 import com.jtang.account.service.ITbPermissionService;
 import com.jtang.web.utils.PageUtils;

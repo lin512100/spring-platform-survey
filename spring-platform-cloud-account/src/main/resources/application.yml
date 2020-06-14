@@ -32,4 +32,4 @@ mybatis-plus:
       table-underline: true
   configuration:
     map-underscore-to-camel-case: true
-  type-aliases-package: com.jtang.entity
+  type-aliases-package: com.jtang.oauth.controller.entity
