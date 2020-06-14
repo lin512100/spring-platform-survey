@@ -26,6 +26,11 @@ spring:
     user:
       name: user
       password: 123
+  redis:
+    host: 127.0.0.0
+    port: 6378
+    database: 0
+    password:
 server:
   port: 8089
 

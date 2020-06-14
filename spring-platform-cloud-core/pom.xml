@@ -19,6 +19,7 @@
         <module>core-platform-web</module>
         <module>spring-platform-core</module>
         <module>spring-platform-core-feign</module>
+        <module>spring-platform-core-redis</module>
     </modules>
 
     <dependencies>
