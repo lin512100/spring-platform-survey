@@ -1,45 +1,69 @@
 package com.jtang.oauth.service.impl;
 
-import com.jtang.dto.UserDetail;
-import com.jtang.oauth.service.AccountService;
-import core.account.UserInfo;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
+import com.jtang.oauth.entity.PlatformMenu;
+import com.jtang.oauth.entity.PlatformUser;
+import com.jtang.oauth.entity.UserJwt;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.provider.ClientDetails;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-/**
- * @date 2020/6/14 9:38
- * @author LinJinTang
- */
-@Slf4j
 @Service
-@Primary
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private AccountService accountService;
+    ClientDetailsService clientDetailsService;
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        UserInfo userInfo = accountService.getUserDetail(s);
-        if(userInfo == null || userInfo.getUsername() == null){
-            throw new UsernameNotFoundException("用户信息不存在");
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        //取出身份，如果身份为空说明没有认证
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        //没有认证统一采用httpbasic认证，httpbasic中存储了client_id和client_secret，开始认证client_id和client_secret
+        if(authentication==null){
+            ClientDetails clientDetails = clientDetailsService.loadClientByClientId(username);
+            if(clientDetails!=null){
+                //密码
+                String clientSecret = clientDetails.getClientSecret();
+                return new User(username,clientSecret, AuthorityUtils.commaSeparatedStringToAuthorityList(""));
+            }
         }
-        UserDetail userDetail = new UserDetail();
-        BeanUtils.copyProperties(userInfo, userDetail);
-        // 权限集合
-        List<GrantedAuthority> grantedAuthorities = userInfo.getRole().stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-        userDetail.setAuthorities(grantedAuthorities);
-        return userDetail;
+        if (StringUtils.isEmpty(username)) {
+            return null;
+        }
+        PlatformUser userext = new PlatformUser();
+        userext.setUsername("itcast");
+        userext.setPassword(new BCryptPasswordEncoder().encode("123"));
+
+        //取出正确密码（hash值）
+        String password = userext.getPassword();
+        //这里暂时使用静态密码
+//       String password ="123";
+        //用户权限，这里暂时使用静态数据，最终会从数据库读取
+        //从数据库获取权限
+//        List<PlatformUser> permissions = userext.getPermissions();
+//        List<String> user_permission = new ArrayList<>();
+//        permissions.forEach(item-> user_permission.add(item.getCode()));
+        String userPermissionString  = StringUtils.join("001,002", ",");
+        UserJwt userDetails = new UserJwt(username,
+                password,
+                AuthorityUtils.commaSeparatedStringToAuthorityList(userPermissionString));
+        userDetails.setId(userext.getId());
+       /* UserDetails userDetails = new org.springframework.security.core.userdetails.User(username,
+                password,
+                AuthorityUtils.commaSeparatedStringToAuthorityList(""));*/
+//                AuthorityUtils.createAuthorityList("course_get_baseinfo","course_get_list"));
+        return userDetails;
     }
 }

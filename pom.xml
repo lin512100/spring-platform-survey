@@ -22,7 +22,6 @@
     <modules>
         <module>spring-platform-cloud-eureka</module>
         <module>spring-platform-cloud-core</module>
-        <module>spring-platform-cloud-account</module>
         <module>spring-platform-cloud-gateway</module>
         <module>spring-platform-cloud-oauth</module>
         <module>spring-platform-cloud-config-server</module>

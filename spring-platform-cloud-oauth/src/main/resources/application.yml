@@ -27,10 +27,10 @@ spring:
       name: user
       password: 123
   redis:
-    host: 127.0.0.0
-    port: 6378
+    host: 129.204.1.173
+    port: 6379
     database: 0
-    password:
+    password: Jtang!14010025
 server:
   port: 8089
 
@@ -45,3 +45,16 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
   type-aliases-package: com.jtang.oauth.controller.entity
+
+encrypt:
+  key-store:
+    location: classpath:/xc.keystore
+    secret: xuechengkeystore
+    alias: xckey
+    password: xuecheng
+auth:
+  tokenValiditySeconds: 1200  #token存储到redis的过期时间
+  clientId: XcWebApp
+  clientSecret: XcWebApp
+  cookieDomain: xuecheng.com
+  cookieMaxAge: -1
