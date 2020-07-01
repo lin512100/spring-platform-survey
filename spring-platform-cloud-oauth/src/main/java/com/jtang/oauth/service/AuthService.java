@@ -1,29 +1,20 @@
 package com.jtang.oauth.service;
 
 import com.alibaba.fastjson.JSON;
-import core.client.PlatformServiceList;
+import core.client.ServiceConstants;
 import core.model.AuthToken;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.DefaultResponseErrorHandler;
-import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
 import java.net.URI;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Administrator
@@ -81,7 +72,7 @@ public class AuthService {
     private AuthToken applyToken(String username, String password, String clientId, String clientSecret){
         //从eureka中获取认证服务的地址（因为spring security在认证服务中）
         //从eureka中获取认证服务的一个实例的地址
-        ServiceInstance serviceInstance = loadBalancerClient.choose(PlatformServiceList.PLATFORM_SERVICE_AUTH);
+        ServiceInstance serviceInstance = loadBalancerClient.choose(ServiceConstants.ACCOUNT_SERVICE);
         //此地址就是http://ip:port
         URI uri = serviceInstance.getUri();
         //令牌申请的地址 http://localhost:40400/auth/oauth/token

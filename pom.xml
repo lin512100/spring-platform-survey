@@ -25,7 +25,8 @@
         <module>spring-platform-cloud-gateway</module>
         <module>spring-platform-cloud-oauth</module>
         <module>spring-platform-cloud-config-server</module>
-        <module>spring-platform-cloud-book</module>
+        <module>spring-platform-cloud-common</module>
+        <module>spring-platform-cloud-model</module>
     </modules>
 
     <dependencies>

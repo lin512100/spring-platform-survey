@@ -1,8 +1,8 @@
 package com.jtang;
 
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import com.jtang.generator.CodeGenerator;
-import com.jtang.generator.GeneratorParamDTO;
+import com.jtang.web.generator.CodeGenerator;
+import com.jtang.web.generator.GeneratorParamDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
