@@ -1,6 +1,6 @@
 package com.jtang.oauth.config;
 
-import com.jtang.oauth.entity.UserJwt;
+import com.jtang.oauth.model.UserJwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -19,6 +19,7 @@ import java.util.Map;
  */
 @Component
 public class CustomUserAuthenticationConverter extends DefaultUserAuthenticationConverter {
+
     @Autowired
     UserDetailsService userDetailsService;
 

@@ -21,12 +21,11 @@
 
     <modules>
         <module>spring-platform-cloud-eureka</module>
-        <module>spring-platform-cloud-core</module>
         <module>spring-platform-cloud-gateway</module>
         <module>spring-platform-cloud-oauth</module>
         <module>spring-platform-cloud-config-server</module>
         <module>spring-platform-cloud-common</module>
-        <module>spring-platform-cloud-model</module>
+        <module>spring-platform-cloud-generator</module>
     </modules>
 
     <dependencies>

@@ -1,7 +1,14 @@
 eureka:
   client:
+    registerWithEureka: true #服务注册开关
+    fetchRegistry: true #服务发现开关
     service-url:
-      defaultZone: http://127.0.0.1:8761/eureka/
+      defaultZone: http://129.204.1.173:8761/eureka/
+  instance:
+    prefer-ip-address:  true  #将自己的ip地址注册到Eureka服务中
+    ip-address: ${IP_ADDRESS:127.0.0.1}
+    instance-id: ${spring.application.name}:${server.port} #指定实例idinstance:
+
 spring:
   application:
     name: platform-oauth
@@ -10,9 +17,9 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/platform-oauth?useUnicode=true&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://129.204.1.173:3306/platform-oauth?useUnicode=true&serverTimezone=UTC&useSSL=false
     username: root
-    password: root
+    password: Jtang!14010025
     hikari:
       minimum-idle: 5
       idle-timeout: 180000
@@ -33,7 +40,6 @@ spring:
     password: Jtang!14010025
 server:
   port: 8089
-
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml

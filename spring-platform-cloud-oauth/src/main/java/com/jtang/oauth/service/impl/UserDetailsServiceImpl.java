@@ -1,10 +1,11 @@
 package com.jtang.oauth.service.impl;
 
-import com.jtang.oauth.entity.PlatformMenu;
-import com.jtang.oauth.entity.PlatformUser;
-import com.jtang.oauth.entity.UserJwt;
+import com.jtang.common.model.auth.PlatformUser;
+import com.jtang.oauth.model.UserJwt;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,10 +18,13 @@ import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * @date 2020/7/1 21:45
+ * @author LinJinTang
+ */
 @Service
+@Primary
+@Slf4j
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -30,20 +34,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //取出身份，如果身份为空说明没有认证
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        //没有认证统一采用httpbasic认证，httpbasic中存储了client_id和client_secret，开始认证client_id和client_secret
+        //没有认证统一采用http basic认证，http basic中存储了client_id和client_secret，开始认证client_id和client_secret
         if(authentication==null){
             ClientDetails clientDetails = clientDetailsService.loadClientByClientId(username);
             if(clientDetails!=null){
                 //密码
+                log.error(clientDetails.toString());
                 String clientSecret = clientDetails.getClientSecret();
-                return new User(username,clientSecret, AuthorityUtils.commaSeparatedStringToAuthorityList(""));
+                return new User(username,clientSecret, AuthorityUtils.commaSeparatedStringToAuthorityList("aa,aa"));
             }
         }
         if (StringUtils.isEmpty(username)) {
             return null;
         }
         PlatformUser userext = new PlatformUser();
-        userext.setUsername("itcast");
+        userext.setUsername("jtang");
         userext.setPassword(new BCryptPasswordEncoder().encode("123"));
 
         //取出正确密码（hash值）

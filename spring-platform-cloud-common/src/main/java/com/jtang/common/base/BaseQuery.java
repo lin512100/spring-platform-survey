@@ -1,4 +1,4 @@
-package com.jtang.web.base;
+package com.jtang.common.base;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;

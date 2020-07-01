@@ -1,7 +1,7 @@
-package com.jtang.web.utils;
+package com.jtang.common.utils;
 
 
-import com.jtang.web.base.ResultCodeEnum;
+import com.jtang.common.base.ResultCodeEnum;
 import lombok.Getter;
 
 import java.io.Serializable;

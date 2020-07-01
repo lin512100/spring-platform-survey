@@ -1,4 +1,4 @@
-package com.jtang.web.base;
+package com.jtang.common.base;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

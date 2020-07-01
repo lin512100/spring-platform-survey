@@ -1,6 +1,6 @@
 package com.jtang.business.query;
 
-import com.jtang.web.base.BaseQuery;
+import com.jtang.common.base.BaseQuery;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

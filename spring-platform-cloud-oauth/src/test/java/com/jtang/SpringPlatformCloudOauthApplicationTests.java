@@ -6,7 +6,6 @@ import com.jtang.web.generator.GeneratorParamDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
 @SpringBootTest
 class SpringPlatformCloudOauthApplicationTests {
     @Test
@@ -28,6 +27,8 @@ class SpringPlatformCloudOauthApplicationTests {
         // 设置作者
         generatorParamDTO.setAuthor("jtang");
         generatorParamDTO.setModuleName("oauth");
+        String[] includeTable = new String[]{"oauth_client_details"};
+        generatorParamDTO.setIncludeTableList(includeTable);
         CodeGenerator.genertor(generatorParamDTO , dsc);
 
     }

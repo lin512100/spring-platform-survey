@@ -1,15 +1,16 @@
-package com.jtang.common.model;
+package com.jtang.common.model.auth;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * Created by mrt on 2018/5/21.
+ *
+ * @author linjt
+ * @date 2018/5/21
  */
-@Data
-@ToString
-@NoArgsConstructor
+@Getter
+@Setter
 public class AuthToken {
     /** 访问token就是短令牌，用户身份令牌 */
     String access_token;

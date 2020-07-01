@@ -1,4 +1,4 @@
-package com.jtang.web.utils;
+package com.jtang.common.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

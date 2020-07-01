@@ -1,6 +1,8 @@
 package com.jtang.oauth.config;
 
+import com.jtang.oauth.service.impl.CustomerClientDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.bootstrap.encrypt.KeyProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,9 +33,6 @@ import java.security.KeyPair;
 @EnableAuthorizationServer
 class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    @Autowired
-    private DataSource dataSource;
-
     /** jwt令牌转换器 */
     @Autowired
     private JwtAccessTokenConverter jwtAccessTokenConverter;
@@ -63,11 +62,12 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     /** 客户端配置 */
     @Bean
     public ClientDetailsService clientDetails() {
-        return new JdbcClientDetailsService(dataSource);
+        return new CustomerClientDetailServiceImpl();
     }
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(this.dataSource).clients(this.clientDetails());
+        clients.withClientDetails(clientDetails());
     }
 
     @Bean

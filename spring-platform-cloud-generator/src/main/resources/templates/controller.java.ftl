@@ -7,7 +7,7 @@ import com.jtang.business.query.${entity}QueryDTO;
 import ${package.Entity}.${entity};
 import ${package.Service}.I${entity}Service;
 import com.jtang.web.utils.PageUtils;
-import com.jtang.web.utils.ResultUtils;
+import com.jtang.common.utils.ResultUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;

@@ -1,20 +1,28 @@
 package com.jtang.oauth.service;
 
 import com.alibaba.fastjson.JSON;
-import core.client.ServiceConstants;
-import core.model.AuthToken;
+import com.jtang.common.client.ServiceConstants;
+import com.jtang.common.model.auth.AuthToken;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.DefaultResponseErrorHandler;
+import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.net.URI;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Administrator
@@ -30,6 +38,9 @@ public class AuthService {
 
     @Autowired
     private RedissonClient redissonClient;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
 
     /** 用户认证申请令牌，将令牌存储到redis */
@@ -56,15 +67,15 @@ public class AuthService {
 
     /**
      *
-     * @param access_token 用户身份令牌
+     * @param accessToken 用户身份令牌
      * @param content  内容就是AuthToken对象的内容
      * @param ttl 过期时间
      * @return
      */
-    private boolean saveToken(String access_token,String content,long ttl){
-        String key = "user_token:" + access_token;
-        redissonClient.getQueue(key).add(content);
-//        Long expire = stringRedisTemplate.getExpire(key, TimeUnit.SECONDS);
+    private boolean saveToken(String accessToken,String content,long ttl){
+
+        String key = "user_token:" + accessToken;
+        redissonClient.getBucket(key).set(content, ttl, TimeUnit.SECONDS);
         return true;
     }
 
@@ -89,41 +100,40 @@ public class AuthService {
         body.add("password",password);
 
         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(body, header);
-        //String url, HttpMethod method, @Nullable HttpEntity<?> requestEntity, Class<T> responseType, Object... uriVariables
 
         //设置restTemplate远程调用时候，对400和401不让报错，正确返回数据
-//        restTemplate.setErrorHandler(new DefaultResponseErrorHandler(){
-//            @Override
-//            public void handleError(ClientHttpResponse response) throws IOException {
-//                if(response.getRawStatusCode()!= 400 && response.getRawStatusCode()!=401){
-//                    super.handleError(response);
-//                }
-//            }
-//        });
+        restTemplate.setErrorHandler(new DefaultResponseErrorHandler(){
+            @Override
+            public void handleError(ClientHttpResponse response) throws IOException {
+                if(response.getRawStatusCode()!= 400 && response.getRawStatusCode()!=401){
+                    super.handleError(response);
+                }
+            }
+        });
 
-//        ResponseEntity<Map> exchange = restTemplate.exchange(authUrl, HttpMethod.POST, httpEntity, Map.class);
-//
-//        //申请令牌信息
-//        Map bodyMap = exchange.getBody();
-//        if(bodyMap == null ||
-//            bodyMap.get("access_token") == null ||
-//                bodyMap.get("refresh_token") == null ||
-//                bodyMap.get("jti") == null){
-//            return null;
-//        }
+        ResponseEntity<Map> exchange = restTemplate.exchange(authUrl, HttpMethod.POST, httpEntity, Map.class);
+
+        //申请令牌信息
+        Map bodyMap = exchange.getBody();
+        if(bodyMap == null ||
+            bodyMap.get("access_token") == null ||
+                bodyMap.get("refresh_token") == null ||
+                bodyMap.get("jti") == null){
+            return null;
+        }
         AuthToken authToken = new AuthToken();
-//        //用户身份令牌
-//        authToken.setAccess_token((String) bodyMap.get("jti"));
-//        //刷新令牌
-//        authToken.setRefresh_token((String) bodyMap.get("refresh_token"));
-//        //jwt令牌
-//        authToken.setJwt_token((String) bodyMap.get("access_token"));
+        //用户身份令牌
+        authToken.setAccess_token((String) bodyMap.get("jti"));
+        //刷新令牌
+        authToken.setRefresh_token((String) bodyMap.get("refresh_token"));
+        //jwt令牌
+        authToken.setJwt_token((String) bodyMap.get("access_token"));
         return authToken;
     }
 
 
 
-    /** 获取httpbasic的串 */
+    /** 获取http basic的串 */
     private String getHttpBasic(String clientId,String clientSecret){
         String string = clientId+":"+clientSecret;
         //将串进行base64编码
