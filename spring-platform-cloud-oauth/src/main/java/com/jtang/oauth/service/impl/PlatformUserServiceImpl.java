@@ -51,8 +51,7 @@ public class PlatformUserServiceImpl extends ServiceImpl<PlatformUserMapper, Pla
         List<PlatformMenu> userPermissionByUserId = iPlatformMenuService.getMenuByUserId(user.getId());
         List<String> collect = userPermissionByUserId.stream().map(PlatformMenu::getUrl).collect(Collectors.toList());
         String menus  = StringUtils.join(collect, ",");
-        UserJwt userDetails = new UserJwt(username,
-                user.getPassword(),
+        UserJwt userDetails = new UserJwt(username, user.getPassword(),
                 AuthorityUtils.commaSeparatedStringToAuthorityList(menus));
         userDetails.setId(user.getId().toString());
         return userDetails;
