@@ -1,8 +1,7 @@
 package com.jtang.oauth.mapper;
 
-import com.jtang.common.model.auth.PlatformMenu;
+import com.jtang.common.model.oauth.entity.PlatformMenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.jtang.common.model.auth.PlatformPermission;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

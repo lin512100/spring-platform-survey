@@ -1,8 +1,7 @@
 package com.jtang.oauth.service;
 
-import com.jtang.common.model.auth.PlatformMenu;
+import com.jtang.common.model.oauth.entity.PlatformMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.jtang.common.model.auth.PlatformPermission;
 
 import java.util.List;
 

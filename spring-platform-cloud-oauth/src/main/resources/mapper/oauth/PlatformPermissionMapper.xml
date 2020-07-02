@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jtang.oauth.mapper.PlatformPermissionMapper">
 
-    <select id="getUserPermissionByUserId" resultType="com.jtang.common.model.auth.PlatformPermission" parameterType="long">
+    <select id="getUserPermissionByUserId" resultType="com.jtang.common.model.oauth.entity.PlatformPermission" parameterType="long">
         SELECT
             *
         FROM

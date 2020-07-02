@@ -1,6 +1,6 @@
 package com.jtang.oauth.mapper;
 
-import com.jtang.common.model.auth.PlatformRole;
+import com.jtang.common.model.oauth.entity.PlatformRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

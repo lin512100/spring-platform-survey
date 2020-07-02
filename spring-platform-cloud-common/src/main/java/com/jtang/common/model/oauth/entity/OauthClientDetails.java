@@ -1,4 +1,4 @@
-package com.jtang.common.model.auth;
+package com.jtang.common.model.oauth.entity;
 
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;

@@ -1,6 +1,6 @@
 package com.jtang.oauth.service;
 
-import com.jtang.common.model.auth.PlatformRole;
+import com.jtang.common.model.oauth.entity.PlatformRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

@@ -3,7 +3,7 @@ package com.jtang.oauth.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.jtang.common.model.auth.OauthClientDetails;
+import com.jtang.common.model.oauth.entity.OauthClientDetails;
 import com.jtang.oauth.service.IClientDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

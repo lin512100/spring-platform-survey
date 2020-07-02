@@ -1,4 +1,4 @@
-package com.jtang.common.model.auth;
+package com.jtang.common.model.oauth;
 
 
 import lombok.Getter;

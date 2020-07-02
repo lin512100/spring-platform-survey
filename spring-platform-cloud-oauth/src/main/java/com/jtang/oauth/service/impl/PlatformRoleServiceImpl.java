@@ -1,6 +1,6 @@
 package com.jtang.oauth.service.impl;
 
-import com.jtang.common.model.auth.PlatformRole;
+import com.jtang.common.model.oauth.entity.PlatformRole;
 import com.jtang.oauth.mapper.PlatformRoleMapper;
 import com.jtang.oauth.service.IPlatformRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

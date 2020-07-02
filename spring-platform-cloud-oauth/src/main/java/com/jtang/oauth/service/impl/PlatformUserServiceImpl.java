@@ -1,14 +1,11 @@
 package com.jtang.oauth.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.jtang.common.model.auth.PlatformMenu;
-import com.jtang.common.model.auth.PlatformPermission;
-import com.jtang.common.model.auth.PlatformUser;
-import com.jtang.oauth.mapper.PlatformPermissionMapper;
+import com.jtang.common.model.oauth.entity.PlatformMenu;
+import com.jtang.common.model.oauth.entity.PlatformUser;
 import com.jtang.oauth.mapper.PlatformUserMapper;
 import com.jtang.oauth.model.UserJwt;
 import com.jtang.oauth.service.IPlatformMenuService;
-import com.jtang.oauth.service.IPlatformPermissionService;
 import com.jtang.oauth.service.IPlatformUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;

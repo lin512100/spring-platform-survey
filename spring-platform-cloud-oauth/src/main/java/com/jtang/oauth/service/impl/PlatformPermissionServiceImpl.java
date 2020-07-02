@@ -1,15 +1,12 @@
 package com.jtang.oauth.service.impl;
 
-import com.jtang.common.model.auth.PlatformPermission;
+import com.jtang.common.model.oauth.entity.PlatformPermission;
 import com.jtang.oauth.mapper.PlatformPermissionMapper;
 import com.jtang.oauth.service.IPlatformPermissionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
 * <p>
