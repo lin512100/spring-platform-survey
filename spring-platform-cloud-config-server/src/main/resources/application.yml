@@ -3,15 +3,8 @@ server:
 spring:
   application:
     name: spring-platform-cloud-config-server
-  cloud:
-    config:
-      server:
-        git:
-          uri: https://github.com/lin512100/spring-platform-cloud.git # git仓库的地址
-          search-paths: chapter6/springcloud-config  # git仓库地址下的相对地址，可以配置多个，用,分割。
-          username: #Git仓库用户名
-          password: #Git仓库密码
+
 eureka:
   client:
     service-url:
-      defaultZone: http://127.0.0.1:8761/eureka/
+      defaultZone: http://129.204.1.173:8761/eureka/

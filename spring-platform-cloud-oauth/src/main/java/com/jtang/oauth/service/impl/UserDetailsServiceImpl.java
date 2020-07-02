@@ -2,6 +2,7 @@ package com.jtang.oauth.service.impl;
 
 import com.jtang.common.model.auth.PlatformUser;
 import com.jtang.oauth.model.UserJwt;
+import com.jtang.oauth.service.IPlatformUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,10 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    ClientDetailsService clientDetailsService;
+    private ClientDetailsService clientDetailsService;
+
+    @Autowired
+    private IPlatformUserService iPlatformUserService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -39,36 +43,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             ClientDetails clientDetails = clientDetailsService.loadClientByClientId(username);
             if(clientDetails!=null){
                 //密码
-                log.error(clientDetails.toString());
                 String clientSecret = clientDetails.getClientSecret();
                 return new User(username,clientSecret, AuthorityUtils.commaSeparatedStringToAuthorityList("aa,aa"));
             }
         }
         if (StringUtils.isEmpty(username)) {
-            return null;
+            throw new UsernameNotFoundException("用户名不能为空");
         }
-        PlatformUser userext = new PlatformUser();
-        userext.setUsername("jtang");
-        userext.setPassword(new BCryptPasswordEncoder().encode("123"));
-
-        //取出正确密码（hash值）
-        String password = userext.getPassword();
-        //这里暂时使用静态密码
-//       String password ="123";
-        //用户权限，这里暂时使用静态数据，最终会从数据库读取
-        //从数据库获取权限
-//        List<PlatformUser> permissions = userext.getPermissions();
-//        List<String> user_permission = new ArrayList<>();
-//        permissions.forEach(item-> user_permission.add(item.getCode()));
-        String userPermissionString  = StringUtils.join("001,002", ",");
-        UserJwt userDetails = new UserJwt(username,
-                password,
-                AuthorityUtils.commaSeparatedStringToAuthorityList(userPermissionString));
-        userDetails.setId(userext.getId());
-       /* UserDetails userDetails = new org.springframework.security.core.userdetails.User(username,
-                password,
-                AuthorityUtils.commaSeparatedStringToAuthorityList(""));*/
-//                AuthorityUtils.createAuthorityList("course_get_baseinfo","course_get_list"));
-        return userDetails;
+        return iPlatformUserService.loadUserByUsername(username);
     }
 }

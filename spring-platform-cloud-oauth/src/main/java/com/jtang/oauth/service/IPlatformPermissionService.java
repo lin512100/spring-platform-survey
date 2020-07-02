@@ -3,6 +3,8 @@ package com.jtang.oauth.service;
 import com.jtang.common.model.auth.PlatformPermission;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
 * <p>
 * 权限 服务类

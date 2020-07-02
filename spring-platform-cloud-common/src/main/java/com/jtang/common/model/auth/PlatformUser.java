@@ -21,7 +21,7 @@ public class PlatformUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    private Long id;
 
     @ApiModelProperty(value = "用户名")
     private String username;

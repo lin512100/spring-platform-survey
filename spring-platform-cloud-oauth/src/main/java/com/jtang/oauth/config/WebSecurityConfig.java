@@ -19,7 +19,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // 网页校验忽略地址
-        web.ignoring().antMatchers("/userlogin","/userlogout","/userjwt");
+        web.ignoring().antMatchers("/userlogin","/userlogout","/userjwt","/auth/oauth/token");
 
     }
 
