@@ -1,4 +1,4 @@
-package com.jtang.business.query;
+package com.jtang.oauth.query;
 
 import com.jtang.common.base.BaseQuery;
 import lombok.Getter;
