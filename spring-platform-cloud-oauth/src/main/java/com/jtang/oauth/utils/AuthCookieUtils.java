@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.jtang.common.model.oauth.AuthToken;
 import com.jtang.common.utils.CookieUtil;
 import com.jtang.common.utils.HttpUtils;
-import com.jtang.oauth.properties.AuthProperties;
+import com.jtang.feign.properties.AuthProperties;
 import org.redisson.api.RedissonClient;
 
 import javax.servlet.http.HttpServletRequest;

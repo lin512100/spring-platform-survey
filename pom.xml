@@ -23,9 +23,10 @@
         <module>spring-platform-cloud-eureka</module>
         <module>spring-platform-cloud-gateway</module>
         <module>spring-platform-cloud-oauth</module>
-        <module>spring-platform-cloud-config-server</module>
+        <module>spring-platform-cloud-user</module>
         <module>spring-platform-cloud-common</module>
         <module>spring-platform-cloud-generator</module>
+        <module>spring-platform-cloud-feign</module>
     </modules>
 
     <dependencies>

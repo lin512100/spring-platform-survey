@@ -29,10 +29,7 @@ spring:
       max-lifetime: 1800000
       connection-timeout: 30000
       connection-test-query: SELECT 1
-  security:
-    user:
-      name: user
-      password: 123
+
   redis:
     host: 129.204.1.173
     port: 6379
@@ -58,12 +55,3 @@ encrypt:
     secret: xuechengkeystore
     alias: xckey
     password: xuecheng
-
-# Auth配置
-auth:
-  tokenValiditySeconds: 1200  #token存储到redis的过期时间
-  clientId: XcWebApp
-  clientSecret: XcWebApp
-  cookieDomain: xuecheng.com
-  cookieMaxAge: -1
-  redirectUri: http://localhost

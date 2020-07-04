@@ -1,10 +1,11 @@
 package com.jtang.oauth.service.impl;
 
-import com.jtang.oauth.service.IPlatformUserService;
+import com.jtang.feign.model.UserDao;
+import com.jtang.feign.model.UserJwt;
+import com.jtang.oauth.service.api.UserApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +22,6 @@ import org.springframework.stereotype.Service;
  * @author LinJinTang
  */
 @Service
-@Primary
 @Slf4j
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -29,16 +29,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private ClientDetailsService clientDetailsService;
 
     @Autowired
-    private IPlatformUserService iPlatformUserService;
+    private UserApiService userApiService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //取出身份，如果身份为空说明没有认证
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         //没有认证统一采用http basic认证，http basic中存储了client_id和client_secret，开始认证client_id和client_secret
-        if(authentication==null){
+        if(authentication == null){
             ClientDetails clientDetails = clientDetailsService.loadClientByClientId(username);
-            if(clientDetails!=null){
+            if(clientDetails != null){
                 //密码
                 String clientSecret = clientDetails.getClientSecret();
                 return new User(username,clientSecret, AuthorityUtils.commaSeparatedStringToAuthorityList("aa,aa"));
@@ -47,6 +47,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (StringUtils.isEmpty(username)) {
             throw new UsernameNotFoundException("用户名不能为空");
         }
-        return iPlatformUserService.loadUserByUsername(username);
+        UserDao user = userApiService.getUsernameInfo(username);
+        return new UserJwt("jtang", user.getPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList(StringUtils.join(user.getAuthority(), ",")));
     }
 }

@@ -22,12 +22,6 @@ public class CommonConfig {
     /** 默认redis数据库 */
     private static final int DEFAULT_REDIS_DATABASE = 0;
 
-    @Bean
-    @LoadBalanced
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
     /** Redission 配置*/
     @Bean
     public RedissonClient redissonClient(){

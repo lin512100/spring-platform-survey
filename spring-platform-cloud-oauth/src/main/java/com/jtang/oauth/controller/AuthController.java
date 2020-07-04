@@ -35,7 +35,7 @@ public class AuthController {
 
     /** 获取JWT令牌 */
     @GetMapping("/jwt")
-    public JwtResult userjwt() {
+    public JwtResult jwt() {
         String jwtToken = authService.jwtToken();
         if(jwtToken == null){
             return new JwtResult(CommonCode.FAIL,null);

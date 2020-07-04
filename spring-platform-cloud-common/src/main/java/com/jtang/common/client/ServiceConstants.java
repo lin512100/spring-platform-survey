@@ -12,4 +12,7 @@ public class ServiceConstants {
     /** 授权服务 */
     public final static String OAUTH_SERVICE = "platform-oauth";
 
+    /** 用户服务 */
+    public final static String USER_SERVICE = "platform-user";
+
 }

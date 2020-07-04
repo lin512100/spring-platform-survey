@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "客户端信息模块")
 @RestController
 @AllArgsConstructor
-@RequestMapping("/oauth/client-details")
+@RequestMapping("/client-details")
 public class ClientDetailsController {
 
     @Autowired

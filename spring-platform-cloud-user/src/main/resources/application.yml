@@ -1,0 +1,45 @@
+server:
+  port: 3000
+spring:
+  application:
+    name: platform-user
+  profiles:
+    active: thymeleaf
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://129.204.1.173:3306/platform-oauth?useUnicode=true&serverTimezone=UTC&useSSL=false
+    username: root
+    password: Jtang!14010025
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 180000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*/*Mapper.xml
+  global-config:
+    banner: false
+    db-config:
+      id-type: AUTO
+      table-underline: true
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.jtang.oauth.controller.entity
+
+eureka:
+  client:
+    registerWithEureka: true #服务注册开关
+    fetchRegistry: true #服务发现开关
+    service-url:
+      defaultZone: http://129.204.1.173:8761/eureka/
+  instance:
+    prefer-ip-address:  true  #将自己的ip地址注册到Eureka服务中
+    ip-address: ${IP_ADDRESS:127.0.0.1}
+    instance-id: ${spring.application.name}:${server.port} #指定实例idinstance:
+
+
