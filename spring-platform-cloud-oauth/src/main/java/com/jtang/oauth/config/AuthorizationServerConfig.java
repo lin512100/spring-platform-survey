@@ -46,9 +46,6 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private TokenStore tokenStore;
 
-    @Autowired
-    private CustomUserAuthenticationConverter customUserAuthenticationConverter;
-
     /** 读取密钥的配置 */
     @Bean("keyProp")
     public KeyProperties keyProperties(){
@@ -82,7 +79,7 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
                 (keyProperties.getKeyStore().getLocation(), keyProperties.getKeyStore().getSecret().toCharArray())
                 .getKeyPair(keyProperties.getKeyStore().getAlias(),keyProperties.getKeyStore().getPassword().toCharArray());
         converter.setKeyPair(keyPair);
-        //配置自定义的CustomUserAuthenticationConverter
+        // 配置自定义的CustomUserAuthenticationConverter
         DefaultAccessTokenConverter accessTokenConverter = (DefaultAccessTokenConverter) converter.getAccessTokenConverter();
         accessTokenConverter.setUserTokenConverter(customUserAuthenticationConverter);
         return converter;

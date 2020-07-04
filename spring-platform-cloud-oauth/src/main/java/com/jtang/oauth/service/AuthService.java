@@ -17,12 +17,23 @@ public interface AuthService {
      * @param clientSecret 客户端密码
      * @return {@link AuthToken}
      * */
-    AuthToken login(String username, String password, String clientId, String clientSecret);
+    AuthToken getToken(String username, String password, String clientId, String clientSecret);
 
     /**
      * 用户登录
      * @param loginRequest {@link LoginRequest}
-     * @return {@link AuthToken}
+     * @return {@link String}
      * */
-    String login(LoginRequest loginRequest);
+    String getToken(LoginRequest loginRequest);
+
+    /**
+     * 用户退出
+     * */
+    void logout();
+
+    /**
+     * 获取JWT令牌
+     * @return {@link String}
+     * */
+    String jwtToken();
 }

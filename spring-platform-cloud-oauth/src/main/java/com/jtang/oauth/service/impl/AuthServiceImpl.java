@@ -2,19 +2,20 @@ package com.jtang.oauth.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.jtang.common.client.ServiceConstants;
+import com.jtang.common.enums.HttpStatusEnum;
 import com.jtang.common.exception.ExceptionCast;
+import com.jtang.common.model.base.response.ResponseResult;
 import com.jtang.common.model.oauth.AuthToken;
 import com.jtang.common.model.oauth.request.LoginRequest;
 import com.jtang.common.model.oauth.response.AuthCode;
 import com.jtang.common.utils.CookieUtil;
 import com.jtang.oauth.properties.AuthProperties;
 import com.jtang.oauth.service.AuthService;
+import com.jtang.oauth.utils.AuthCookieUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -29,9 +30,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URI;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -43,12 +44,8 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-
     @Autowired
     private AuthProperties authProperties;
-
-    @Autowired
-    private LoadBalancerClient loadBalancerClient;
 
     @Autowired
     private RedissonClient redissonClient;
@@ -57,7 +54,7 @@ public class AuthServiceImpl implements AuthService {
     private RestTemplate restTemplate;
 
     @Override
-    public String login(LoginRequest loginRequest) {
+    public String getToken(LoginRequest loginRequest) {
         if(loginRequest == null || StringUtils.isEmpty(loginRequest.getUsername())){
             ExceptionCast.cast(AuthCode.AUTH_USERNAME_NONE);
         }
@@ -67,28 +64,51 @@ public class AuthServiceImpl implements AuthService {
         }
         //账号
         String username = loginRequest.getUsername();
-
         //密码
         String password = loginRequest.getPassword();
-
         //申请令牌
-        AuthToken authToken =  login(username, password, authProperties.getClientId(), authProperties.getClientSecret());
-
+        AuthToken authToken =  getToken(username, password, authProperties.getClientId(), authProperties.getClientSecret());
         //用户身份令牌
         String accessToken = authToken.getAccess_token();
         //将令牌存储到cookie
-        this.saveCookie(accessToken);
+        AuthCookieUtils.saveCookie(accessToken,authProperties);
         return accessToken;
     }
 
+    @Override
+    public void logout() {
+        // 取出cookie中的用户身份令牌
+        String uid = AuthCookieUtils.getTokenFormCookie();
+        //删除redis中的token
+        AuthCookieUtils.delToken(redissonClient,uid);
+        //清除cookie
+        AuthCookieUtils.clearCookie(uid,authProperties.getCookieDomain());
+    }
 
     @Override
-    public AuthToken login(String username, String password, String clientId, String clientSecret) {
+    public String jwtToken() {
+        //取出cookie中的用户身份令牌
+        String uid = AuthCookieUtils.getTokenFormCookie();
+        if(uid == null){
+            return null;
+        }
+
+        //拿身份令牌从redis中查询jwt令牌
+        AuthToken userToken = AuthCookieUtils.getUserToken(redissonClient, uid);
+        if(userToken != null){
+            //将jwt令牌返回给用户
+            return userToken.getJwt_token();
+        }
+        return null;
+    }
+
+    @Override
+    public AuthToken getToken(String username, String password, String clientId, String clientSecret) {
 
         //请求spring security申请令牌
         AuthToken authToken = this.applyToken(username, password, clientId, clientSecret);
         if(authToken == null){
-            throw new RuntimeException();
+            ExceptionCast.cast(AuthCode.AUTH_CREDENTIAL_ERROR);
         }
         //用户身份令牌
         String accessToken = authToken.getAccess_token();
@@ -97,10 +117,9 @@ public class AuthServiceImpl implements AuthService {
         //将令牌存储到redis
         boolean result = this.saveToken(accessToken, jsonString, authProperties.getTokenValiditySeconds());
         if (!result) {
-            throw new RuntimeException();
+            ExceptionCast.cast(AuthCode.AUTH_LOGIN_TOKEN_SAVE_FAIL);
         }
         return authToken;
-
     }
 
     /**
@@ -139,7 +158,8 @@ public class AuthServiceImpl implements AuthService {
         restTemplate.setErrorHandler(new DefaultResponseErrorHandler(){
             @Override
             public void handleError(ClientHttpResponse response) throws IOException {
-                if(response.getRawStatusCode()!= 400 && response.getRawStatusCode()!=401){
+                if(response.getRawStatusCode() != HttpStatusEnum.BAD_REQUEST.code()
+                        && response.getRawStatusCode() != HttpStatusEnum.UNAUTHORIZED.code()){
                     super.handleError(response);
                 }
             }
@@ -163,17 +183,6 @@ public class AuthServiceImpl implements AuthService {
         //jwt令牌
         authToken.setJwt_token((String) bodyMap.get("access_token"));
         return authToken;
-    }
-
-    /** 将令牌存储到cookie */
-    private void saveCookie(String token){
-        try{
-            HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
-            CookieUtil.addCookie(response,authProperties.getCookieDomain(),"/","uid",token,authProperties.getCookieMaxAge(),false);
-        }catch (NullPointerException e){
-            e.printStackTrace();
-        }
-
     }
 
     /** 获取http basic的串 */
