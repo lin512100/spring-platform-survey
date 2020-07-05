@@ -21,4 +21,11 @@ spring:
           predicates:
             - Path=/account/**         # 如果请求地址满足/account/**,则转发到user-server服务
           filters:
-            - StripPrefix=1           # 去除原请求地址中的account
+            - StripPrefix=1           # 去除原请求地址中的user
+
+        - id: platform-auth
+          uri: lb://platform-auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1

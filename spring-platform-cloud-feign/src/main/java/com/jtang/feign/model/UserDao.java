@@ -26,10 +26,7 @@ public class UserDao {
     private boolean credentialsNonExpired;
     private boolean enabled;
 
-    public UserDao(long id , String username, String password, List<String> authority){
-        this.id = id;
-        this.username = username;
-        this.password = password;
+    public UserDao(List<String> authority){
         this.authority = authority;
         this.accountNonExpired = true;
         this.accountNonLocked = true;

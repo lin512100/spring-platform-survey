@@ -1,9 +1,10 @@
 package com.jtang.common.exception;
 
 import com.google.common.collect.ImmutableMap;
-import com.jtang.common.model.base.response.CommonCode;
-import com.jtang.common.model.base.response.ResponseResult;
-import com.jtang.common.model.base.response.ResultCode;
+import com.jtang.base.exception.CustomException;
+import com.jtang.base.response.CommonCode;
+import com.jtang.base.response.ResponseResult;
+import com.jtang.base.response.ResultCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.HttpMessageNotReadableException;

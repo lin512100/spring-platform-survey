@@ -1,11 +1,16 @@
 package com.jtang.common.utils;
 
 
-import com.jtang.common.base.ResultCodeEnum;
+import com.jtang.base.enums.ResultStatusEnums;
 import lombok.Getter;
 
 import java.io.Serializable;
 
+/**
+ * 统一返回类
+ * @date 2020/7/5 14:46
+ * @author LinJinTang
+ */
 @Getter
 public class ResultUtils<T> implements Serializable {
     private static final long serialVersionUID = 3436477890959388499L;
@@ -13,7 +18,7 @@ public class ResultUtils<T> implements Serializable {
     /**
      * 返回操作码（默认为正常）
      */
-    private Integer code = ResultCodeEnum.SUCCESS.getCode();
+    private Integer code = ResultStatusEnums.SUCCESS.getCode();
 
     /**
      * 返回数据信息
@@ -31,7 +36,7 @@ public class ResultUtils<T> implements Serializable {
     private String error = "";
 
     public static ResultUtils success = new ResultUtils();
-    public static ResultUtils fail = new ResultUtils().code(ResultCodeEnum.FAIL.getCode());
+    public static ResultUtils fail = new ResultUtils().code(ResultStatusEnums.FAIL.getCode());
 
     public static ResultUtils build() {
         return new ResultUtils();
@@ -66,7 +71,7 @@ public class ResultUtils<T> implements Serializable {
         return ResultUtil.build(xxx);
         // return ResultUtil.success.data(xxx).msg("获取成功");
         // return ResultUtil.fail.error("获取失败！");
-        // return ResultUtil.fail.code(ResultCodeEnum.FAIL.code()).error("登录过期！");
-        // return ResultUtil.fail.code(ResultCodeEnum.FAIL.code()).error(ResultCodeEnum.FAIL.msg());
+        // return ResultUtil.fail.code(ResultStatusEnums.FAIL.code()).error("登录过期！");
+        // return ResultUtil.fail.code(ResultStatusEnums.FAIL.code()).error(ResultStatusEnums.FAIL.msg());
     }*/
 }

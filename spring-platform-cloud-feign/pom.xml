@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>spring-platform-cloud-feign</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <dependencies>
 
@@ -19,12 +20,6 @@
             <artifactId>spring-platform-cloud-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>com.netflix.feign</groupId>-->
-<!--            <artifactId>feign-okhttp</artifactId>-->
-<!--            <version>8.18.0</version>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>

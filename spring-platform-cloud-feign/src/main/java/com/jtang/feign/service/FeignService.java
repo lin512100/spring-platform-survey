@@ -1,7 +1,6 @@
 package com.jtang.feign.service;
 
-import com.jtang.common.model.oauth.AuthToken;
-import com.jtang.feign.enums.AuthMode;
+import com.jtang.common.model.account.AuthToken;
 
 /**
  * @date 2020/7/4 15:29

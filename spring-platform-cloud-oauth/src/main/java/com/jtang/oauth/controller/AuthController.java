@@ -1,10 +1,7 @@
 package com.jtang.oauth.controller;
 
-import com.jtang.common.model.base.response.CommonCode;
-import com.jtang.common.model.base.response.ResponseResult;
-import com.jtang.common.model.oauth.request.LoginRequest;
-import com.jtang.common.model.oauth.response.JwtResult;
-import com.jtang.common.model.oauth.response.LoginResult;
+import com.jtang.common.model.account.request.LoginRequest;
+import com.jtang.common.utils.ResultUtils;
 import com.jtang.oauth.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,24 +26,24 @@ public class AuthController {
      * @return {@link LoginRequest}
      * */
     @PostMapping("/login")
-    public LoginResult login(LoginRequest loginRequest) {
-        return new LoginResult(CommonCode.SUCCESS,authService.getToken(loginRequest));
+    public ResultUtils login(LoginRequest loginRequest) {
+        return ResultUtils.build(authService.getToken(loginRequest));
     }
 
     /** 获取JWT令牌 */
     @GetMapping("/jwt")
-    public JwtResult jwt() {
+    public ResultUtils jwt() {
         String jwtToken = authService.jwtToken();
         if(jwtToken == null){
-            return new JwtResult(CommonCode.FAIL,null);
+            return ResultUtils.fail;
         }
-        return new JwtResult(CommonCode.SUCCESS,jwtToken);
+        return ResultUtils.build(jwtToken);
     }
 
     /** 退出登录 */
     @PostMapping("/logout")
-    public ResponseResult logout() {
+    public ResultUtils logout() {
         authService.logout();
-        return new ResponseResult(CommonCode.SUCCESS);
+        return ResultUtils.success;
     }
 }

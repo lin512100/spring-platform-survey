@@ -2,7 +2,7 @@ package com.jtang.oauth.service.impl;
 
 import com.jtang.feign.model.UserDao;
 import com.jtang.feign.model.UserJwt;
-import com.jtang.oauth.service.api.UserApiService;
+import com.jtang.feign.service.UserApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

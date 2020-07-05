@@ -1,9 +1,7 @@
 package com.jtang.oauth.service.impl;
 
-
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.jtang.common.model.oauth.entity.OauthClientDetails;
+import com.jtang.common.model.account.entity.OauthClientDetails;
 import com.jtang.oauth.service.IClientDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,7 @@ public class CustomerClientDetailServiceImpl implements ClientDetailsService{
     private IClientDetailsService iClientDetailsService;
 
     @Override
-    public org.springframework.security.oauth2.provider.ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
+    public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
         QueryWrapper<OauthClientDetails> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("client_id", clientId);
         OauthClientDetails oauthClientDetails = iClientDetailsService.getOne(queryWrapper);

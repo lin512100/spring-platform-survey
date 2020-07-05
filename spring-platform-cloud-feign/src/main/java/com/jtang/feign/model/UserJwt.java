@@ -1,6 +1,7 @@
 package com.jtang.feign.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,5 +24,6 @@ public class UserJwt extends User {
     public UserJwt(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
+
 
 }

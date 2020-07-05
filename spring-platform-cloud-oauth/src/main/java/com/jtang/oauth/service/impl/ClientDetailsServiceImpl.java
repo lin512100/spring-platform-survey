@@ -1,6 +1,6 @@
 package com.jtang.oauth.service.impl;
 
-import com.jtang.common.model.oauth.entity.OauthClientDetails;
+import com.jtang.common.model.account.entity.OauthClientDetails;
 import com.jtang.oauth.mapper.ClientDetailsMapper;
 import com.jtang.oauth.service.IClientDetailsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

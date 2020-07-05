@@ -1,10 +1,9 @@
 package com.jtang.feign.service.impl;
 
-import com.jtang.common.client.ServiceConstants;
-import com.jtang.common.enums.HttpStatusEnum;
-import com.jtang.common.exception.ExceptionCast;
-import com.jtang.common.model.oauth.AuthToken;
-import com.jtang.common.model.oauth.response.AuthCode;
+import com.jtang.base.client.ServiceConstants;
+import com.jtang.base.exception.ExceptionCast;
+import com.jtang.common.model.account.AuthToken;
+import com.jtang.common.model.account.response.AuthCode;
 import com.jtang.feign.enums.AuthMode;
 import com.jtang.feign.properties.AuthProperties;
 import com.jtang.feign.service.FeignService;
@@ -13,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,7 @@ public class FeignServiceImpl implements FeignService {
     private RestTemplate restTemplate;
 
     @Override
-    public AuthToken getTokenByPassword(String username, String password) {
+    public AuthToken getTokenByPassword(String username, String password){
         String authUrl = "http://" + ServiceConstants.OAUTH_SERVICE + "/oauth/token";
 
         //定义header
@@ -98,8 +98,8 @@ public class FeignServiceImpl implements FeignService {
         restTemplate.setErrorHandler(new DefaultResponseErrorHandler(){
             @Override
             public void handleError(ClientHttpResponse response) throws IOException {
-                if(response.getRawStatusCode() != HttpStatusEnum.BAD_REQUEST.code()
-                        && response.getRawStatusCode() != HttpStatusEnum.UNAUTHORIZED.code()){
+                if(response.getRawStatusCode() != HttpStatus.UNAUTHORIZED.value()
+                        && response.getRawStatusCode() != HttpStatus.UNAUTHORIZED.value()){
                     super.handleError(response);
                 }
             }

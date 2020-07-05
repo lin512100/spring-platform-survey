@@ -1,6 +1,6 @@
 package com.jtang.oauth.service;
 
-import com.jtang.common.model.oauth.request.LoginRequest;
+import com.jtang.common.model.account.request.LoginRequest;
 
 /**
  * @date 2020/7/2 21:05

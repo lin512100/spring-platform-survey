@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jtang.user.mapper.PlatformUserMapper">
+
+    <select id="getUserInfoList" parameterType="com.jtang.user.query.PlatformUserQueryDTO" resultType="com.jtang.common.model.account.response.PlatformUserDTO">
+        SELECT
+            p_user.*,
+            GROUP_CONCAT( p_role.role_name SEPARATOR '|' ) AS roleName
+        FROM
+            platform_user p_user
+            LEFT JOIN platform_user_role u_role ON p_user.id = u_role.user_id
+            LEFT JOIN platform_role p_role ON p_role.id = u_role.role_id
+            WHERE
+            1=1
+            <if test="queryDTO.username != null">
+                AND p_user.username like '%' + #{queryDTO.usrname} + '%'
+            </if>
+        GROUP BY
+            p_user.id
+        <if test="queryDTO.pageNum != null and queryDTO.pageSize != null">
+            limit ${(queryDTO.pageNum-1)*queryDTO.pageSize},#{queryDTO.pageSize}
+        </if>
+    </select>
+
+
+
+</mapper>

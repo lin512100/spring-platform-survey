@@ -7,7 +7,11 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+/**
+ * 外部调用
+ * @date 2020/7/4 19:12
+ * @author LinJinTang
+ */
 @Component
 public class OutFeignRequest implements RequestInterceptor {
 

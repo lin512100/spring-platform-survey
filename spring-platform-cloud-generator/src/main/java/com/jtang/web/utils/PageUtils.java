@@ -1,7 +1,7 @@
 package com.jtang.web.utils;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.jtang.common.utils.Pagination;
+import com.jtang.base.utils.Pagination;
 
 import java.util.ArrayList;
 import java.util.List;

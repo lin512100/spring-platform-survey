@@ -1,13 +1,10 @@
 package com.jtang.oauth.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.jtang.common.client.ServiceConstants;
-import com.jtang.common.enums.HttpStatusEnum;
-import com.jtang.common.exception.ExceptionCast;
-import com.jtang.common.model.oauth.AuthToken;
-import com.jtang.common.model.oauth.request.LoginRequest;
-import com.jtang.common.model.oauth.response.AuthCode;
-import com.jtang.feign.enums.AuthMode;
+import com.jtang.base.exception.ExceptionCast;
+import com.jtang.common.model.account.AuthToken;
+import com.jtang.common.model.account.request.LoginRequest;
+import com.jtang.common.model.account.response.AuthCode;
 import com.jtang.feign.properties.AuthProperties;
 import com.jtang.feign.service.FeignService;
 import com.jtang.oauth.service.AuthService;

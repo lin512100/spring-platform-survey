@@ -1,7 +1,7 @@
 package com.jtang.oauth.utils;
 
 import com.alibaba.fastjson.JSON;
-import com.jtang.common.model.oauth.AuthToken;
+import com.jtang.common.model.account.AuthToken;
 import com.jtang.common.utils.CookieUtil;
 import com.jtang.common.utils.HttpUtils;
 import com.jtang.feign.properties.AuthProperties;
