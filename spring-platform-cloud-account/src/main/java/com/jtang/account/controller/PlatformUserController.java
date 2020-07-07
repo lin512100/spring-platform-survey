@@ -1,6 +1,5 @@
 package com.jtang.account.controller;
 
-import com.jtang.base.enums.SexEnums;
 import com.jtang.base.enums.UserStatusEnums;
 import com.jtang.common.model.account.entity.PlatformUser;
 import com.jtang.common.model.account.response.PlatformUserDTO;
@@ -15,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
 * 用户 前端控制器
@@ -40,8 +42,13 @@ public class PlatformUserController {
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "根据ID删除信息")
-    public ResultUtils addCtFile(@Valid @PathVariable Long id){
-        service.getBaseMapper().deleteById(id);
+    public ResultUtils addCtFile(@Valid @PathVariable String id){
+        String[] ids = id.split(",");
+        List<Long> collect = Arrays.stream(ids).map(Long::parseLong).collect(Collectors.toList());
+        // 删除用户信息
+        service.getBaseMapper().deleteBatchIds(collect);
+        // 删除权限信息
+
         return ResultUtils.success;
     }
 

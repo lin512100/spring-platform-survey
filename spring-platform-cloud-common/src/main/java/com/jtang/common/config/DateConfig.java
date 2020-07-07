@@ -55,7 +55,11 @@ public class DateConfig {
         return new Converter<String, LocalDateTime>() {
             @Override
             public LocalDateTime convert(@NotNull String source) {
-                return LocalDateTime.parse(source, DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT));
+                try{
+                    return LocalDateTime.parse(source, DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT));
+                }catch (Exception ignore){
+                    return null;
+                }
             }
         };
     }

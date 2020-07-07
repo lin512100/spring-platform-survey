@@ -11,10 +11,10 @@
             platform_user p_user
             LEFT JOIN platform_user_role u_role ON p_user.id = u_role.user_id
             LEFT JOIN platform_role p_role ON p_role.id = u_role.role_id
-            WHERE
+        WHERE
             1=1
             <if test="queryDTO.username != null">
-                AND p_user.username like '%' + #{queryDTO.usrname} + '%'
+                AND p_user.username like '%${queryDTO.username}%'
             </if>
         GROUP BY
             p_user.id

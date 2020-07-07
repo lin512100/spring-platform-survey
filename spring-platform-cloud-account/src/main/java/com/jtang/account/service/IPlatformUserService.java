@@ -35,4 +35,9 @@ public interface IPlatformUserService extends IService<PlatformUser> {
      * */
     void addUserInfo(PlatformUserDTO platformUserDTO);
 
+    /**
+     * 删除用户信息
+     * */
+    void delUserInfo(String ids);
+
 }

@@ -18,14 +18,17 @@ import com.jtang.account.query.PlatformUserQueryDTO;
 import com.jtang.account.service.IPlatformMenuService;
 import com.jtang.account.service.IPlatformUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,12 +86,8 @@ public class PlatformUserServiceImpl extends ServiceImpl<PlatformUserMapper, Pla
         BeanUtils.copyProperties(platformUserDTO,platformUser);
         // 更新用户基础信息
         this.baseMapper.updateById(platformUser);
-
         // 删除旧角色
-        QueryWrapper<PlatformUserRole> roleQueryWrapper = new QueryWrapper<>();
-        roleQueryWrapper.eq("user_id", platformUserDTO.getId());
-        iPlatformUserRoleService.remove(roleQueryWrapper);
-
+        this.removeRole(Collections.singletonList(platformUserDTO.getId()));
         // 关联新角色
         addRole(platformUserDTO.getId(),platformUserDTO.getRoleId());
     }
@@ -102,15 +101,31 @@ public class PlatformUserServiceImpl extends ServiceImpl<PlatformUserMapper, Pla
         platformUser.setSalt(salt);
         // 默认初始密码
         platformUser.setPassword(EncryptionUtils.getPBKDF2Code("123456",salt));
+        // 创建时间
+        platformUser.setCreateTime(LocalDateTime.now());
         // 保存用户信息
         long id = this.getBaseMapper().insert(platformUser);
         // 关联新角色
         addRole(id,platformUserDTO.getRoleId());
     }
 
+    @Override
+    public void delUserInfo(String ids) {
+        String[] idStr = ids.split(",");
+        List<Long> collect = Arrays.stream(idStr).map(Long::parseLong).collect(Collectors.toList());
+        // 删除用户信息
+        this.getBaseMapper().deleteBatchIds(collect);
+        // 删除权限信息
+        this.removeRole(collect);
+
+    }
+
 
     /** 关联新角色*/
     private void addRole(Long userId,String roleIds){
+        if(StringUtils.isEmpty(roleIds)){
+            return;
+        }
         List<PlatformUserRole> list = new ArrayList<>();
         List<Long> collect = Arrays.stream(roleIds.split(",")).map(Long::parseLong).collect(Collectors.toList());
         for (Long roleId: collect) {
@@ -118,6 +133,16 @@ public class PlatformUserServiceImpl extends ServiceImpl<PlatformUserMapper, Pla
         }
         // 添加新建的权限
         iPlatformUserRoleService.saveBatch(list);
+    }
+
+    /** 删除就角色 */
+    private void removeRole(List<Long> userIds){
+        if(userIds == null ||userIds.size() ==0){
+            return;
+        }
+        QueryWrapper<PlatformUserRole> roleQueryWrapper = new QueryWrapper<>();
+        roleQueryWrapper.in("user_id", userIds);
+        iPlatformUserRoleService.remove(roleQueryWrapper);
     }
 
 }
