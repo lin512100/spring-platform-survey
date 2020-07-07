@@ -1,3 +1,4 @@
 # Auto Configuration
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.jtang.common.config.SwaggerConfiguration
+  com.jtang.common.config.SwaggerConfiguration,\
+  com.jtang.common.config.DateConfig

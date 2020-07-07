@@ -21,19 +21,24 @@ public class PlatformUserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    private Long id;
 
     @ApiModelProperty(value = "用户ID")
-    private String userId;
+    private Long userId;
 
     @ApiModelProperty(value = "角色ID")
-    private String roleId;
+    private Long roleId;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
     @ApiModelProperty(value = "创建者")
     private String creator;
+
+    public PlatformUserRole(long userId,long roleId){
+        this.userId = userId;
+        this.roleId = roleId;
+    }
 
 
 }

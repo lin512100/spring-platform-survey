@@ -10,8 +10,8 @@
     </parent>
 
     <artifactId>spring-platform-cloud-account</artifactId>
+    <name>spring-platform-cloud-account</name>
     <version>1.0-SNAPSHOT</version>
-    <name>spring-platform-cloud-user</name>
 
     <dependencies>
 

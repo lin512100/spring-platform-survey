@@ -42,7 +42,7 @@ public class PlatformUser implements Serializable {
     private LocalDateTime birthday;
 
     @ApiModelProperty(value = "性别")
-    private String sex;
+    private Integer sex;
 
     @ApiModelProperty(value = "身份证")
     private String identity;
@@ -51,7 +51,7 @@ public class PlatformUser implements Serializable {
     private String phone;
 
     @ApiModelProperty(value = "用户状态")
-    private String status;
+    private Integer status;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
