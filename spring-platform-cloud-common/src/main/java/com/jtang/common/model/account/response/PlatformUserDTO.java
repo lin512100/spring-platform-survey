@@ -1,5 +1,6 @@
 package com.jtang.common.model.account.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jtang.base.enums.SexEnums;
 import com.jtang.base.enums.UserStatusEnums;
 import io.swagger.annotations.ApiModelProperty;
@@ -18,6 +19,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PlatformUserDTO {
     private Long id;
 

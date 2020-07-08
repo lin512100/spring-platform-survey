@@ -35,7 +35,7 @@ public class PlatformUserController {
 
     @PostMapping
     @ApiOperation(value = "用户添加")
-    public ResultUtils addCtFile(@Valid PlatformUserDTO entity){
+    public ResultUtils addCtFile(@Valid @RequestBody PlatformUserDTO entity){
         service.addUserInfo(entity);
         return ResultUtils.success;
     }
@@ -54,7 +54,7 @@ public class PlatformUserController {
 
     @PutMapping
     @ApiOperation(value = "修改用户信息")
-    public ResultUtils modifyPlatformUser(@Valid PlatformUserDTO entity){
+    public ResultUtils modifyPlatformUser(@Valid @RequestBody PlatformUserDTO entity){
         service.updateUserInfo(entity);
         return ResultUtils.success;
     }

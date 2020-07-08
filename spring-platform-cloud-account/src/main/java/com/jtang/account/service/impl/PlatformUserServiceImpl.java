@@ -120,7 +120,6 @@ public class PlatformUserServiceImpl extends ServiceImpl<PlatformUserMapper, Pla
 
     }
 
-
     /** 关联新角色*/
     private void addRole(Long userId,String roleIds){
         if(StringUtils.isEmpty(roleIds)){

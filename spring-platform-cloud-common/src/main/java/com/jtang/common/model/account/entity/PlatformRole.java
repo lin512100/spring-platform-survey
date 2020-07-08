@@ -2,6 +2,8 @@ package com.jtang.common.model.account.entity;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,6 +19,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value="PlatformRole对象", description="角色")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PlatformRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
