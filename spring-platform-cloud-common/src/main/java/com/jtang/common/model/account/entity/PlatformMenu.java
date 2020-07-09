@@ -2,6 +2,8 @@ package com.jtang.common.model.account.entity;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -18,16 +20,13 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ApiModel(value="PlatformMenu对象", description="菜单表")
 public class PlatformMenu implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    private String id;
+    private Long id;
 
     @ApiModelProperty(value = "菜单编码")
     private String code;
 
     @ApiModelProperty(value = "父菜单ID")
-    private String pId;
+    private Long pId;
 
     @ApiModelProperty(value = "名称")
     private String menuName;

@@ -64,7 +64,7 @@ public class PlatformPermissionController {
     public ResultUtils getList(@Valid PlatformPermissionQueryDTO queryDTO) {
         QueryWrapper<PlatformPermission> queryWrapper =  new QueryWrapper<>();
         queryWrapper.orderByDesc("id");
-        Page<PlatformPermission> page = new Page<>(queryDTO.getPageNum(),queryDTO.getPageSize());
+        Page<PlatformPermission> page = new Page<>(queryDTO.getPageIndex(),queryDTO.getPageSize());
         IPage<PlatformPermission> iPage = service.getBaseMapper().selectPage(page,queryWrapper);
         return ResultUtils.build(PageUtils.converterToPagination(iPage));
     }

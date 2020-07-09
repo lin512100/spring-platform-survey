@@ -33,7 +33,7 @@ public enum ResultStatusEnums {
     private String msg;
 
     /**
-     * 根据枚举名称--获取枚举编码
+     * 根据枚举名称获取枚举编码
      */
     public static Integer getCode(String name) {
         for (ResultStatusEnums resultCode : ResultStatusEnums.values()) {

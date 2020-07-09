@@ -65,7 +65,7 @@ public class ClientDetailsController {
     public ResultUtils getList(@Valid ClientDetailsQueryDTO queryDTO) {
         QueryWrapper<OauthClientDetails> queryWrapper =  new QueryWrapper<>();
         queryWrapper.orderByDesc("id");
-        Page<OauthClientDetails> page = new Page<>(queryDTO.getPageNum(),queryDTO.getPageSize());
+        Page<OauthClientDetails> page = new Page<>(queryDTO.getPageIndex(),queryDTO.getPageSize());
         IPage<OauthClientDetails> iPage = service.getBaseMapper().selectPage(page,queryWrapper);
         return ResultUtils.build(PageUtils.converterToPagination(iPage));
     }

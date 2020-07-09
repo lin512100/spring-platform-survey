@@ -83,7 +83,7 @@ public class ${table.controllerName} {
     public ResultUtils getList(@Valid ${entity}QueryDTO queryDTO) {
         QueryWrapper<${entity}> queryWrapper =  new QueryWrapper<>();
         queryWrapper.orderByDesc("id");
-        Page<${entity}> page = new Page<>(queryDTO.getPageNum(),queryDTO.getPageSize());
+        Page<${entity}> page = new Page<>(queryDTO.getPageIndex(),queryDTO.getPageSize());
         IPage<${entity}> iPage = service.getBaseMapper().selectPage(page,queryWrapper);
         return ResultUtils.build(PageUtils.converterToPagination(iPage));
     }

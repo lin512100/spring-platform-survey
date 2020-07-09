@@ -47,8 +47,6 @@ public class PlatformUserController {
         List<Long> collect = Arrays.stream(ids).map(Long::parseLong).collect(Collectors.toList());
         // 删除用户信息
         service.getBaseMapper().deleteBatchIds(collect);
-        // 删除权限信息
-
         return ResultUtils.success;
     }
 

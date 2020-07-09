@@ -19,12 +19,11 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value="PlatformRole对象", description="角色")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class PlatformRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    private Long id;
 
     @ApiModelProperty(value = "角色名称")
     private String roleName;
@@ -43,6 +42,4 @@ public class PlatformRole implements Serializable {
 
     @ApiModelProperty(value = "状态")
     private String status;
-
-
 }

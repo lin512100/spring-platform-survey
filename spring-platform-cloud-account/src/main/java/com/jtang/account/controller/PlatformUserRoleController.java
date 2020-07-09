@@ -64,7 +64,7 @@ public class PlatformUserRoleController {
     public ResultUtils getList(@Valid PlatformUserRoleQueryDTO queryDTO) {
         QueryWrapper<PlatformUserRole> queryWrapper =  new QueryWrapper<>();
         queryWrapper.orderByDesc("id");
-        Page<PlatformUserRole> page = new Page<>(queryDTO.getPageNum(),queryDTO.getPageSize());
+        Page<PlatformUserRole> page = new Page<>(queryDTO.getPageIndex(),queryDTO.getPageSize());
         IPage<PlatformUserRole> iPage = service.getBaseMapper().selectPage(page,queryWrapper);
         return ResultUtils.build(PageUtils.converterToPagination(iPage));
     }

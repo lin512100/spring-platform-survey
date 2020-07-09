@@ -17,8 +17,8 @@ import java.io.Serializable;
 @ToString
 public class BaseQuery implements Serializable {
 
-    @ApiModelProperty(name = "pageNum" , value = "页码")
-    private Integer pageNum;
+    @ApiModelProperty(name = "pageIndex" , value = "页码")
+    private Integer pageIndex;
 
     @ApiModelProperty(name = "pageSize", value = "页码")
     private Integer pageSize;

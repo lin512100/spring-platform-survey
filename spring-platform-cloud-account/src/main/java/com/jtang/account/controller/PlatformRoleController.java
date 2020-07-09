@@ -43,6 +43,7 @@ public class PlatformRoleController {
     @DeleteMapping("/{id}")
     @ApiOperation(value = "根据ID删除信息")
     public ResultUtils addCtFile(@Valid @PathVariable Long id){
+        // 查询是否有用户拥有此角色
         service.getBaseMapper().deleteById(id);
         return ResultUtils.success;
     }
@@ -66,11 +67,11 @@ public class PlatformRoleController {
     public ResultUtils getList(@Valid PlatformRoleQueryDTO queryDTO) {
         QueryWrapper<PlatformRole> queryWrapper =  new QueryWrapper<>();
         queryWrapper.orderByDesc("id");
-        if(queryDTO.getPageNum() == null || queryDTO.getPageSize() == null){
+        if(queryDTO.getPageIndex() == null || queryDTO.getPageSize() == null){
             List<PlatformRole> platformRoleList = service.getBaseMapper().selectList(queryWrapper);
             return ResultUtils.build(new Pagination<>((platformRoleList == null)?0:platformRoleList.size(),platformRoleList));
         }
-        Page<PlatformRole> page = new Page<>(queryDTO.getPageNum(),queryDTO.getPageSize());
+        Page<PlatformRole> page = new Page<>(queryDTO.getPageIndex(),queryDTO.getPageSize());
         IPage<PlatformRole> iPage = service.getBaseMapper().selectPage(page,queryWrapper);
         return ResultUtils.build(PageUtils.converterToPagination(iPage));
     }

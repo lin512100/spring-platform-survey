@@ -3,6 +3,7 @@ package com.jtang.account.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jtang.base.utils.Pagination;
 import com.jtang.common.model.account.entity.PlatformMenu;
 import com.jtang.common.utils.ResultUtils;
 import com.jtang.account.query.PlatformMenuQueryDTO;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
 * 菜单表 前端控制器
@@ -65,10 +67,14 @@ public class PlatformMenuController {
     @ApiOperation(value = "菜单表列表查询")
     public ResultUtils getList(@Valid PlatformMenuQueryDTO queryDTO) {
         QueryWrapper<PlatformMenu> queryWrapper =  new QueryWrapper<>();
-        queryWrapper.orderByDesc("id");
-        Page<PlatformMenu> page = new Page<>(queryDTO.getPageNum(),queryDTO.getPageSize());
+        if(queryDTO.getPageIndex() == null || queryDTO.getPageSize() == null){
+            List<PlatformMenu> platformMenuList = service.getBaseMapper().selectList(queryWrapper);
+            return ResultUtils.build(new Pagination<>((platformMenuList == null)?0:platformMenuList.size(),platformMenuList));
+        }
+        Page<PlatformMenu> page = new Page<>(queryDTO.getPageIndex(),queryDTO.getPageSize());
         IPage<PlatformMenu> iPage = service.getBaseMapper().selectPage(page,queryWrapper);
         return ResultUtils.build(PageUtils.converterToPagination(iPage));
+
     }
 
     @GetMapping("/listById/{userId}")

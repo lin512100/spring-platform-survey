@@ -3,11 +3,8 @@ package com.jtang.account.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jtang.account.service.IPlatformUserRoleService;
-import com.jtang.base.exception.BusinessException;
-import com.jtang.base.exception.ExceptionCast;
 import com.jtang.base.utils.EncryptionUtils;
 import com.jtang.base.utils.Pagination;
-import com.jtang.base.utils.UIDUtils;
 import com.jtang.common.model.account.entity.PlatformMenu;
 import com.jtang.common.model.account.entity.PlatformUser;
 import com.jtang.common.model.account.entity.PlatformUserRole;
@@ -71,7 +68,7 @@ public class PlatformUserServiceImpl extends ServiceImpl<PlatformUserMapper, Pla
     @Override
     public Pagination<PlatformUserDTO> getUserInfoList(PlatformUserQueryDTO queryDTO) {
         List<PlatformUserDTO> userInfoList = this.baseMapper.getUserInfoList(queryDTO);
-        queryDTO.setPageNum(null);
+        queryDTO.setPageIndex(null);
         queryDTO.setPageSize(null);
         List<PlatformUserDTO> total = this.baseMapper.getUserInfoList(queryDTO);
         return new Pagination<PlatformUserDTO>((total == null)?0:total.size(),(userInfoList == null)? new ArrayList<>():userInfoList);
@@ -81,7 +78,7 @@ public class PlatformUserServiceImpl extends ServiceImpl<PlatformUserMapper, Pla
     public void updateUserInfo(PlatformUserDTO platformUserDTO) {
         PlatformUser platformUser = this.baseMapper.selectById(platformUserDTO.getId());
         if(platformUser == null){
-            throw new BusinessException("用户信息不存在");
+            throw new RuntimeException("用户信息不存在");
         }
         BeanUtils.copyProperties(platformUserDTO,platformUser);
         // 更新用户基础信息

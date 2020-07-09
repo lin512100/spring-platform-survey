@@ -2,6 +2,11 @@ package com.jtang.base.enums;
 
 import lombok.Getter;
 
+/**
+ * 性别枚举
+ * @author linjt
+ * @date 2020/7/9
+ */
 @Getter
 public enum SexEnums {
     MALE(0,"男性"),

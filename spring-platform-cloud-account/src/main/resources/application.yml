@@ -8,7 +8,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://129.204.1.173:3306/platform-oauth?useUnicode=true&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://129.204.1.173:3306/platform-oauth?useUnicode=true&serverTimezone=UTC&useSSL=false&characterEncoding=UTF-8
     username: root
     password: Jtang!14010025
     hikari:

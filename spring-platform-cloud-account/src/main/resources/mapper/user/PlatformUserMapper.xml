@@ -18,8 +18,8 @@
             </if>
         GROUP BY
             p_user.id
-        <if test="queryDTO.pageNum != null and queryDTO.pageSize != null">
-            limit ${(queryDTO.pageNum-1)*queryDTO.pageSize},#{queryDTO.pageSize}
+        <if test="queryDTO.pageIndex != null and queryDTO.pageSize != null">
+            limit ${(queryDTO.pageIndex-1)*queryDTO.pageSize},#{queryDTO.pageSize}
         </if>
     </select>
 
