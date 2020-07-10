@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,14 +36,14 @@ public class PlatformUserController {
 
     @PostMapping
     @ApiOperation(value = "用户添加")
-    public ResultUtils addCtFile(@Valid @RequestBody PlatformUserDTO entity){
+    public ResultUtils add(@Valid @RequestBody PlatformUserDTO entity){
         service.addUserInfo(entity);
         return ResultUtils.success;
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "根据ID删除信息")
-    public ResultUtils addCtFile(@Valid @PathVariable String id){
+    public ResultUtils delete(@Valid @PathVariable String id){
         String[] ids = id.split(",");
         List<Long> collect = Arrays.stream(ids).map(Long::parseLong).collect(Collectors.toList());
         // 删除用户信息
@@ -52,21 +53,21 @@ public class PlatformUserController {
 
     @PutMapping
     @ApiOperation(value = "修改用户信息")
-    public ResultUtils modifyPlatformUser(@Valid @RequestBody PlatformUserDTO entity){
+    public ResultUtils modify(@Valid @RequestBody PlatformUserDTO entity){
         service.updateUserInfo(entity);
         return ResultUtils.success;
     }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "根据ID查询用户信息")
-    public ResultUtils getCtFile(@Valid @PathVariable Long id){
+    public ResultUtils detail(@Valid @PathVariable Long id){
         PlatformUser entity = service.getBaseMapper().selectById(id);
         return ResultUtils.build(entity);
     }
 
     @GetMapping("/list")
     @ApiOperation(value = "用户列表查询")
-    public ResultUtils getList(@Valid PlatformUserQueryDTO queryDTO) {
+    public ResultUtils list(@Valid PlatformUserQueryDTO queryDTO) {
         return ResultUtils.build(service.getUserInfoList(queryDTO));
     }
 

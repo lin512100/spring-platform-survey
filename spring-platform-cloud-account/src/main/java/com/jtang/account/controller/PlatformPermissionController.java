@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 /**
 * 权限 前端控制器
@@ -33,35 +34,36 @@ public class PlatformPermissionController {
 
     @PostMapping
     @ApiOperation(value = "权限添加")
-    public ResultUtils addCtFile(@Valid @RequestBody PlatformPermission entity){
+    public ResultUtils add(@Valid @RequestBody PlatformPermission entity){
+        entity.setCreateTime(LocalDateTime.now());
         service.save(entity);
         return ResultUtils.success;
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "根据ID删除信息")
-    public ResultUtils addCtFile(@Valid @PathVariable Long id){
+    public ResultUtils delete(@Valid @PathVariable Long id){
         service.getBaseMapper().deleteById(id);
         return ResultUtils.success;
     }
 
     @PutMapping
     @ApiOperation(value = "修改权限信息")
-    public ResultUtils modifyPlatformPermission(@Valid @RequestBody PlatformPermission entity){
+    public ResultUtils modify(@Valid @RequestBody PlatformPermission entity){
         service.getBaseMapper().updateById(entity);
         return ResultUtils.success;
     }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "根据ID查询权限信息")
-    public ResultUtils getCtFile(@Valid @PathVariable Long id){
+    public ResultUtils detail(@Valid @PathVariable Long id){
         PlatformPermission entity = service.getBaseMapper().selectById(id);
         return ResultUtils.build(entity);
     }
 
     @GetMapping("/list")
     @ApiOperation(value = "权限列表查询")
-    public ResultUtils getList(@Valid PlatformPermissionQueryDTO queryDTO) {
+    public ResultUtils list(@Valid PlatformPermissionQueryDTO queryDTO) {
         QueryWrapper<PlatformPermission> queryWrapper =  new QueryWrapper<>();
         queryWrapper.orderByDesc("id");
         Page<PlatformPermission> page = new Page<>(queryDTO.getPageIndex(),queryDTO.getPageSize());

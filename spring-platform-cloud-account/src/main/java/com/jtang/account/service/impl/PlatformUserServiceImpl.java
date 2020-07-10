@@ -100,6 +100,7 @@ public class PlatformUserServiceImpl extends ServiceImpl<PlatformUserMapper, Pla
         platformUser.setPassword(EncryptionUtils.getPBKDF2Code("123456",salt));
         // 创建时间
         platformUser.setCreateTime(LocalDateTime.now());
+        platformUser.setUpdateTime(LocalDateTime.now());
         // 保存用户信息
         long id = this.getBaseMapper().insert(platformUser);
         // 关联新角色

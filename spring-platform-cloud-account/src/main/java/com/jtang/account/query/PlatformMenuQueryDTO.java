@@ -19,4 +19,13 @@ public class PlatformMenuQueryDTO extends BaseQuery {
     @ApiModelProperty(name = "menuName" , value = "菜单名称")
     private String menuName;
 
+    @ApiModelProperty(value = "是否是菜单")
+    private Integer isMenu;
+
+    @ApiModelProperty(value = "父菜单ID")
+    private Long pid;
+
+    @ApiModelProperty(value = "地址")
+    private String url;
+
 }

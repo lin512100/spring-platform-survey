@@ -26,7 +26,7 @@ public class PlatformMenu implements Serializable {
     private String code;
 
     @ApiModelProperty(value = "父菜单ID")
-    private Long pId;
+    private Long pid;
 
     @ApiModelProperty(value = "名称")
     private String menuName;
@@ -35,7 +35,7 @@ public class PlatformMenu implements Serializable {
     private String url;
 
     @ApiModelProperty(value = "是否是菜单")
-    private String isMenu;
+    private Integer isMenu;
 
     @ApiModelProperty(value = "菜单层级")
     private Integer level;
@@ -54,6 +54,9 @@ public class PlatformMenu implements Serializable {
 
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
+
+    @ApiModelProperty(value = "功能")
+    private String func;
 
 
 }

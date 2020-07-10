@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -35,14 +36,16 @@ public class PlatformRoleController {
 
     @PostMapping
     @ApiOperation(value = "角色添加")
-    public ResultUtils addCtFile(@Valid @RequestBody PlatformRole entity){
+    public ResultUtils add(@Valid @RequestBody PlatformRole entity){
+        entity.setCreateTime(LocalDateTime.now());
+        entity.setUpdateTime(LocalDateTime.now());
         service.save(entity);
         return ResultUtils.success;
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "根据ID删除信息")
-    public ResultUtils addCtFile(@Valid @PathVariable Long id){
+    public ResultUtils delete(@Valid @PathVariable Long id){
         // 查询是否有用户拥有此角色
         service.getBaseMapper().deleteById(id);
         return ResultUtils.success;
@@ -50,21 +53,21 @@ public class PlatformRoleController {
 
     @PutMapping
     @ApiOperation(value = "修改角色信息")
-    public ResultUtils modifyPlatformRole(@Valid @RequestBody PlatformRole entity){
+    public ResultUtils modify(@Valid @RequestBody PlatformRole entity){
         service.getBaseMapper().updateById(entity);
         return ResultUtils.success;
     }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "根据ID查询角色信息")
-    public ResultUtils getCtFile(@Valid @PathVariable Long id){
+    public ResultUtils detail(@Valid @PathVariable Long id){
         PlatformRole entity = service.getBaseMapper().selectById(id);
         return ResultUtils.build(entity);
     }
 
     @GetMapping("/list")
     @ApiOperation(value = "角色列表查询")
-    public ResultUtils getList(@Valid PlatformRoleQueryDTO queryDTO) {
+    public ResultUtils list(@Valid PlatformRoleQueryDTO queryDTO) {
         QueryWrapper<PlatformRole> queryWrapper =  new QueryWrapper<>();
         queryWrapper.orderByDesc("id");
         if(queryDTO.getPageIndex() == null || queryDTO.getPageSize() == null){
