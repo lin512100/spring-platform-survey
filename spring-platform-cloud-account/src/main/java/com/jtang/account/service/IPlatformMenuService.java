@@ -1,7 +1,10 @@
 package com.jtang.account.service;
 
+import com.jtang.account.query.PlatformMenuQueryDTO;
+import com.jtang.base.utils.Pagination;
 import com.jtang.common.model.account.entity.PlatformMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jtang.common.model.account.response.PlatformMenuDTO;
 
 import java.util.List;
 
@@ -25,5 +28,13 @@ public interface IPlatformMenuService extends IService<PlatformMenu> {
      * @return {@link PlatformMenu}
      * */
     List<PlatformMenu> getListByRole(long userId);
+
+
+    /**
+     * 菜单列表信息查询
+     * @param queryDTO {@link PlatformMenuQueryDTO}
+     * @return {@link PlatformMenuDTO}
+     * */
+    Pagination<PlatformMenuDTO> getMenuList(PlatformMenuQueryDTO queryDTO);
 
 }

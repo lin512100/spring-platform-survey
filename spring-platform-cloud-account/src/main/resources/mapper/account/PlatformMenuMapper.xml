@@ -18,6 +18,47 @@
             )
         ORDER BY
             id;
+        <include refid="com.jtang.account.mapper.CommonMapper.pageHelper"/>
     </select>
+
+    <select id="getMenuList" resultType="com.jtang.common.model.account.response.PlatformMenuDTO" parameterType="com.jtang.account.query.PlatformMenuQueryDTO">
+        SELECT
+            p1.*,
+            p2.menu_name AS pidMenuName
+        FROM
+            platform_menu p1
+            LEFT JOIN platform_menu p2 ON p1.pid = p2.id
+        <include refid="menu"/>
+    </select>
+
+    <select id="getMenuListCount" resultType="long" parameterType="com.jtang.account.query.PlatformMenuQueryDTO">
+        SELECT
+            count(1)
+        FROM
+        platform_menu p1
+        LEFT JOIN platform_menu p2 ON p1.pid = p2.id
+        <include refid="menu"/>
+    </select>
+
+    <sql id="menu">
+        WHERE
+        1 = 1
+        <if test="queryDTO.menuName != null">
+            AND p1.menu_name like '%${queryDTO.menuName}%'
+        </if>
+        <if test="queryDTO.isMenu != null">
+            AND p1.is_menu = #{queryDTO.isMenu}
+        </if>
+        <if test="queryDTO.pid != null">
+            AND p1.pid = #{pid}
+        </if>
+        <if test="queryDTO.url != null">
+            AND p1.url like '%${queryDTO.url}%'
+        </if>
+        <if test="queryDTO.method != null">
+            AND p1.method like '%${queryDTO.method}%'
+        </if>
+    </sql>
+
 
 </mapper>

@@ -1,7 +1,10 @@
 package com.jtang.account.mapper;
 
+import com.jtang.account.query.PlatformMenuQueryDTO;
+import com.jtang.base.utils.Pagination;
 import com.jtang.common.model.account.entity.PlatformMenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jtang.common.model.account.response.PlatformMenuDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -22,4 +25,18 @@ public interface PlatformMenuMapper extends BaseMapper<PlatformMenu> {
      * @return {@link PlatformMenu}
      * */
     List<PlatformMenu> getMenuByUserId(@Param("userId") long userId);
+
+    /**
+     * 菜单列表信息查询
+     * @param queryDTO {@link PlatformMenuQueryDTO}
+     * @return {@link PlatformMenuDTO}
+     * */
+    List<PlatformMenuDTO> getMenuList(@Param("queryDTO") PlatformMenuQueryDTO queryDTO);
+
+    /**
+     * 菜单列表信息查询
+     * @param queryDTO {@link PlatformMenuQueryDTO}
+     * @return {@link PlatformMenuDTO}
+     * */
+    Long getMenuListCount(@Param("queryDTO") PlatformMenuQueryDTO queryDTO);
 }

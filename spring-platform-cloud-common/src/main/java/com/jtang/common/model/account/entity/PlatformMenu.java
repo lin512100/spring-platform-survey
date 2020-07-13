@@ -49,14 +49,12 @@ public class PlatformMenu implements Serializable {
     @ApiModelProperty(value = "菜单图标")
     private String icon;
 
+    @ApiModelProperty(value = "方法名")
+    private String method;
+
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
-
-    @ApiModelProperty(value = "功能")
-    private String func;
-
-
 }

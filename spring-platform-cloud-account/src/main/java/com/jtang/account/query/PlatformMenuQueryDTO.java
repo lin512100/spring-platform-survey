@@ -28,4 +28,7 @@ public class PlatformMenuQueryDTO extends BaseQuery {
     @ApiModelProperty(value = "地址")
     private String url;
 
+    @ApiModelProperty(value = "方法名")
+    private String method;
+
 }

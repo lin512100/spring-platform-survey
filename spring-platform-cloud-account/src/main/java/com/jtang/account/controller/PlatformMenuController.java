@@ -70,26 +70,7 @@ public class PlatformMenuController {
     @GetMapping("/list")
     @ApiOperation(value = "菜单表列表查询")
     public ResultUtils list(@Valid PlatformMenuQueryDTO queryDTO) {
-        QueryWrapper<PlatformMenu> queryWrapper =  new QueryWrapper<>();
-        if(queryDTO.getIsMenu() != null){
-            queryWrapper.eq("is_menu",queryDTO.getIsMenu());
-        }
-        if(queryDTO.getMenuName() != null){
-            queryWrapper.like("menu_name",queryDTO.getMenuName());
-        }
-        if(StringUtils.isNotEmpty(queryDTO.getUrl())){
-            queryWrapper.like("url",queryDTO.getUrl());
-        }
-        if(queryDTO.getPid() != null){
-            queryWrapper.eq("pid",queryDTO.getPid());
-        }
-        if(queryDTO.getPageIndex() == null || queryDTO.getPageSize() == null){
-            List<PlatformMenu> platformMenuList = service.getBaseMapper().selectList(queryWrapper);
-            return ResultUtils.build(new Pagination<>((platformMenuList == null)?0:platformMenuList.size(),platformMenuList));
-        }
-        Page<PlatformMenu> page = new Page<>(queryDTO.getPageIndex(),queryDTO.getPageSize());
-        IPage<PlatformMenu> iPage = service.getBaseMapper().selectPage(page,queryWrapper);
-        return ResultUtils.build(PageUtils.converterToPagination(iPage));
+        return ResultUtils.build(service.getMenuList(queryDTO));
 
     }
 
