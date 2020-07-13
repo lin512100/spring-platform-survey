@@ -58,7 +58,8 @@ public class PlatformUserServiceImpl extends ServiceImpl<PlatformUserMapper, Pla
             throw new UsernameNotFoundException("用户不存在");
         }
         // 查询用户权限信息
-        List<PlatformMenu> userPermissionByUserId = iPlatformMenuService.getMenuByUserId(user.getId());
+//        List<PlatformMenu> userPermissionByUserId = iPlatformMenuService.getMenuByUserId(user.getId());
+        List<PlatformMenu> userPermissionByUserId = new ArrayList<>();
         List<String> collect = userPermissionByUserId.stream().map(PlatformMenu::getUrl).collect(Collectors.toList());
         UserDao userDao = new UserDao(collect);
         BeanUtils.copyProperties(user,userDao);

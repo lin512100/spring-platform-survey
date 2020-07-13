@@ -33,7 +33,6 @@ class SpringPlatformCloudOauthApplicationTests {
         String[] includeTable = new String[]{"oauth_client_details"};
         generatorParamDTO.setIncludeTableList(includeTable);
         CodeGenerator.genertor(generatorParamDTO , dsc);
-
     }
 
     @Test

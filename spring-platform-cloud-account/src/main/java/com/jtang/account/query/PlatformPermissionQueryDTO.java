@@ -1,6 +1,7 @@
 package com.jtang.account.query;
 
 import com.jtang.common.base.BaseQuery;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,4 +16,10 @@ import lombok.ToString;
 @Setter
 @ToString
 public class PlatformPermissionQueryDTO extends BaseQuery {
+
+    @ApiModelProperty(name = "menuName",value = "菜单名")
+    private String menuName;
+
+    @ApiModelProperty(name = "func",value = "方法名")
+    private String func;
 }

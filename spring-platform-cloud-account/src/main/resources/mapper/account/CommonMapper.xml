@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jtang.account.mapper.CommonMapper">
+
+    <sql id="pageHelper">
+        <if test="queryDTO.pageIndex != null and queryDTO.pageSize != null">
+            limit ${(queryDTO.pageIndex-1)*queryDTO.pageSize},#{queryDTO.pageSize}
+        </if>
+    </sql>
+
+</mapper>

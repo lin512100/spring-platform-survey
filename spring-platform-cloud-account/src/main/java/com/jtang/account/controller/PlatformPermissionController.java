@@ -1,13 +1,9 @@
 package com.jtang.account.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jtang.common.model.account.entity.PlatformPermission;
 import com.jtang.common.utils.ResultUtils;
 import com.jtang.account.query.PlatformPermissionQueryDTO;
 import com.jtang.account.service.IPlatformPermissionService;
-import com.jtang.web.utils.PageUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -64,11 +60,7 @@ public class PlatformPermissionController {
     @GetMapping("/list")
     @ApiOperation(value = "权限列表查询")
     public ResultUtils list(@Valid PlatformPermissionQueryDTO queryDTO) {
-        QueryWrapper<PlatformPermission> queryWrapper =  new QueryWrapper<>();
-        queryWrapper.orderByDesc("id");
-        Page<PlatformPermission> page = new Page<>(queryDTO.getPageIndex(),queryDTO.getPageSize());
-        IPage<PlatformPermission> iPage = service.getBaseMapper().selectPage(page,queryWrapper);
-        return ResultUtils.build(PageUtils.converterToPagination(iPage));
+        return ResultUtils.build(service.list(queryDTO));
     }
 
 }

@@ -2,6 +2,10 @@ package com.jtang.account.mapper;
 
 import com.jtang.common.model.account.entity.PlatformRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jtang.common.model.account.response.MenuTree;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +16,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-06-30
  */
 public interface PlatformRoleMapper extends BaseMapper<PlatformRole> {
+
+    /**
+     * 菜单列表
+     * @return {@link MenuTree}
+     * */
+    @Select({"select * from platform_menu p_menu"})
+    List<MenuTree> menuTree();
+
 
 }

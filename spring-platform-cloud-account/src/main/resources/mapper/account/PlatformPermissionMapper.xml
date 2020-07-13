@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jtang.account.mapper.PlatformPermissionMapper">
+
+    <select id="list" parameterType="com.jtang.account.query.PlatformPermissionQueryDTO" resultType="com.jtang.common.model.account.response.PlatformPermissionDTO">
+        SELECT
+            p_per.*,
+            p_menu.menu_name AS menuName
+        FROM
+            platform_permission p_per
+        LEFT JOIN platform_menu p_menu ON p_per.menu_id = p_menu.id
+        WHERE
+            1 = 1
+            <if test="queryDTO.menuName != null">
+                AND p_menu.menu_name like '%${queryDTO.menuName}%'
+            </if>
+            <if test="queryDTO.func != null">
+                AND p_menu.func like '%${queryDTO.func}%'
+            </if>
+            <include refid="com.jtang.account.mapper.CommonMapper.pageHelper"></include>
+    </select>
+
+    <select id="menuPermissionList" resultType="com.jtang.common.model.account.response.MenuTree">
+        SELECT
+            p_per.id AS id,
+            p_per.func AS menuName,
+            p_menu.id AS pid,
+            u_role.id AS choice
+        FROM
+            platform_menu p_menu
+                LEFT JOIN platform_permission p_per ON p_menu.id = p_per.menu_id
+                LEFT JOIN platform_role_menu u_role ON u_role.menu_id = p_per.menu_id
+    </select>
+</mapper>

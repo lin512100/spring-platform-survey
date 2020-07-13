@@ -1,7 +1,14 @@
 package com.jtang.account.mapper;
 
+import com.jtang.account.query.PlatformPermissionQueryDTO;
 import com.jtang.common.model.account.entity.PlatformPermission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jtang.common.model.account.response.MenuTree;
+import com.jtang.common.model.account.response.PlatformPermissionDTO;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,6 +21,17 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface PlatformPermissionMapper extends BaseMapper<PlatformPermission> {
 
 
+    /**
+     * 查询操作信息列表
+     * @param queryDTO {@link PlatformPermissionQueryDTO}
+     * */
+    List<PlatformPermissionDTO> list(@Param("queryDTO") PlatformPermissionQueryDTO queryDTO);
+
+    /**
+     * 菜单操作列表
+     * @return {@link MenuTree}
+     * */
+    List<MenuTree> menuPermissionList();
 
 
 }

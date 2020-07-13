@@ -3,6 +3,7 @@ package com.jtang.account.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jtang.base.response.ResponseResult;
 import com.jtang.base.utils.Pagination;
 import com.jtang.common.model.account.entity.PlatformRole;
 import com.jtang.common.utils.ResultUtils;
@@ -77,6 +78,11 @@ public class PlatformRoleController {
         Page<PlatformRole> page = new Page<>(queryDTO.getPageIndex(),queryDTO.getPageSize());
         IPage<PlatformRole> iPage = service.getBaseMapper().selectPage(page,queryWrapper);
         return ResultUtils.build(PageUtils.converterToPagination(iPage));
+    }
+
+    @GetMapping("/tree")
+    public ResultUtils tree(){
+    return ResultUtils.build(service.getMenuTree());
     }
 
 }

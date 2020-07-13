@@ -21,16 +21,18 @@ public class PlatformPermission implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String id;
-
-    @ApiModelProperty(value = "角色ID")
-    private String roleId;
+    private Long id;
 
     @ApiModelProperty(value = "菜单ID")
-    private String menuId;
+    private Long menuId;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
+    @ApiModelProperty(value = "功能描述")
+    private String func;
+
+    @ApiModelProperty(value = "方法名")
+    private String method;
 
 }
