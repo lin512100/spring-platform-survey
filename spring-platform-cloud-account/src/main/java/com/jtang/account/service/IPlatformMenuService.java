@@ -4,8 +4,10 @@ import com.jtang.account.query.PlatformMenuQueryDTO;
 import com.jtang.base.utils.Pagination;
 import com.jtang.common.model.account.entity.PlatformMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jtang.common.model.account.response.MenuTree;
 import com.jtang.common.model.account.response.PlatformMenuDTO;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -36,5 +38,10 @@ public interface IPlatformMenuService extends IService<PlatformMenu> {
      * @return {@link PlatformMenuDTO}
      * */
     Pagination<PlatformMenuDTO> getMenuList(PlatformMenuQueryDTO queryDTO);
+
+    /**
+     * 菜单树结构
+     * */
+    List<MenuTree> tree(List<Long> roleId) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException;
 
 }

@@ -3,6 +3,7 @@ package com.jtang.common.model.account.response;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,7 +16,8 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuTree {
+public class MenuTree implements Serializable {
+
 
     @ApiModelProperty(name = "id",value = "菜单ID")
     private Long id;
@@ -30,7 +32,7 @@ public class MenuTree {
     private Integer choice;
 
     @ApiModelProperty(name = "child", value = "子树")
-    private List<MenuTree> child;
+    private List<MenuTree> children;
 
 
 }

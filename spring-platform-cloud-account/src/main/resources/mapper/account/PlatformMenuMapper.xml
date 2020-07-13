@@ -17,7 +17,7 @@
                 role_id IN ( SELECT role_id FROM platform_user_role WHERE user_id IN ( SELECT id FROM platform_user WHERE id = ${userId} ) )
             )
         ORDER BY
-            id;
+            id
         <include refid="com.jtang.account.mapper.CommonMapper.pageHelper"/>
     </select>
 
@@ -31,6 +31,7 @@
         <include refid="menu"/>
     </select>
 
+    <!--    菜单列表总数-->
     <select id="getMenuListCount" resultType="long" parameterType="com.jtang.account.query.PlatformMenuQueryDTO">
         SELECT
             count(1)
@@ -39,6 +40,23 @@
         LEFT JOIN platform_menu p2 ON p1.pid = p2.id
         <include refid="menu"/>
     </select>
+
+    <!--    树形菜单列表-->
+    <select id="menuTree" resultType="com.jtang.common.model.account.response.MenuTree" parameterType="list">
+        SELECT
+            p_menu.id,
+            p_menu.pid,
+            (CASE WHEN IFNULL(r_menu.id,null ) = null THEN 1 ELSE 0 END) as choice,
+            p_menu.menu_name AS menuName
+        FROM
+            platform_menu p_menu
+        left join (select * from platform_role_menu where role_id in
+            <foreach collection="roleIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        )r_menu on r_menu.menu_id = p_menu.id
+    </select>
+
 
     <sql id="menu">
         WHERE
@@ -58,7 +76,9 @@
         <if test="queryDTO.method != null">
             AND p1.method like '%${queryDTO.method}%'
         </if>
+        <include refid="com.jtang.account.mapper.CommonMapper.pageHelper"/>
     </sql>
+
 
 
 </mapper>
