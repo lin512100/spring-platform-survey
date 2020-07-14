@@ -4,7 +4,7 @@ import com.jtang.account.query.PlatformPermissionQueryDTO;
 import com.jtang.base.utils.Pagination;
 import com.jtang.common.model.account.entity.PlatformPermission;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.jtang.common.model.account.response.MenuTree;
+import com.jtang.common.model.account.response.PlatformMenuDTO;
 import com.jtang.common.model.account.response.PlatformPermissionDTO;
 
 import java.util.List;
@@ -27,8 +27,8 @@ public interface IPlatformPermissionService extends IService<PlatformPermission>
 
     /**
      * 菜单操作列表
-     * @return {@link MenuTree}
+     * @return {@link PlatformMenuDTO}
      * */
-    List<MenuTree> menuPermissionList();
+    List<PlatformMenuDTO> menuPermissionList();
 
 }

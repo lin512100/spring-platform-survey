@@ -1,4 +1,4 @@
-package com.jtang.business.query;
+package com.jtang.account.query;
 
 import com.jtang.common.base.BaseQuery;
 import lombok.Getter;
@@ -15,4 +15,5 @@ import lombok.ToString;
 @Setter
 @ToString
 public class PlatformRoleMenuQueryDTO extends BaseQuery {
+
 }

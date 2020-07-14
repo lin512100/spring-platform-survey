@@ -1,12 +1,11 @@
 package com.jtang.account.mapper;
 
 import com.jtang.account.query.PlatformMenuQueryDTO;
-import com.jtang.base.utils.Pagination;
 import com.jtang.common.model.account.entity.PlatformMenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.jtang.common.model.account.response.MenuTree;
 import com.jtang.common.model.account.response.PlatformMenuDTO;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -43,8 +42,8 @@ public interface PlatformMenuMapper extends BaseMapper<PlatformMenu> {
 
     /**
      * 获取树结构所有数据
-     * @param roleIds 权限Ids
-     * @return {@link MenuTree}
+     * @return {@link PlatformMenuDTO}
      * */
-    List<MenuTree> menuTree(@Param("roleIds") List<Long> roleIds);
+    @Select("SELECT p_menu.id, p_menu.pid, p_menu.menu_name AS menuName FROM platform_menu p_menu")
+    List<PlatformMenuDTO> menuTree();
 }

@@ -27,10 +27,15 @@ public class PlatformRoleMenu implements Serializable {
     private Long roleId;
 
     @ApiModelProperty(value = "菜单ID")
-    private Long  menu;
+    private Long  menuId;
 
     @ApiModelProperty(value = "操作权限")
     private String operate;
+
+    public PlatformRoleMenu(Long roleId ,Long menuId){
+        this.roleId = roleId;
+        this.menuId = menuId;
+    }
 
 
 }

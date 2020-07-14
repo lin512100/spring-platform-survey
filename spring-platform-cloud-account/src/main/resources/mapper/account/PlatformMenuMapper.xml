@@ -41,23 +41,6 @@
         <include refid="menu"/>
     </select>
 
-    <!--    树形菜单列表-->
-    <select id="menuTree" resultType="com.jtang.common.model.account.response.MenuTree" parameterType="list">
-        SELECT
-            p_menu.id,
-            p_menu.pid,
-            (CASE WHEN IFNULL(r_menu.id,null ) = null THEN 1 ELSE 0 END) as choice,
-            p_menu.menu_name AS menuName
-        FROM
-            platform_menu p_menu
-        left join (select * from platform_role_menu where role_id in
-            <foreach collection="roleIds" index="index" item="item" open="(" separator="," close=")">
-                #{item}
-            </foreach>
-        )r_menu on r_menu.menu_id = p_menu.id
-    </select>
-
-
     <sql id="menu">
         WHERE
         1 = 1

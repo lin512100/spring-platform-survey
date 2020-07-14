@@ -20,7 +20,7 @@
             <include refid="com.jtang.account.mapper.CommonMapper.pageHelper"></include>
     </select>
 
-    <select id="menuPermissionList" resultType="com.jtang.common.model.account.response.MenuTree">
+    <select id="menuPermissionList" resultType="com.jtang.common.model.account.response.PlatformMenuDTO">
         SELECT
             p_per.id AS id,
             p_per.func AS menuName,

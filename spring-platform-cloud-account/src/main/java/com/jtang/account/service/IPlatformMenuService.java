@@ -4,7 +4,7 @@ import com.jtang.account.query.PlatformMenuQueryDTO;
 import com.jtang.base.utils.Pagination;
 import com.jtang.common.model.account.entity.PlatformMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.jtang.common.model.account.response.MenuTree;
+import com.jtang.common.model.account.response.PlatformMenuDTO;
 import com.jtang.common.model.account.response.PlatformMenuDTO;
 
 import java.lang.reflect.InvocationTargetException;
@@ -42,6 +42,12 @@ public interface IPlatformMenuService extends IService<PlatformMenu> {
     /**
      * 菜单树结构
      * */
-    List<MenuTree> tree(List<Long> roleId) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException;
+    List<PlatformMenuDTO> tree() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException;
+
+    /**
+     * 根据用户ID查询树状图结构
+     * @param userId 用户ID
+     * */
+    List<PlatformMenuDTO> getTreeById(Long userId)  throws NoSuchMethodException, IllegalAccessException, InvocationTargetException;
 
 }

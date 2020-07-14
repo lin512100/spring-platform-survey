@@ -1,6 +1,7 @@
 package com.jtang.account.service.impl;
 
 import com.jtang.account.query.PlatformMenuQueryDTO;
+import com.jtang.account.service.IPlatformRoleMenuService;
 import com.jtang.base.utils.Pagination;
 import com.jtang.base.utils.TreeUtils;
 import com.jtang.common.model.account.entity.PlatformMenu;
@@ -8,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jtang.account.mapper.PlatformMenuMapper;
 import com.jtang.account.service.IPlatformMenuService;
 import com.jtang.account.service.IPlatformUserRoleService;
-import com.jtang.common.model.account.response.MenuTree;
+import com.jtang.common.model.account.response.PlatformMenuDTO;
 import com.jtang.common.model.account.response.PlatformMenuDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -33,6 +33,11 @@ public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, Pla
 
     @Autowired
     private IPlatformUserRoleService iPlatformUserRoleService;
+
+    @Autowired
+    private IPlatformRoleMenuService iPlatformRoleMenuService;
+
+
 
     @Override
     public List<PlatformMenu> getMenuByUserId(long userId) {
@@ -56,13 +61,15 @@ public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, Pla
     }
 
     @Override
-    public List<MenuTree> tree(List<Long> roleId) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        if(roleId == null || roleId.size() == 0){
-            return new ArrayList<>();
-        }
-        List<MenuTree> menuList = this.baseMapper.menuTree(roleId);
+    public List<PlatformMenuDTO> tree() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        // 菜单
+        List<PlatformMenuDTO> menuList = this.baseMapper.menuTree();
         return TreeUtils.buildByRecursive(menuList, "Id", "Pid", "Children");
+    }
 
+    @Override
+    public List<PlatformMenuDTO> getTreeById(Long userId) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        return null;
     }
 }
 

@@ -6,7 +6,7 @@ import com.jtang.common.model.account.entity.PlatformPermission;
 import com.jtang.account.mapper.PlatformPermissionMapper;
 import com.jtang.account.service.IPlatformPermissionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.jtang.common.model.account.response.MenuTree;
+import com.jtang.common.model.account.response.PlatformMenuDTO;
 import com.jtang.common.model.account.response.PlatformPermissionDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,7 @@ public class PlatformPermissionServiceImpl extends ServiceImpl<PlatformPermissio
     }
 
     @Override
-    public List<MenuTree> menuPermissionList() {
+    public List<PlatformMenuDTO> menuPermissionList() {
         return baseMapper.menuPermissionList();
     }
 }

@@ -3,7 +3,8 @@ package com.jtang.account.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.jtang.business.query.PlatformRoleMenuQueryDTO;
+import com.jtang.account.query.PlatformRoleMenuDTO;
+import com.jtang.account.query.PlatformRoleMenuQueryDTO;
 import com.jtang.common.model.account.entity.PlatformRoleMenu;
 import com.jtang.account.service.IPlatformRoleMenuService;
 import com.jtang.web.utils.PageUtils;
@@ -48,8 +49,8 @@ public class PlatformRoleMenuController {
 
     @PutMapping
     @ApiOperation(value = "修改信息")
-    public ResultUtils modifyPlatformRoleMenu(@Valid @RequestBody PlatformRoleMenu entity){
-        service.getBaseMapper().updateById(entity);
+    public ResultUtils modifyPlatformRoleMenu(@Valid @RequestBody PlatformRoleMenuDTO entity){
+        service.modifyRoleMenu(entity);
         return ResultUtils.success;
     }
 

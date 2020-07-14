@@ -80,9 +80,4 @@ public class PlatformRoleController {
         return ResultUtils.build(PageUtils.converterToPagination(iPage));
     }
 
-    @GetMapping("/tree")
-    public ResultUtils tree(){
-    return ResultUtils.build(service.getMenuTree());
-    }
-
 }

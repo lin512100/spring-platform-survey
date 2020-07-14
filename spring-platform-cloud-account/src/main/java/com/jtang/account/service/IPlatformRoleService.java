@@ -2,9 +2,6 @@ package com.jtang.account.service;
 
 import com.jtang.common.model.account.entity.PlatformRole;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.jtang.common.model.account.response.MenuTree;
-
-import java.util.List;
 
 /**
 * <p>
@@ -15,9 +12,5 @@ import java.util.List;
 */
 public interface IPlatformRoleService extends IService<PlatformRole> {
 
-    /**
-     * 更改用户权限
-     * */
-    List<MenuTree> getMenuTree();
 
 }
