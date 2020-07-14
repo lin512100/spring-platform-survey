@@ -28,6 +28,7 @@
         <module>spring-platform-cloud-account</module>
         <module>spring-platform-cloud-generator</module>
         <module>spring-platform-cloud-feign</module>
+        <module>spring-platform-cloud-tools</module>
     </modules>
 
     <dependencies>
