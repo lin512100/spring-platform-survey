@@ -37,8 +37,6 @@ public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, Pla
     @Autowired
     private IPlatformRoleMenuService iPlatformRoleMenuService;
 
-
-
     @Override
     public List<PlatformMenu> getMenuByUserId(long userId) {
         return this.baseMapper.getMenuByUserId(userId);

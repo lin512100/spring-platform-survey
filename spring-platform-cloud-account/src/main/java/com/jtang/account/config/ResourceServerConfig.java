@@ -34,7 +34,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     /**
      * 公钥
      * */
-    private static final String PUBLIC_KEY = "publickey.txt";
+    private static final String PUBLIC_KEY = "public.key";
 
     /**
      * 定义JwtTokenStore，使用jwt令牌
@@ -66,6 +66,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
             BufferedReader br = new BufferedReader(inputStreamReader);
             return br.lines().collect(Collectors.joining("\n"));
         } catch (IOException ioe) {
+            log.info("非对称加密公钥 Key获取失败:" + ioe.getMessage());
             return null;
         }
     }
