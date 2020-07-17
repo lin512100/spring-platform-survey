@@ -44,6 +44,7 @@ public class PlatformRoleMenuServiceImpl extends ServiceImpl<PlatformRoleMenuMap
         entity.getMenuId().removeAll(oldRole);
         List<PlatformRoleMenu> list = new ArrayList<>();
         for(Long id : entity.getMenuId()){
+            System.out.println("新增：" + entity.getMenuId());
             list.add(new PlatformRoleMenu(entity.getRoleId(),id));
         }
         saveBatch(list);
@@ -51,6 +52,7 @@ public class PlatformRoleMenuServiceImpl extends ServiceImpl<PlatformRoleMenuMap
             QueryWrapper<PlatformRoleMenu> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("role_id", entity.getRoleId());
             queryWrapper.in("menu_id",menuIdByRoleId);
+            System.out.println("删除：" + entity.getMenuId());
             this.baseMapper.delete(queryWrapper);
         }
 

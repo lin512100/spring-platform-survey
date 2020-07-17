@@ -67,6 +67,7 @@ public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, Pla
 
     @Override
     public List<PlatformMenuDTO> getTreeById(Long userId) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        List<PlatformMenuDTO> menuList = this.baseMapper.getMenuTree(userId);
         return null;
     }
 }

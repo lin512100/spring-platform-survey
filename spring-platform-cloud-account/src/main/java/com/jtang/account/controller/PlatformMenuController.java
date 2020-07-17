@@ -95,7 +95,6 @@ public class PlatformMenuController {
     @ApiModelProperty(value = "根据用户ID查询树状图结构")
     public ResultUtils getTreeById(@PathVariable("userId") Long userId) throws Exception{
         return null;
-
     }
 
 }
