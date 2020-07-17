@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
-* <p>
 * 客户端信息 服务实现类
-* </p>
-*
 * @author jtang
 * @since 2020-07-01
 */

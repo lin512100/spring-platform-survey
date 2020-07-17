@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* <p>
 * ${table.comment!} 服务类
-* </p>
 * @author ${author}
 * @since ${date}
 */

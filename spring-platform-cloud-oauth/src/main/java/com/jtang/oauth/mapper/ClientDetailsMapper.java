@@ -4,10 +4,7 @@ import com.jtang.common.model.account.entity.OauthClientDetails;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * <p>
  * 客户端信息 Mapper 接口
- * </p>
- *
  * @author jtang
  * @since 2020-07-01
  */

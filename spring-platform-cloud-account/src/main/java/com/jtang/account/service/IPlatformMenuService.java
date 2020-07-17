@@ -11,9 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
-* <p>
 * 菜单表 服务类
-* </p>
 * @author jtang
 * @since 2020-06-30
 */

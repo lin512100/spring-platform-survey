@@ -10,10 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.apache.commons.lang3.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 /**
-* <p>
 * ${table.comment!} 服务实现类
-* </p>
-*
 * @author ${author}
 * @since ${date}
 */

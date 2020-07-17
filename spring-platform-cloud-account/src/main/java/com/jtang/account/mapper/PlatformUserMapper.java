@@ -9,10 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * <p>
  * 用户 Mapper 接口
- * </p>
- *
  * @author jtang
  * @since 2020-06-30
  */

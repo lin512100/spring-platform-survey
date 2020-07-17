@@ -8,10 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /**
- * <p>
  * 角色 Mapper 接口
- * </p>
- *
  * @author jtang
  * @since 2020-06-30
  */

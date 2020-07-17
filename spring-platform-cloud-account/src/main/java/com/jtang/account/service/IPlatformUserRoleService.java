@@ -6,9 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
 
 /**
-* <p>
 * 用户角色 服务类
-* </p>
 * @author jtang
 * @since 2020-06-30
 */

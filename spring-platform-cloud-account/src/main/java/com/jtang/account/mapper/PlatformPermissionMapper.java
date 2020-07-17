@@ -10,9 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * <p>
  * 权限 Mapper 接口
- * </p>
  *
  * @author jtang
  * @since 2020-06-30

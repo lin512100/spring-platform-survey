@@ -16,10 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-* <p>
 * 权限 服务实现类
-* </p>
-*
 * @author jtang
 * @since 2020-06-30
 */

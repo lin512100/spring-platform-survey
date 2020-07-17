@@ -4,9 +4,7 @@ import com.jtang.common.model.account.entity.OauthClientDetails;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
-* <p>
 * 客户端信息 服务类
-* </p>
 * @author jtang
 * @since 2020-07-01
 */

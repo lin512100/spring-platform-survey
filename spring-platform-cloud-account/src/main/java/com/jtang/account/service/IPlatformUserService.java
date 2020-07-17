@@ -8,9 +8,7 @@ import com.jtang.feign.model.UserDao;
 import com.jtang.account.query.PlatformUserQueryDTO;
 
 /**
-* <p>
 * 用户 服务类
-* </p>
 * @author jtang
 * @since 2020-06-30
 */
