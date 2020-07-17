@@ -18,7 +18,6 @@
         <dependency>
             <groupId>com.jtang</groupId>
             <artifactId>spring-platform-cloud-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>

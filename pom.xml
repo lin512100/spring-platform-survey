@@ -17,6 +17,13 @@
         <maven-compiler.version>3.8.1</maven-compiler.version>
         <maven-compiler-configuration.source.version>1.8</maven-compiler-configuration.source.version>
         <maven-compiler-configuration.target.version>1.8</maven-compiler-configuration.target.version>
+        <redisson-version>3.8.2</redisson-version>
+        <platform-version>1.0-SNAPSHOT</platform-version>
+        <swagger-version>2.9.2</swagger-version>
+        <myabtis-version>3.3.1.tmp</myabtis-version>
+        <mysql-version>5.1.48</mysql-version>
+        <freemarker-version>2.3.29</freemarker-version>
+
     </properties>
 
     <modules>
@@ -77,6 +84,71 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--  Feign内部调用模块模块-->
+            <dependency>
+                <groupId>com.jtang</groupId>
+                <artifactId>spring-platform-cloud-feign</artifactId>
+                <version>${platform-version}</version>
+            </dependency>
+
+            <!--  集成网页基础服务模块-->
+            <dependency>
+                <groupId>com.jtang</groupId>
+                <artifactId>spring-platform-cloud-generator</artifactId>
+                <version>${platform-version}</version>
+            </dependency>
+
+            <!--  基础服务模块-->
+            <dependency>
+                <groupId>com.jtang</groupId>
+                <artifactId>spring-platform-cloud-base</artifactId>
+                <version>${platform-version}</version>
+            </dependency>
+
+            <!--  公共服务基础模块 -->
+            <dependency>
+                <groupId>com.jtang</groupId>
+                <artifactId>spring-platform-cloud-common</artifactId>
+                <version>${platform-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${myabtis-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${myabtis-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker-version}</version>
+            </dependency>
+
+            <!--  Swagger-UI  -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger-version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -92,6 +164,14 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!--  Redission-->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson-version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
