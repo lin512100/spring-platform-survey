@@ -1,5 +1,6 @@
 package com.jtang.account.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jtang.account.query.PlatformMenuQueryDTO;
 import com.jtang.account.service.IPlatformRoleMenuService;
 import com.jtang.base.utils.Pagination;
@@ -49,6 +50,14 @@ public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, Pla
     }
 
     @Override
+    public void deleteById(Long id) {
+        QueryWrapper<PlatformMenu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("pid",id);
+        list(queryWrapper);
+        deleteById(id);
+    }
+
+    @Override
     public Pagination<PlatformMenuDTO> getMenuList(PlatformMenuQueryDTO queryDTO) {
 
         List<PlatformMenuDTO> userInfoList = this.baseMapper.getMenuList(queryDTO);
@@ -68,7 +77,7 @@ public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, Pla
     @Override
     public List<PlatformMenuDTO> getTreeById(Long userId) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         List<PlatformMenuDTO> menuList = this.baseMapper.getMenuTree(userId);
-        return null;
+        return TreeUtils.buildByRecursive(menuList,"Id","Pid","Children");
     }
 }
 

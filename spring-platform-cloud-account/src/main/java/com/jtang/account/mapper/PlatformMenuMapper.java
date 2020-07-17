@@ -44,6 +44,10 @@ public interface PlatformMenuMapper extends BaseMapper<PlatformMenu> {
     @Select("SELECT p_menu.id, p_menu.pid, p_menu.menu_name AS menuName FROM platform_menu p_menu")
     List<PlatformMenuDTO> menuTree();
 
-    /** 获取用户权限菜单列表 */
+    /**
+     * 获取用户权限菜单列表
+     * @param userId 用户ID
+     * @return {@link PlatformMenuDTO}
+     * */
     List<PlatformMenuDTO> getMenuTree(@Param("userId") Long userId);
 }

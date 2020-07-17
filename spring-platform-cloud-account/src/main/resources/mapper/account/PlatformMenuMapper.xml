@@ -51,7 +51,8 @@
             JOIN platform_user_role u_role ON u_role.role_id = r_menu.role_id
         WHERE
             menu.is_menu = 1
-            AND u_role.user_id = 1;
+            AND menu.show = 1
+            AND u_role.user_id = #{userId};
     </select>
 
     <sql id="menu">

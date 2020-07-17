@@ -48,7 +48,7 @@ public class PlatformMenuController {
     @DeleteMapping("/{id}")
     @ApiOperation(value = "根据ID删除信息")
     public ResultUtils delete(@Valid @PathVariable Long id){
-        service.getBaseMapper().deleteById(id);
+        service.deleteById(id);
         return ResultUtils.success;
     }
 
@@ -85,7 +85,7 @@ public class PlatformMenuController {
     public ResultUtils tree(@PathVariable("roleId") Long roleId) throws Exception{
         // 默认权限
         List<Long> menuIdByRoleId = iPlatformRoleMenuService.getMenuIdByRoleId(Collections.singletonList(roleId));
-        Map<String,List> result = new HashMap<>();
+        Map<String,List> result = new HashMap<>(2);
         result.put("selected",menuIdByRoleId);
         result.put("menu",service.tree());
         return ResultUtils.build(result);
@@ -94,7 +94,7 @@ public class PlatformMenuController {
     @GetMapping("/public/getTreeById/{userId}")
     @ApiModelProperty(value = "根据用户ID查询树状图结构")
     public ResultUtils getTreeById(@PathVariable("userId") Long userId) throws Exception{
-        return null;
+        return ResultUtils.build(service.getTreeById(userId));
     }
 
 }

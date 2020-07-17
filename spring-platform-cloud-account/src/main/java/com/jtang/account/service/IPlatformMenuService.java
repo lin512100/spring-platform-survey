@@ -29,6 +29,11 @@ public interface IPlatformMenuService extends IService<PlatformMenu> {
      * */
     List<PlatformMenu> getListByRole(long userId);
 
+    /**
+     * 删除菜单信息
+     * @param id 菜单Id
+     * */
+    void deleteById(Long id);
 
     /**
      * 菜单列表信息查询
