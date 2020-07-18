@@ -5,6 +5,7 @@ import com.jtang.feign.model.UserJwt;
 import com.jtang.feign.service.UserApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -48,6 +49,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("用户名不能为空");
         }
         UserDao user = userApiService.getUsernameInfo(username);
-        return new UserJwt("jtang", user.getPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList(StringUtils.join(user.getAuthority(), ",")));
+        UserJwt userJwt = new UserJwt(user.getUsername(), user.getPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList(StringUtils.join(user.getAuthority(), ",")));
+        BeanUtils.copyProperties(user,userJwt);
+        return userJwt;
     }
 }

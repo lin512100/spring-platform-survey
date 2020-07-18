@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jtang.account.service.IPlatformUserRoleService;
 import com.jtang.base.utils.EncryptionUtils;
+import com.jtang.base.utils.OperateFunctionUtils;
 import com.jtang.base.utils.Pagination;
 import com.jtang.common.model.account.entity.PlatformMenu;
 import com.jtang.common.model.account.entity.PlatformUser;
@@ -23,10 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -55,10 +53,11 @@ public class PlatformUserServiceImpl extends ServiceImpl<PlatformUserMapper, Pla
             throw new UsernameNotFoundException("用户不存在");
         }
         // 查询用户权限信息
-//        List<PlatformMenu> userPermissionByUserId = iPlatformMenuService.getMenuByUserId(user.getId());
-        List<PlatformMenu> userPermissionByUserId = new ArrayList<>();
-        List<String> collect = userPermissionByUserId.stream().map(PlatformMenu::getUrl).collect(Collectors.toList());
-        UserDao userDao = new UserDao(collect);
+        List<PlatformMenu> permissions = iPlatformMenuService.getMenuByUserId(user.getId());
+        List<String> permission = permissions.stream()
+                .map(x-> OperateFunctionUtils.getStr(x.getUrl(), x.getMenuName(), x.getMethod()))
+                .collect(Collectors.toList());
+        UserDao userDao = new UserDao(permission);
         BeanUtils.copyProperties(user,userDao);
         return userDao;
     }

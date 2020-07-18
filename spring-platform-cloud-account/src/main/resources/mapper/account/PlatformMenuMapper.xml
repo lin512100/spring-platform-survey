@@ -3,22 +3,19 @@
 <mapper namespace="com.jtang.account.mapper.PlatformMenuMapper">
 
     <select id="getMenuByUserId" resultType="com.jtang.common.model.account.entity.PlatformMenu" parameterType="long">
-        SELECT
-            *
+        SELECT DISTINCT
+            r_menu.menu_id,
+            menu.url as url,
+            GROUP_CONCAT(menu.method) as method,
+            GROUP_CONCAT(menu.menu_name) as menuName
         FROM
-            platform_menu
+            platform_menu menu
+            JOIN platform_role_menu r_menu ON menu.id = r_menu.menu_id
+            JOIN platform_user_role u_role ON u_role.role_id = r_menu.role_id
         WHERE
-            id IN (
-            SELECT
-                menu_id
-            FROM
-                platform_permission
-            WHERE
-                role_id IN ( SELECT role_id FROM platform_user_role WHERE user_id IN ( SELECT id FROM platform_user WHERE id = ${userId} ) )
-            )
-        ORDER BY
-            id
-        <include refid="com.jtang.account.mapper.CommonMapper.pageHelper"/>
+            menu.is_menu = 0
+            AND u_role.user_id = #{userId}
+            GROUP BY menu.url
     </select>
 
     <select id="getMenuList" resultType="com.jtang.common.model.account.response.PlatformMenuDTO" parameterType="com.jtang.account.query.PlatformMenuQueryDTO">

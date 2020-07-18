@@ -32,12 +32,6 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, PlatformMenu> implements IPlatformMenuService {
 
-    @Autowired
-    private IPlatformUserRoleService iPlatformUserRoleService;
-
-    @Autowired
-    private IPlatformRoleMenuService iPlatformRoleMenuService;
-
     @Override
     public List<PlatformMenu> getMenuByUserId(long userId) {
         return this.baseMapper.getMenuByUserId(userId);
