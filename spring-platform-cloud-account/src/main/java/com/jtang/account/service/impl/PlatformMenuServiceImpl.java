@@ -38,17 +38,11 @@ public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, Pla
     }
 
     @Override
-    @Cacheable(value = "getListByRole", key = "#userId")
-    public List<PlatformMenu> getListByRole(long userId) {
-        return this.baseMapper.getMenuByUserId(userId);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        QueryWrapper<PlatformMenu> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("pid",id);
-        list(queryWrapper);
-        deleteById(id);
+    public void deleteMenuById(Long id) {
+//        QueryWrapper<PlatformMenu> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.eq("pid",id);
+//        list(queryWrapper);
+        this.baseMapper.deleteById(id);
     }
 
     @Override

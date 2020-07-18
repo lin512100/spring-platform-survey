@@ -23,7 +23,7 @@ public class PlatformMenuQueryDTO extends BaseQuery {
     private Integer isMenu;
 
     @ApiModelProperty(value = "是否展示")
-    private Integer show;
+    private Integer isShow;
 
     @ApiModelProperty(value = "父菜单ID")
     private Long pid;

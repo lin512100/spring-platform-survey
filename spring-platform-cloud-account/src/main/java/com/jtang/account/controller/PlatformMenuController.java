@@ -48,7 +48,7 @@ public class PlatformMenuController {
     @DeleteMapping("/{id}")
     @ApiOperation(value = "根据ID删除信息")
     public ResultUtils delete(@Valid @PathVariable Long id){
-        service.deleteById(id);
+        service.deleteMenuById(id);
         return ResultUtils.success;
     }
 
@@ -71,13 +71,6 @@ public class PlatformMenuController {
     public ResultUtils list(@Valid PlatformMenuQueryDTO queryDTO) {
         return ResultUtils.build(service.getMenuList(queryDTO));
 
-    }
-
-    @GetMapping("/listById/{userId}")
-    @ApiOperation(value = "根据角色ID查询菜单列表")
-    public ResultUtils getListByRole(@PathVariable("userId") Long userId){
-
-        return ResultUtils.build(service.getListByRole(userId));
     }
 
     @GetMapping("/public/tree/{roleId}")

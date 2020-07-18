@@ -39,7 +39,7 @@ public class PlatformMenu implements Serializable {
     private Integer isMenu;
 
     @ApiModelProperty(value = "是否展示")
-    private Integer show;
+    private Integer isShow;
 
     @ApiModelProperty(value = "菜单层级")
     private Integer level;
