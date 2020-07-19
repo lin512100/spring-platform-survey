@@ -1,7 +1,5 @@
 package com.jtang.base.utils;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.MessageDigest;

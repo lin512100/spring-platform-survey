@@ -49,3 +49,4 @@ encrypt:
     secret: xuechengkeystore
     alias: xckey
     password: xuecheng
+debug: true

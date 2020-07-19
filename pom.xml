@@ -30,12 +30,12 @@
         <module>spring-platform-cloud-base</module>
         <module>spring-platform-cloud-common</module>
         <module>spring-platform-cloud-eureka</module>
-        <module>spring-platform-cloud-gateway</module>
         <module>spring-platform-cloud-oauth</module>
         <module>spring-platform-cloud-account</module>
         <module>spring-platform-cloud-generator</module>
         <module>spring-platform-cloud-feign</module>
         <module>spring-platform-cloud-tools</module>
+        <module>spring-platform-cloud-zuul</module>
     </modules>
 
     <dependencies>

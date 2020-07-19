@@ -20,6 +20,7 @@ public class UserDao {
     private String name;
     private String username;
     private String password;
+    private String salt;
     private List<String> authority;
     private boolean accountNonExpired;
     private boolean accountNonLocked;

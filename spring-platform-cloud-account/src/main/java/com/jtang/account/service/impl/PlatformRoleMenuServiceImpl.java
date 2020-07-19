@@ -33,10 +33,19 @@ public class PlatformRoleMenuServiceImpl extends ServiceImpl<PlatformRoleMenuMap
     }
 
     @Override
+    public List<Long> getAllMenuIdByRoleId(List<Long> roleIds) {
+        if(roleIds == null || roleIds.size() == 0){
+            return new ArrayList<>();
+        }
+        return this.baseMapper.getALLMenuIdByRoleId(roleIds);
+    }
+
+
+    @Override
     public void modifyRoleMenu(PlatformRoleMenuDTO entity) {
 
         // 查询该角色已经有的权限
-        List<Long> oldRole = this.getMenuIdByRoleId(Collections.singletonList(entity.getRoleId()));
+        List<Long> oldRole = this.getAllMenuIdByRoleId(Collections.singletonList(entity.getRoleId()));
         List<Long> menuIdByRoleId = new ArrayList<>(oldRole);
         // 删除的菜单ID
         menuIdByRoleId.removeAll(entity.getMenuId());

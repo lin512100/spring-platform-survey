@@ -22,4 +22,11 @@ public interface PlatformRoleMenuMapper extends BaseMapper<PlatformRoleMenu> {
      * */
     List<Long> getMenuIdByRoleId(@Param("roleIds") List<Long> roleIds);
 
+    /**
+     * 根据角色ID列表查询非菜单功能ID
+     * @param roleIds 角色ID列表
+     * @return long
+     * */
+    List<Long> getALLMenuIdByRoleId(@Param("roleIds") List<Long> roleIds);
+
 }

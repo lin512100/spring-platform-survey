@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -94,7 +95,7 @@ public class PlatformUserServiceImpl extends ServiceImpl<PlatformUserMapper, Pla
         String salt = EncryptionUtils.getSalt();
         platformUser.setSalt(salt);
         // 默认初始密码
-        platformUser.setPassword(EncryptionUtils.getPBKDF2Code("123456",salt));
+        platformUser.setPassword(new BCryptPasswordEncoder().encode("123"));
         // 创建时间
         platformUser.setCreateTime(LocalDateTime.now());
         platformUser.setUpdateTime(LocalDateTime.now());
