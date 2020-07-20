@@ -1,10 +1,8 @@
 package com.jtang.oauth.controller;
 
-import com.jtang.common.model.account.request.LoginRequest;
 import com.jtang.common.utils.ResultUtils;
 import com.jtang.oauth.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

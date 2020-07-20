@@ -77,7 +77,6 @@ public class AuthServiceImpl implements AuthService {
         //取出cookie中的用户身份令牌
         String uid = AuthCookieUtils.getTokenFormCookie();
         if(uid == null){ return null; }
-
         //拿身份令牌从redis中查询jwt令牌
         AuthToken userToken = AuthCookieUtils.getUserToken(redissonClient, uid);
         if(userToken != null){

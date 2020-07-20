@@ -28,8 +28,7 @@ public class RequestUtils {
      */
     public static String getPjoPath() {
         try {
-            return // 项目的真实路径
-                    StringUtils.replace(getRequest().getServletContext().getContextPath(), "/", "\\");
+            return StringUtils.replace(getRequest().getServletContext().getContextPath(), "/", "\\");
         } catch (Exception e) {
             return null;
         }
@@ -40,8 +39,7 @@ public class RequestUtils {
      */
     public static String getServletPath() {
         try {
-            return // 项目的真实路径
-                    getRequest().getServletPath();
+            return getRequest().getServletPath();
         } catch (Exception e) {
             return null;
         }
@@ -52,8 +50,7 @@ public class RequestUtils {
      */
     public static String getServerName() {
         try {
-            return // 项目的真实路径
-                    getRequest().getServerName();
+            return getRequest().getServerName();
         } catch (Exception e) {
             return null;
         }
@@ -64,8 +61,7 @@ public class RequestUtils {
      */
     public static String getServerPort() {
         try {
-            return // 项目的真实路径
-                    getRequest().getServerPort()+"";
+            return getRequest().getServerPort()+"";
         } catch (Exception e) {
             return ServerPort;
         }

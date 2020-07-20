@@ -39,9 +39,6 @@ import java.util.stream.Collectors;
 public class PlatformUserServiceImpl extends ServiceImpl<PlatformUserMapper, PlatformUser> implements IPlatformUserService {
 
     @Autowired
-    private IPlatformMenuService iPlatformMenuService;
-
-    @Autowired
     private IPlatformUserRoleService iPlatformUserRoleService;
 
     @Override
@@ -53,12 +50,15 @@ public class PlatformUserServiceImpl extends ServiceImpl<PlatformUserMapper, Pla
         if(user == null){
             throw new UsernameNotFoundException("用户不存在");
         }
-        // 查询用户权限信息
-        List<PlatformMenu> permissions = iPlatformMenuService.getMenuByUserId(user.getId());
-        List<String> permission = permissions.stream()
-                .map(x-> OperateFunctionUtils.getStr(x.getUrl(), x.getMenuName(), x.getMethod()))
+        // 查询用户角色信息
+        QueryWrapper<PlatformUserRole> query = new QueryWrapper<>();
+        query.eq("user_id",user.getId());
+        List<PlatformUserRole> platformUserRoles = iPlatformUserRoleService.getBaseMapper().selectList(query);
+        // 封装角色到JWT AUTH中
+        List<String> role = platformUserRoles.stream()
+                .map(x-> String.valueOf(x.getRoleId()))
                 .collect(Collectors.toList());
-        UserDao userDao = new UserDao(permission);
+        UserDao userDao = new UserDao(role);
         BeanUtils.copyProperties(user,userDao);
         return userDao;
     }

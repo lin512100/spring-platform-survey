@@ -68,7 +68,10 @@ public class PlatformRoleMenuServiceImpl extends ServiceImpl<PlatformRoleMenuMap
 
     @Override
     public List<HandleAllow> getHandleAllow(List<Long> roleIds) {
-        return null;
+        if(roleIds == null || roleIds.size() == 0){
+            return new ArrayList<>();
+        }
+        return this.getBaseMapper().getALLMenuByRoleId(roleIds);
     }
 }
 

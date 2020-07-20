@@ -29,6 +29,23 @@
         </foreach>
     </select>
 
+    <select id="getALLMenuByRoleId"  parameterType="long" resultType="com.jtang.common.model.account.response.HandleAllow">
+        SELECT
+            m.server as server,
+            m.url as url,
+            m.method as method
+        FROM
+            platform_role_menu r_menu
+            JOIN platform_menu m ON r_menu.menu_id = m.id
+        WHERE
+            m.is_menu = 0
+        AND
+            r_menu.role_id IN
+            <foreach item='item' index='index' collection='roleIds' open='(' separator=',' close=')'>
+                #{item}
+            </foreach>
+    </select>
+
 
 
 

@@ -70,11 +70,6 @@ public class PlatformUserController {
         return ResultUtils.build(service.getUserInfoList(queryDTO));
     }
 
-    @GetMapping("/info")
-    public UserDao getUserInfo(@RequestParam("username") String username){
-        return service.loadUserByUsername(username);
-    }
-
     @GetMapping("/status/list")
     public  ResultUtils getList(){
         return ResultUtils.build(UserStatusEnums.getMap());

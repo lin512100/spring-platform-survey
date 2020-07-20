@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
  * @author LinJinTang
  */
 @Configuration
-public class CommonConfig {
+public class RedisConfig {
     @Autowired
     private RedisProperties redisProperties;
 

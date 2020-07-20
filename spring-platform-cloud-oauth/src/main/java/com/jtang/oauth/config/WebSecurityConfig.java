@@ -1,5 +1,6 @@
 package com.jtang.oauth.config;
 
+import com.jtang.base.client.PublicUrlConstants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -19,7 +20,8 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // 网页校验忽略地址
-        web.ignoring().antMatchers("/public/login","/logout","/public/jwt");
+        web.ignoring().antMatchers(PublicUrlConstants.PUBLIC_PRE + PublicUrlConstants.LOGIN,
+                PublicUrlConstants.PUBLIC_PRE + PublicUrlConstants.JWT);
     }
 
     @Bean

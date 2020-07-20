@@ -12,5 +12,10 @@ import java.util.Map;
  */
 public interface InnerService {
 
-    Map<String,List<HandleAllow>> getHandleAllow();
+    /**
+     * 根据角色ID查询操作列表
+     * @param roleIds 角色ID
+     * @return List<HandleAllow>
+     * */
+    Map<String,List<HandleAllow>> getHandleAllow(List<Long> roleIds);
 }

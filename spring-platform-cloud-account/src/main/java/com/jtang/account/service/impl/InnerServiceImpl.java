@@ -1,11 +1,14 @@
 package com.jtang.account.service.impl;
 
+import com.jtang.account.service.IPlatformRoleMenuService;
 import com.jtang.account.service.InnerService;
 import com.jtang.common.model.account.response.HandleAllow;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author linjt
@@ -14,9 +17,12 @@ import java.util.Map;
 @Service
 public class InnerServiceImpl implements InnerService {
 
-    @Override
-    public Map<String, List<HandleAllow>> getHandleAllow() {
+    @Autowired
+    private IPlatformRoleMenuService iPlatformRoleMenuService;
 
-        return null;
+    @Override
+    public Map<String, List<HandleAllow>> getHandleAllow(List<Long> roleIds) {
+        List<HandleAllow> handleAllow = iPlatformRoleMenuService.getHandleAllow(roleIds);
+        return handleAllow.stream().collect(Collectors.groupingBy(HandleAllow::getServer));
     }
 }
