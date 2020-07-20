@@ -16,4 +16,6 @@ public class HttpUtils {
         byte[] encode = Base64Utils.encode(string.getBytes());
         return "Basic "+ new String(encode);
     }
+
+
 }

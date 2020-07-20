@@ -3,6 +3,7 @@ package com.jtang.account.service;
 import com.jtang.account.query.PlatformRoleMenuDTO;
 import com.jtang.common.model.account.entity.PlatformRoleMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jtang.common.model.account.response.HandleAllow;
 
 import java.util.List;
 
@@ -31,5 +32,12 @@ public interface IPlatformRoleMenuService extends IService<PlatformRoleMenu> {
      * @param entity {@link PlatformRoleMenuDTO}
      * */
     void modifyRoleMenu(PlatformRoleMenuDTO entity);
+
+    /**
+     * 根据角色ID查询角色操作清单列表
+     * @param roleIds 角色ID
+     * @return {@link HandleAllow}
+     * */
+    List<HandleAllow> getHandleAllow(List<Long> roleIds);
 
 }

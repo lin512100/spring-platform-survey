@@ -15,5 +15,3 @@ spring:
     password: Jtang!14010025
   profiles:
     active: zuul
-
-

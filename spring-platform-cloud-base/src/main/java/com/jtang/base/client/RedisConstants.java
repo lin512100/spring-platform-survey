@@ -12,4 +12,7 @@ public class RedisConstants {
 
     /** 用户服务 */
     public final static int REDIS_DATABASE_USER = 1;
+
+    /** 网关服务 */
+    public final static int REDIS_DATABASE_ZUUL = 2;
 }

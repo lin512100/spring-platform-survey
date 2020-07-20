@@ -1,5 +1,6 @@
 package com.jtang.zuul.config;
 
+import com.jtang.zuul.filter.PermissionCheckFilter;
 import com.jtang.zuul.filter.TokenCheckFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,5 +16,10 @@ public class ZuulConfig {
     @Bean
     public TokenCheckFilter tokenFilter(){
         return new TokenCheckFilter();
+    }
+
+    @Bean
+    public PermissionCheckFilter permissionCheckFilter(){
+        return new PermissionCheckFilter();
     }
 }

@@ -6,6 +6,7 @@ import com.jtang.common.model.account.entity.PlatformRoleMenu;
 import com.jtang.account.mapper.PlatformRoleMenuMapper;
 import com.jtang.account.service.IPlatformRoleMenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jtang.common.model.account.response.HandleAllow;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,6 +64,11 @@ public class PlatformRoleMenuServiceImpl extends ServiceImpl<PlatformRoleMenuMap
             this.baseMapper.delete(queryWrapper);
         }
 
+    }
+
+    @Override
+    public List<HandleAllow> getHandleAllow(List<Long> roleIds) {
+        return null;
     }
 }
 
