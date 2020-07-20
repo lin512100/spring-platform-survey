@@ -20,26 +20,6 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    /**
-     * 用户登录
-     * @param loginRequest {@link LoginRequest}
-     * @return {@link LoginRequest}
-     * */
-    @PostMapping("/login")
-    public ResultUtils login(LoginRequest loginRequest) {
-        return ResultUtils.build(authService.getToken(loginRequest));
-    }
-
-    /** 获取JWT令牌 */
-    @GetMapping("/jwt")
-    public ResultUtils jwt() {
-        String jwtToken = authService.jwtToken();
-        if(jwtToken == null){
-            return ResultUtils.fail;
-        }
-        return ResultUtils.build(jwtToken);
-    }
-
     /** 退出登录 */
     @PostMapping("/logout")
     public ResultUtils logout() {

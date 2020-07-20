@@ -15,12 +15,12 @@ import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 网页管理拦截器
+ * Auth权限拦截器
  * @date 2020/7/18 19:35
  * @author LinJinTang
  */
 @Slf4j
-public class TokenFilter extends ZuulFilter {
+public class TokenCheckFilter extends ZuulFilter {
 
     @Autowired
     private AuthService authService;
@@ -48,7 +48,7 @@ public class TokenFilter extends ZuulFilter {
         log.info("send {} request to {}", request.getMethod(), RequestUtils.getServletPath());
 
         // 判断是否为放行链接
-        boolean addrStatus = PathMatcherUtil.matches(Roster.WHITE_ADDR,request.getRequestURI());
+        boolean addrStatus = PathMatcherUtil.matches(Roster.WHITE_ADDR,RequestUtils.getServletPath());
         if(addrStatus){
             return null;
         }
@@ -65,6 +65,7 @@ public class TokenFilter extends ZuulFilter {
             //拒绝访问
             return refused(ctx,"token is empty");
         }
+        log.info("JWT TOKEN:{}",jwtFromHeader);
         return  null;
     }
 

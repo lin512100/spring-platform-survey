@@ -21,7 +21,7 @@
         <platform-version>1.0-SNAPSHOT</platform-version>
         <swagger-version>2.9.2</swagger-version>
         <myabtis-version>3.3.1.tmp</myabtis-version>
-        <mysql-version>5.1.48</mysql-version>
+        <mysql-version>8.0.21</mysql-version>
         <freemarker-version>2.3.29</freemarker-version>
 
     </properties>
@@ -129,6 +129,7 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-version}</version>
             </dependency>
+
 
             <dependency>
                 <groupId>org.freemarker</groupId>

@@ -18,8 +18,8 @@ public class Roster {
 
     /** 链接放行白名单 */
     public final static List<String> WHITE_ADDR = new ArrayList<>(Arrays.asList(
-            "/auth/login",
-            "/auth/jwt",
+            "/auth/public/login",
+            "/auth/public/jwt",
 
             "/account/info",
             "/account/menu/listById/**"
