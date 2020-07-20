@@ -30,6 +30,6 @@ public class InnerController {
     @GetMapping("/{id}")
     @ApiOperation(value = "根据角色ID查询角色操作功能")
     Map<String,List<HandleAllow>> getHandleAllow(){
-
+        return null;
     }
 }
