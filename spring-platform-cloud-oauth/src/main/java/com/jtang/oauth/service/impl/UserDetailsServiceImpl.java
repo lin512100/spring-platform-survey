@@ -22,8 +22,8 @@ import org.springframework.stereotype.Service;
  * @date 2020/7/1 21:45
  * @author LinJinTang
  */
-@Service
 @Slf4j
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired

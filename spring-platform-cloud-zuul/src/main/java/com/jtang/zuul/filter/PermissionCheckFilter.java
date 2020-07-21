@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.jtang.base.client.InnerUrlConstants;
 import com.jtang.base.client.PublicUrlConstants;
 import com.jtang.common.model.account.response.HandleAllow;
+import com.jtang.feign.model.UserDao;
 import com.jtang.feign.service.UserApiService;
 import com.jtang.zuul.service.AuthService;
 import com.jtang.zuul.utils.RequestUtils;
@@ -18,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.security.jwt.Jwt;
 import org.springframework.security.jwt.JwtHelper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -30,7 +31,7 @@ import java.util.Map;
  * @date 2020/7/20
  */
 @Slf4j
-@Component
+@Service
 public class PermissionCheckFilter extends ZuulFilter {
 
     @Autowired
@@ -84,14 +85,11 @@ public class PermissionCheckFilter extends ZuulFilter {
         Jwt decode = JwtHelper.decode(jwt);
         String claims = decode.getClaims();
         JSONObject jsonObject = JSONObject.parseObject(decode.getClaims());
-        jsonObject.get("authorities");
-        System.out.println();
-
+        System.out.println(jsonObject.get("authorities"));
 
         // 链接权限校验
         Map<String, List<HandleAllow>> handleAllow = userApiService.getHandleAllow("1");
-
-
+        System.out.println(handleAllow);
 
         return null;
     }

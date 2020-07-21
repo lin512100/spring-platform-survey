@@ -11,7 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
  * @author LinJinTang
  */
 
-@EnableFeignClients
 @SpringCloudApplication
 @ComponentScan(basePackages = {"com.jtang.*"})
 @MapperScan(basePackages = "com.jtang.*.mapper")

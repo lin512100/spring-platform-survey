@@ -12,7 +12,6 @@ import org.springframework.context.annotation.ComponentScan;
  * @author linjt
  * @date 2020/6/12
  */
-@EnableFeignClients
 @EnableZuulProxy
 @SpringBootApplication
 @EnableDiscoveryClient
