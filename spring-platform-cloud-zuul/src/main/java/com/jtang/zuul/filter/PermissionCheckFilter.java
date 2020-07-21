@@ -3,10 +3,13 @@ package com.jtang.zuul.filter;
 import com.alibaba.fastjson.JSONObject;
 import com.jtang.base.client.InnerUrlConstants;
 import com.jtang.base.client.PublicUrlConstants;
+import com.jtang.base.utils.PathMatcherUtil;
 import com.jtang.common.model.account.response.HandleAllow;
 import com.jtang.feign.model.UserDao;
+import com.jtang.feign.model.UserJwt;
 import com.jtang.feign.service.UserApiService;
 import com.jtang.zuul.service.AuthService;
+import com.jtang.zuul.service.RoleService;
 import com.jtang.zuul.utils.RequestUtils;
 import com.jtang.zuul.utils.ZuulDealUtils;
 import com.netflix.zuul.ZuulFilter;
@@ -24,6 +27,8 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * 链接权限校验器
@@ -35,13 +40,10 @@ import java.util.Map;
 public class PermissionCheckFilter extends ZuulFilter {
 
     @Autowired
-    private RedissonClient redissonClient;
-
-    @Autowired
     private AuthService authService;
 
     @Autowired
-    private UserApiService userApiService;
+    private RoleService roleService;
 
     @Override
     public String filterType() {
@@ -83,14 +85,27 @@ public class PermissionCheckFilter extends ZuulFilter {
         // 解析JWT里面包含的用户角色字段
         String jwt = authService.getJwtFromHeader(request);
         Jwt decode = JwtHelper.decode(jwt);
-        String claims = decode.getClaims();
+        // 获取内容信息
         JSONObject jsonObject = JSONObject.parseObject(decode.getClaims());
-        System.out.println(jsonObject.get("authorities"));
+        String authorities = jsonObject.get("authorities").toString();
+        String roleIds = authorities.substring(1,authorities.length() - 1).replace("\"","");
 
-        // 链接权限校验
-        Map<String, List<HandleAllow>> handleAllow = userApiService.getHandleAllow("1");
-        System.out.println(handleAllow);
+        // 超级管理员权限
+        if(Integer.parseInt(jsonObject.get("id").toString()) == 1){
+            return null;
+        }
 
-        return null;
+        // 匹配出调用的是什么服务
+        String url = RequestUtils.getServletPath();
+        String server = Objects.requireNonNull(url).split("/")[1];
+
+        // 校验链接权限
+        Set<HandleAllow> operator = roleService.getRoleItem(roleIds,server);
+        for (HandleAllow handleAllow : operator){
+            if(PathMatcherUtil.match("/"+ server + handleAllow.getUrl(), url) && request.getMethod().equals(handleAllow.getMethod())){
+                return null;
+            }
+        }
+        return ZuulDealUtils.refused(ctx,"Permission denied can't not visit:" + request.getRequestURI());
     }
 }

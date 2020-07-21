@@ -26,4 +26,36 @@ public class HandleAllow implements Serializable {
 
     /** 访问方法 */
     private String method;
+
+
+    /** 重写equals方法 */
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj){
+            //地址相等
+            return true;
+        }
+
+        //非空性：对于任意非空引用x，x.equals(null)应该返回false。
+        if(obj == null){
+            return false;
+        }
+
+        if(obj instanceof HandleAllow){
+            HandleAllow other = (HandleAllow) obj;
+            return this.server.equals(other.server) && this.url.equals(other.url);
+        }
+
+        return false;
+    }
+
+    /** 重写hashCode方法 */
+    @Override
+    public int hashCode() {
+        String str = url + method;
+        return str.hashCode();
+    }
+
+
+
 }

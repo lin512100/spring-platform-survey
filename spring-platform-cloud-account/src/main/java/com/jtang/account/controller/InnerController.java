@@ -41,7 +41,6 @@ public class InnerController {
     @GetMapping(InnerUrlConstants.ALLOW_HANDLE)
     @ApiOperation(value = "根据角色ID查询角色操作功能")
     Map<String,List<HandleAllow>> getHandleAllow(@RequestParam("roleIds") String roleIds){
-        System.out.println("===================");
         if(StringUtils.isEmpty(roleIds)){
             return new HashMap<>(1);
         }

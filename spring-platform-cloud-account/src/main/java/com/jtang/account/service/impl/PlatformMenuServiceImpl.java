@@ -11,10 +11,7 @@ import com.jtang.account.mapper.PlatformMenuMapper;
 import com.jtang.account.service.IPlatformMenuService;
 import com.jtang.account.service.IPlatformUserRoleService;
 import com.jtang.common.model.account.response.PlatformMenuDTO;
-import com.jtang.common.model.account.response.PlatformMenuDTO;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,9 +36,6 @@ public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, Pla
 
     @Override
     public void deleteMenuById(Long id) {
-//        QueryWrapper<PlatformMenu> queryWrapper = new QueryWrapper<>();
-//        queryWrapper.eq("pid",id);
-//        list(queryWrapper);
         this.baseMapper.deleteById(id);
     }
 
