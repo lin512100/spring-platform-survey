@@ -1,7 +1,7 @@
 package com.jtang.feign.config;
 
-import com.jtang.feign.service.InitService;
-import com.jtang.feign.service.impl.InitServiceImpl;
+import com.jtang.feign.service.FeignService;
+import com.jtang.feign.service.impl.FeignServiceImpl;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -22,9 +22,9 @@ public class FeignConfiguration {
         return new RestTemplate();
     }
 
-    /** 注册初始化服务 */
     @Bean
-    public InitService initService(){
-        return new InitServiceImpl();
+    public FeignService feignService(){
+        return new FeignServiceImpl();
     }
+
 }

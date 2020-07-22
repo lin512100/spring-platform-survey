@@ -21,8 +21,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ApiModel(value="PlatformMenu对象", description="菜单表")
 public class PlatformMenu implements Serializable {
-    private Long id;
 
+    private Long id;
     @ApiModelProperty(value = "菜单编码")
     private String code;
 

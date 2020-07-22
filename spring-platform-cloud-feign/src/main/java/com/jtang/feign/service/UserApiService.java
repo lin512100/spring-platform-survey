@@ -3,13 +3,17 @@ package com.jtang.feign.service;
 import com.jtang.base.client.InnerUrlConstants;
 import com.jtang.base.client.ServiceConstants;
 import com.jtang.common.model.account.response.HandleAllow;
+import com.jtang.common.utils.ResultUtils;
 import com.jtang.feign.InnerFeignRequest;
 import com.jtang.feign.model.UserDao;
 import com.jtang.feign.service.impl.UserApiServiceImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,4 +40,12 @@ public interface UserApiService {
      * */
     @GetMapping(InnerUrlConstants.INNER_PRE + InnerUrlConstants.ALLOW_HANDLE)
     Map<String, List<HandleAllow>> getHandleAllow(@RequestParam("roleIds") String roleIds);
+
+    /**
+     * 同步URL接口信息到账户服务
+     * @param mapList 操作资源列表
+     * @param server 服务名
+     * */
+    @PostMapping(InnerUrlConstants.INNER_PRE + InnerUrlConstants.ASYNC_OPERATE_URL)
+    ResultUtils asyncOperateUrl(@RequestBody List<HashMap<String, String>> mapList, @RequestParam("server") String server);
 }

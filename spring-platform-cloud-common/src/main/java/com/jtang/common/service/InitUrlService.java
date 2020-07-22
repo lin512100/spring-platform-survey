@@ -26,7 +26,6 @@ import java.util.Map;
  * @date 2020/7/22
  */
 @Slf4j
-@Component
 public class InitUrlService implements InitializingBean, ServletContextAware{
 
     /** 请求路径 */

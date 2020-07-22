@@ -30,7 +30,6 @@ import java.util.Map;
  * @author LinJinTang
  */
 @Slf4j
-@Service
 public class FeignServiceImpl implements FeignService {
 
     @Autowired

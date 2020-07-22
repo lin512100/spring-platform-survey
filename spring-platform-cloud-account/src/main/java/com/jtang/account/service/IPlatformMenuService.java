@@ -52,7 +52,8 @@ public interface IPlatformMenuService extends IService<PlatformMenu> {
      * 同步URL请求接口信息
      * @param mapList 请求接口信息
      * @return Map<String,Object>
+     * @param server 服务名
      * */
-    Map<String,Object> asyncOperateUrl(List<HashMap<String, String>> mapList);
+    Map<String,Object> asyncOperateUrl(List<HashMap<String, String>> mapList, String server);
 
 }

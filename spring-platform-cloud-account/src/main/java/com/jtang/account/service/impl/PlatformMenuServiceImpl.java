@@ -69,34 +69,36 @@ public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, Pla
     }
 
     @Override
-    public Map<String,Object> asyncOperateUrl(List<HashMap<String, String>> mapList) {
+    public Map<String,Object> asyncOperateUrl(List<HashMap<String, String>> mapList, String server) {
         // 操作URL更改记录
         Map<String,Object> result = new HashMap<>(2);
         List<HashMap<String, String>> add = new ArrayList<>();
         List update = new ArrayList();
-        Map<String,Object> objectMap = new HashMap<>();
-
         PlatformMenu platformMenu;
         QueryWrapper<PlatformMenu> query;
         for(HashMap<String, String> map: mapList){
+            // 过滤内部接口
             platformMenu = new PlatformMenu();
-            // 设置参数
             // 类型
-            if(map.containsKey(InitUrlService.REFLEX_TYPE)){
-                platformMenu.setMethod(map.get(InitUrlService.REFLEX_TYPE));
+            if(!map.containsKey(InitUrlService.REFLEX_TYPE)){
+                continue;
             }
+            platformMenu.setMethod(map.get(InitUrlService.REFLEX_TYPE));
+
             // 请求地址
-            if(map.containsKey(InitUrlService.REFLEX_URL)){
-                platformMenu.setUrl(map.get(InitUrlService.REFLEX_URL));
+            if(!map.containsKey(InitUrlService.REFLEX_URL) || map.get(InitUrlService.REFLEX_URL).contains("/inner/")){
+                continue;
             }
-            // 请求方法
-            if(map.containsKey(InitUrlService.REFLEX_TYPE)) {
-                platformMenu.setMethod(map.get(InitUrlService.REFLEX_TYPE));
-            }
+            platformMenu.setUrl(map.get(InitUrlService.REFLEX_URL));
+
             // 方法描述
-            if(map.containsKey(InitUrlService.REFLEX_API_OPERATION_VALUE)){
-                platformMenu.setMenuName(map.get(InitUrlService.REFLEX_API_OPERATION_VALUE));
+            if(!map.containsKey(InitUrlService.REFLEX_API_OPERATION_VALUE)){
+                continue;
             }
+            platformMenu.setMenuName(map.get(InitUrlService.REFLEX_API_OPERATION_VALUE));
+
+            // 服务名
+            platformMenu.setServer(server);
 
             query = new QueryWrapper<>();
             query.eq("server", platformMenu.getServer());
@@ -104,7 +106,9 @@ public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, Pla
             query.eq("url", platformMenu.getUrl());
             // 查询之前是否有过记录
             PlatformMenu one = getOne(query);
+
             if(one != null){
+                one.setMenuName((one.getMenuName() == null )?"":one.getMenuName());
                 // 如果操作名跟数据库的不一致，则更新
                 if(!one.getMenuName().equals(platformMenu.getMenuName())){
                     one.setMenuName(platformMenu.getMenuName());
@@ -112,6 +116,7 @@ public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, Pla
                 }
                 continue;
             }
+
             // 如果没有则插入一条
             save(platformMenu);
             add.add(map);

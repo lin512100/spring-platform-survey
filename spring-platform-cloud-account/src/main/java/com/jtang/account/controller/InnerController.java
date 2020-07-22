@@ -58,7 +58,7 @@ public class InnerController {
     }
 
     @PostMapping(InnerUrlConstants.ASYNC_OPERATE_URL)
-    public ResultUtils asyncOperateUrl(@RequestBody List<HashMap<String, String>> mapList){
-        return ResultUtils.build(menuService.asyncOperateUrl(mapList));
+    public ResultUtils asyncOperateUrl(@RequestBody List<HashMap<String, String>> mapList,@RequestParam("server") String server){
+        return ResultUtils.build(menuService.asyncOperateUrl(mapList,server));
     }
 }
