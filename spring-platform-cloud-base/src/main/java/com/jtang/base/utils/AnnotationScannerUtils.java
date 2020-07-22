@@ -1,7 +1,7 @@
-package com.jtang.common.utils;
+package com.jtang.base.utils;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.lang.annotation.Annotation;
@@ -21,12 +21,16 @@ public class AnnotationScannerUtils {
     /**
      * 根据包名获取包的URL
      * @param pkgName com.demo.controller
-     * @return
+     * @return String 路径地址
      */
     public static String getPkgPath(String pkgName){
-        String pkgDirName = pkgName.replace('.', File.separatorChar);
+        String pkgDirName = pkgName.replace(".", File.separator);
         URL url = Thread.currentThread().getContextClassLoader().getResource(pkgDirName);
-        return url == null ? null : url.getFile();
+        if(url != null){
+            String filePath = url.getFile().replace("/", File.separator).replace("\\", File.separator);
+            return UrlUtils.getURLDecoderString(filePath);
+        }
+        return null;
     }
     /**
      * 获取指定包下所有类对象的集合
