@@ -30,15 +30,15 @@ import java.util.Map;
 public class InitUrlService implements InitializingBean, ServletContextAware{
 
     /** 请求路径 */
-    private final static String URL = "url";
+    public final static String REFLEX_URL = "url";
     /** 类名 */
-    private final static String CLASS_NAME = "className";
+    public final static String REFLEX_CLASS_NAME = "className";
     /** 接口说明 */
-    private final static String API_OPERATION_VALUE = "apiOperationValue";
+    public final static String REFLEX_API_OPERATION_VALUE = "apiOperationValue";
     /** 接口发布说明 */
-    private final static String API_OPERATION_NOTES = "apiOperationnotes";
+    public final static String REFLEX_API_OPERATION_NOTES = "apiOperationnotes";
     /** 请求方法类型 */
-    private final static String TYPE = "type";
+    public final static String REFLEX_TYPE = "type";
 
     public static List<HashMap<String, String>> urlList = new ArrayList<HashMap<String, String>>();
 
@@ -55,22 +55,22 @@ public class InitUrlService implements InitializingBean, ServletContextAware{
             HandlerMethod method = item.getValue();
             PatternsRequestCondition p = info.getPatternsCondition();
             for (String url : p.getPatterns()) {
-                model.put(URL, url);
+                model.put(REFLEX_URL, url);
             }
 
-            model.put(CLASS_NAME, method.getMethod().getDeclaringClass().getName());
+            model.put(REFLEX_CLASS_NAME, method.getMethod().getDeclaringClass().getName());
 
             ApiOperation apiOperation = method.getMethodAnnotation(ApiOperation.class);
             if(apiOperation != null) {
-                model.put(API_OPERATION_VALUE, apiOperation.value());
-                model.put(API_OPERATION_NOTES, apiOperation.notes());
+                model.put(REFLEX_API_OPERATION_VALUE, apiOperation.value());
+                model.put(REFLEX_API_OPERATION_NOTES, apiOperation.notes());
             }
 
             RequestMethodsRequestCondition methodsCondition = info.getMethodsCondition();
             String type = methodsCondition.toString();
             if (type.startsWith("[") && type.endsWith("]")) {
                 type = type.substring(1, type.length() - 1);
-                model.put(TYPE, type);
+                model.put(REFLEX_TYPE, type);
             }
             urlList.add(model);
         }

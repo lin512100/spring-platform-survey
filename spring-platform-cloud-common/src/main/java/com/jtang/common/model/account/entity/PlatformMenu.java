@@ -32,6 +32,9 @@ public class PlatformMenu implements Serializable {
     @ApiModelProperty(value = "名称")
     private String menuName;
 
+    @ApiModelProperty(value = "服务名称")
+    private String server;
+
     @ApiModelProperty(value = "请求地址")
     private String url;
 

@@ -17,5 +17,8 @@ public class InnerUrlConstants {
     /** 根据用户角色获取操作权限信息 */
     public final static String ALLOW_HANDLE = "/allow/handle";
 
+    /** 操作URL信息同步 */
+    public final static String ASYNC_OPERATE_URL = "/async/operate/url";
+
 
 }

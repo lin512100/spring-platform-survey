@@ -1,18 +1,17 @@
 package com.jtang.account.controller;
 
+import com.jtang.account.service.IPlatformMenuService;
 import com.jtang.account.service.IPlatformUserService;
 import com.jtang.account.service.InnerService;
 import com.jtang.base.client.InnerUrlConstants;
 import com.jtang.common.model.account.response.HandleAllow;
+import com.jtang.common.utils.ResultUtils;
 import com.jtang.feign.model.UserDao;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.StringUtils;
 
 import java.util.Arrays;
@@ -36,7 +35,12 @@ public class InnerController {
     private InnerService innerService;
 
     @Autowired
-    private IPlatformUserService service;
+    private IPlatformUserService userService;
+
+    @Autowired
+    private IPlatformMenuService menuService;
+
+
 
     @GetMapping(InnerUrlConstants.ALLOW_HANDLE)
     @ApiOperation(value = "根据角色ID查询角色操作功能")
@@ -50,6 +54,11 @@ public class InnerController {
 
     @GetMapping(InnerUrlConstants.USER_INFO)
     public UserDao getUserInfo(@RequestParam("username") String username){
-        return service.loadUserByUsername(username);
+        return userService.loadUserByUsername(username);
+    }
+
+    @PostMapping(InnerUrlConstants.ASYNC_OPERATE_URL)
+    public ResultUtils asyncOperateUrl(@RequestBody List<HashMap<String, String>> mapList){
+        return ResultUtils.build(menuService.asyncOperateUrl(mapList));
     }
 }

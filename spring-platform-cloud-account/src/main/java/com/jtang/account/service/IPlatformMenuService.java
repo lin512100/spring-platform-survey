@@ -8,7 +8,9 @@ import com.jtang.common.model.account.response.PlatformMenuDTO;
 import com.jtang.common.model.account.response.PlatformMenuDTO;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
 * 菜单表 服务类
@@ -45,5 +47,12 @@ public interface IPlatformMenuService extends IService<PlatformMenu> {
      * @param userId 用户ID
      * */
     List<PlatformMenuDTO> getTreeById(Long userId)  throws NoSuchMethodException, IllegalAccessException, InvocationTargetException;
+
+    /**
+     * 同步URL请求接口信息
+     * @param mapList 请求接口信息
+     * @return Map<String,Object>
+     * */
+    Map<String,Object> asyncOperateUrl(List<HashMap<String, String>> mapList);
 
 }
