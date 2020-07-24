@@ -1,14 +1,8 @@
-server:
-  port: 3000
 spring:
-  application:
-    name: platform-account
-  profiles:
-    active: thymeleaf
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://129.204.1.173:3306/platform-account?useUnicode=true&serverTimezone=UTC&useSSL=false&characterEncoding=UTF-8
+    url: jdbc:mysql://129.204.1.173:3306/platform-zuul?useUnicode=true&serverTimezone=UTC&useSSL=false
     username: root
     password: Jtang!14010025
     hikari:
@@ -21,12 +15,6 @@ spring:
       connection-timeout: 30000
       connection-test-query: SELECT 1
 
-  redis:
-    host: 129.204.1.173
-    port: 6379
-    password: Jtang!14010025
-
-
 mybatis-plus:
   mapper-locations: classpath:/mapper/*/*Mapper.xml
   global-config:
@@ -37,8 +25,3 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
   type-aliases-package: com.jtang.oauth.controller.entity
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://129.204.1.173:8761/eureka/

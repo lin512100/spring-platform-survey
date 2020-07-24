@@ -1,52 +1,10 @@
-eureka:
-  client:
-    service-url:
-      defaultZone: http://129.204.1.173:8761/eureka/
 
 spring:
   application:
     name: platform-auth
   profiles:
-    active: thymeleaf
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://129.204.1.173:3306/platform-oauth?useUnicode=true&serverTimezone=UTC&useSSL=false
-    username: root
-    password: Jtang!14010025
-    hikari:
-      minimum-idle: 5
-      idle-timeout: 180000
-      maximum-pool-size: 10
-      auto-commit: true
-      pool-name: MyHikariCP
-      max-lifetime: 1800000
-      connection-timeout: 30000
-      connection-test-query: SELECT 1
+    active: mysql,redis,oauth,eureka
 
-  redis:
-    host: 129.204.1.173
-    port: 6379
-    database: 0
-    password: Jtang!14010025
 server:
   port: 8089
-
-mybatis-plus:
-  mapper-locations: classpath:/mapper/*/*Mapper.xml
-  global-config:
-    banner: false
-    db-config:
-      id-type: AUTO
-      table-underline: true
-  configuration:
-    map-underscore-to-camel-case: true
-  type-aliases-package: com.jtang.oauth.controller.entity
-
-encrypt:
-  key-store:
-    location: classpath:/xc.keystore
-    secret: xuechengkeystore
-    alias: xckey
-    password: xuecheng
 debug: true

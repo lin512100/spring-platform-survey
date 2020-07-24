@@ -7,8 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jtang.base.utils.OperateFunctionUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 /**
@@ -21,6 +20,24 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ApiModel(value="PlatformMenu对象", description="菜单表")
 public class PlatformMenu implements Serializable {
+
+    @Getter
+    @AllArgsConstructor
+    public static enum IsMenu{
+        YES(1,"是"),
+        NO(0,"否");
+        private int code;
+        private String status;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public static enum IsShow{
+        YES(1,"是"),
+        NO(0,"否");
+        private int code;
+        private String status;
+    }
 
     private Long id;
     @ApiModelProperty(value = "菜单编码")
@@ -42,7 +59,7 @@ public class PlatformMenu implements Serializable {
     private Integer isMenu;
 
     @ApiModelProperty(value = "是否展示")
-    private Integer isShow;
+    private Integer isShow = IsShow.YES.code;
 
     @ApiModelProperty(value = "菜单层级")
     private Integer level;
@@ -64,4 +81,5 @@ public class PlatformMenu implements Serializable {
 
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
+
 }

@@ -105,6 +105,17 @@ public class PermissionCheckFilter extends ZuulFilter {
             if(PathMatcherUtil.match("/"+ server + handleAllow.getUrl(), url) && request.getMethod().equals(handleAllow.getMethod())){
                 return null;
             }
+            // 特殊校验 /{id}匹配URL地址
+            if(handleAllow.getUrl().contains("{")){
+                // 传入的URL最后一位
+                String[] split = url.split("/");
+                String last = split[split.length - 1];
+                // 替换URL里面的{id}字段
+                handleAllow.setUrl(handleAllow.getUrl().replace("{.*}", last));
+                if(url.equals(handleAllow.getUrl())){
+                    return null;
+                }
+            }
         }
         return ZuulDealUtils.refused(ctx,"Permission denied can't not visit:" + request.getRequestURI());
     }

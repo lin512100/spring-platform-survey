@@ -16,6 +16,7 @@ import com.jtang.common.model.account.response.PlatformMenuDTO;
 import com.jtang.common.service.InitUrlService;
 import com.sun.org.apache.xml.internal.security.Init;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -76,6 +77,25 @@ public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, Pla
         List update = new ArrayList();
         PlatformMenu platformMenu;
         QueryWrapper<PlatformMenu> query;
+        // 获取名字为其他的菜单
+        QueryWrapper<PlatformMenu> otherQuery = new QueryWrapper<>();
+        otherQuery.eq("menu_name","其他");
+        PlatformMenu other = getOne(otherQuery);
+        //默认其他操作的ID
+        long otherId = -1;
+        if(other == null){
+            other = new PlatformMenu();
+            other.setIsMenu(PlatformMenu.IsMenu.YES.getCode());
+            other.setMenuName("其他");
+            other.setUrl("/other");
+            other.setIsShow(PlatformMenu.IsShow.YES.getCode());
+            otherId = this.baseMapper.insert(other);
+            if(otherId == 1){
+                otherId = getOne(otherQuery).getId();
+            }
+
+        }
+
         for(HashMap<String, String> map: mapList){
             // 过滤内部接口
             platformMenu = new PlatformMenu();
@@ -84,19 +104,16 @@ public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, Pla
                 continue;
             }
             platformMenu.setMethod(map.get(InitUrlService.REFLEX_TYPE));
-
             // 请求地址
             if(!map.containsKey(InitUrlService.REFLEX_URL) || map.get(InitUrlService.REFLEX_URL).contains("/inner/")){
                 continue;
             }
             platformMenu.setUrl(map.get(InitUrlService.REFLEX_URL));
-
             // 方法描述
             if(!map.containsKey(InitUrlService.REFLEX_API_OPERATION_VALUE)){
                 continue;
             }
             platformMenu.setMenuName(map.get(InitUrlService.REFLEX_API_OPERATION_VALUE));
-
             // 服务名
             platformMenu.setServer(server);
 
@@ -104,9 +121,9 @@ public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, Pla
             query.eq("server", platformMenu.getServer());
             query.eq("method", platformMenu.getMethod());
             query.eq("url", platformMenu.getUrl());
+
             // 查询之前是否有过记录
             PlatformMenu one = getOne(query);
-
             if(one != null){
                 one.setMenuName((one.getMenuName() == null )?"":one.getMenuName());
                 // 如果操作名跟数据库的不一致，则更新
@@ -116,8 +133,8 @@ public class PlatformMenuServiceImpl extends ServiceImpl<PlatformMenuMapper, Pla
                 }
                 continue;
             }
-
             // 如果没有则插入一条
+            platformMenu.setPid(otherId);
             save(platformMenu);
             add.add(map);
         }

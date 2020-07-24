@@ -1,17 +1,8 @@
 server:
   port: 5000
-eureka:
-  client:
-    service-url:
-      defaultZone: http://129.204.1.173:8761/eureka/
 
 spring:
   application:
     name: platform-zuul
-
-  redis:
-    host: 129.204.1.173
-    port: 6379
-    password: Jtang!14010025
   profiles:
-    active: zuul
+    active: zuul,eureka,mysql,redis
