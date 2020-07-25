@@ -8,7 +8,7 @@ import com.jtang.account.query.PlatformRoleMenuQueryDTO;
 import com.jtang.common.model.account.entity.PlatformRoleMenu;
 import com.jtang.account.service.IPlatformRoleMenuService;
 import com.jtang.web.utils.PageUtils;
-import com.jtang.common.utils.ResultUtils;
+import com.jtang.base.utils.ResultUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;

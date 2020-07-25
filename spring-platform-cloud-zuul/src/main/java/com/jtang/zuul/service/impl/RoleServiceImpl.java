@@ -28,7 +28,6 @@ public class RoleServiceImpl implements RoleService {
     private RoleService self;
 
     @Override
-//    @Cacheable(cacheNames = "ROLE_SERVER_OPERATE", key = "#p1-#p0")
     public Set<HandleAllow> getRoleItem(String roleIds, String server) {
         String[] roleIdStr = roleIds.split(",");
         if(roleIdStr.length == 0){

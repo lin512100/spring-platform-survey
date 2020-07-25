@@ -1,10 +1,8 @@
-
 spring:
   application:
     name: platform-auth
   profiles:
-    active: mysql,redis,oauth,eureka
-
+    active: eureka,mysql,oauth,redis
 server:
   port: 8089
 debug: true

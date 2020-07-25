@@ -41,7 +41,7 @@ public interface PlatformMenuMapper extends BaseMapper<PlatformMenu> {
      * 获取树结构所有数据
      * @return {@link PlatformMenuDTO}
      * */
-    @Select("SELECT p_menu.id, p_menu.pid, p_menu.menu_name AS menuName FROM platform_menu p_menu")
+    @Select("SELECT p_menu.id, p_menu.pid, p_menu.menu_name AS menuName FROM platform_menu p_menu where p_menu.is_show = 1")
     List<PlatformMenuDTO> menuTree();
 
     /**

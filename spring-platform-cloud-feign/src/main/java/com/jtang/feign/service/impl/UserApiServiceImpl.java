@@ -3,7 +3,7 @@ package com.jtang.feign.service.impl;
 import com.jtang.base.exception.ExceptionCast;
 import com.jtang.common.model.account.response.AuthCode;
 import com.jtang.common.model.account.response.HandleAllow;
-import com.jtang.common.utils.ResultUtils;
+import com.jtang.base.utils.ResultUtils;
 import com.jtang.feign.model.UserDao;
 import com.jtang.feign.service.UserApiService;
 import org.springframework.stereotype.Service;

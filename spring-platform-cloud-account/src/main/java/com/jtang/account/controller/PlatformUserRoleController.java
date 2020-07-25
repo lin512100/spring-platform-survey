@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jtang.common.model.account.entity.PlatformUserRole;
-import com.jtang.common.utils.ResultUtils;
+import com.jtang.base.utils.ResultUtils;
 import com.jtang.account.query.PlatformUserRoleQueryDTO;
 import com.jtang.account.service.IPlatformUserRoleService;
 import com.jtang.web.utils.PageUtils;

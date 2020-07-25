@@ -3,7 +3,7 @@ package com.jtang.feign.service;
 import com.jtang.base.client.InnerUrlConstants;
 import com.jtang.base.client.ServiceConstants;
 import com.jtang.common.model.account.response.HandleAllow;
-import com.jtang.common.utils.ResultUtils;
+import com.jtang.base.utils.ResultUtils;
 import com.jtang.feign.InnerFeignRequest;
 import com.jtang.feign.model.UserDao;
 import com.jtang.feign.service.impl.UserApiServiceImpl;

@@ -14,7 +14,7 @@ import java.util.Objects;
  * @author LinJinTang
  */
 public class RequestUtils {
-    private final static String ServerPort = "80";
+    private final static String SERVER_PORT = "80";
     /**
      * 获取request对象
      * @return request
@@ -68,7 +68,7 @@ public class RequestUtils {
             return // 项目的真实路径
                     getRequest().getServerPort()+"";
         } catch (Exception e) {
-            return ServerPort;
+            return SERVER_PORT;
         }
     }
     /**

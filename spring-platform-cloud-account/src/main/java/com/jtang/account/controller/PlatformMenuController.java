@@ -2,7 +2,7 @@ package com.jtang.account.controller;
 
 import com.jtang.account.service.IPlatformRoleMenuService;
 import com.jtang.common.model.account.entity.PlatformMenu;
-import com.jtang.common.utils.ResultUtils;
+import com.jtang.base.utils.ResultUtils;
 import com.jtang.account.query.PlatformMenuQueryDTO;
 import com.jtang.account.service.IPlatformMenuService;
 import io.swagger.annotations.Api;

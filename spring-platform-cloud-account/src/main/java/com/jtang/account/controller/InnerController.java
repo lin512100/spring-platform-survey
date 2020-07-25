@@ -5,7 +5,7 @@ import com.jtang.account.service.IPlatformUserService;
 import com.jtang.account.service.InnerService;
 import com.jtang.base.client.InnerUrlConstants;
 import com.jtang.common.model.account.response.HandleAllow;
-import com.jtang.common.utils.ResultUtils;
+import com.jtang.base.utils.ResultUtils;
 import com.jtang.feign.model.UserDao;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

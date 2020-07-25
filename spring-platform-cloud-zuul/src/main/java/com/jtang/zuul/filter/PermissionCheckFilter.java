@@ -88,6 +88,7 @@ public class PermissionCheckFilter extends ZuulFilter {
         // 获取内容信息
         JSONObject jsonObject = JSONObject.parseObject(decode.getClaims());
         String authorities = jsonObject.get("authorities").toString();
+        log.info(authorities);
         String roleIds = authorities.substring(1,authorities.length() - 1).replace("\"","");
 
         // 超级管理员权限
@@ -100,9 +101,11 @@ public class PermissionCheckFilter extends ZuulFilter {
         String server = Objects.requireNonNull(url).split("/")[1];
 
         // 校验链接权限
+        log.info("拥有的角色ID" + roleIds);
         Set<HandleAllow> operator = roleService.getRoleItem(roleIds,server);
         for (HandleAllow handleAllow : operator){
             if(PathMatcherUtil.match("/"+ server + handleAllow.getUrl(), url) && request.getMethod().equals(handleAllow.getMethod())){
+                System.out.println("/"+ server + handleAllow.getUrl());
                 return null;
             }
             // 特殊校验 /{id}匹配URL地址

@@ -1,7 +1,7 @@
 package com.jtang.account.schedule;
 
 import com.jtang.common.service.InitUrlService;
-import com.jtang.common.utils.ResultUtils;
+import com.jtang.base.utils.ResultUtils;
 import com.jtang.feign.service.UserApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
  * @author LinJinTang
  */
 @Slf4j
-@Configuration
+//@Configuration
 public class AsyncOperator {
 
     @Autowired

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jtang.common.model.account.entity.OauthClientDetails;
-import com.jtang.common.utils.ResultUtils;
+import com.jtang.base.utils.ResultUtils;
 import com.jtang.oauth.query.ClientDetailsQueryDTO;
 import com.jtang.oauth.service.IClientDetailsService;
 import com.jtang.web.utils.PageUtils;
