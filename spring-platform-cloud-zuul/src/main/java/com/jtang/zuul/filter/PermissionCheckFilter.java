@@ -101,11 +101,9 @@ public class PermissionCheckFilter extends ZuulFilter {
         String server = Objects.requireNonNull(url).split("/")[1];
 
         // 校验链接权限
-        log.info("拥有的角色ID" + roleIds);
         Set<HandleAllow> operator = roleService.getRoleItem(roleIds,server);
         for (HandleAllow handleAllow : operator){
             if(PathMatcherUtil.match("/"+ server + handleAllow.getUrl(), url) && request.getMethod().equals(handleAllow.getMethod())){
-                System.out.println("/"+ server + handleAllow.getUrl());
                 return null;
             }
             // 特殊校验 /{id}匹配URL地址
@@ -120,6 +118,7 @@ public class PermissionCheckFilter extends ZuulFilter {
                 }
             }
         }
-        return ZuulDealUtils.refused(ctx,"Permission denied can't not visit:" + request.getRequestURI());
+        String errorMsg = String.format("can't visit: {url:%s,role:%s}",request.getRequestURI(),roleIds);
+        return ZuulDealUtils.refused(ctx,errorMsg);
     }
 }
