@@ -17,7 +17,7 @@ public class RedisTest {
     @Autowired
     private RedissonClient redissonClient;
 
-    @Test
+//    @Test
     public void testExpire() throws InterruptedException {
         String aaaaa = "KeyTest";
         redissonClient.getBucket(aaaaa).set(50,100, TimeUnit.SECONDS);

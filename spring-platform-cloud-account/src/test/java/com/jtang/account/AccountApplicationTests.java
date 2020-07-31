@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class AccountApplicationTests {
 
-    @Test
+//    @Test
     void contextLoads() {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
