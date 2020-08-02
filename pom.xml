@@ -36,6 +36,7 @@
         <module>spring-platform-cloud-feign</module>
         <module>spring-platform-cloud-tools</module>
         <module>spring-platform-cloud-zuul</module>
+        <module>spring-platform-cloud-message</module>
     </modules>
 
     <dependencies>
