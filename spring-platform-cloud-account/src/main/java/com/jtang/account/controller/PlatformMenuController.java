@@ -1,6 +1,7 @@
 package com.jtang.account.controller;
 
 import com.jtang.account.service.IPlatformRoleMenuService;
+import com.jtang.common.annotation.OperationLog;
 import com.jtang.common.model.account.entity.PlatformMenu;
 import com.jtang.base.utils.ResultUtils;
 import com.jtang.account.query.PlatformMenuQueryDTO;
@@ -28,6 +29,7 @@ import java.util.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/menu")
+@OperationLog
 public class PlatformMenuController {
 
     @Autowired

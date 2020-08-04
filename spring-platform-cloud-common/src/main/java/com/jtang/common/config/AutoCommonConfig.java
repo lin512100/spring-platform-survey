@@ -1,5 +1,6 @@
 package com.jtang.common.config;
 
+import com.jtang.common.aspect.OperationLog;
 import com.jtang.common.service.InitUrlService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,5 +18,10 @@ public class AutoCommonConfig {
     public InitUrlService initUrlService(){
         return new InitUrlService();
     };
+
+    @Bean
+    public OperationLog operationLog(){
+        return new OperationLog();
+    }
 
 }

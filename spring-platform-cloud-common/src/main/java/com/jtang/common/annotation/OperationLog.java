@@ -7,9 +7,9 @@ import java.lang.annotation.*;
  * @date 2020/8/4
  */
 @Documented
-@Target({ElementType.PACKAGE, ElementType.METHOD})
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface LogAnnotation {
+public @interface OperationLog {
 
 
 }
