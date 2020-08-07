@@ -1,23 +1,37 @@
 package com.jtang.common.aspect;
 
 import com.jtang.common.annotation.OperationLog;
+import com.jtang.common.model.common.SysLog;
+import com.jtang.common.utils.HttpUtils;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 
+
+/**
+ * 切面实现类
+ * @author linjt
+ * @date 2020/8/7
+ */
 @Slf4j
 @Aspect
 public class OperationAspect {
+
+    @Autowired
+    private Environment env;
 
     /**
      * within(com.jtang.common.annotation.OperationLog)
@@ -31,20 +45,10 @@ public class OperationAspect {
 
     @Before(value = "operationLog()")
     public void doBefore(JoinPoint joinPoint) {
-        Class<?> aClass = joinPoint.getTarget().getClass();
-        System.out.println(aClass.toString());
+
         //获取请求request
         ServletRequestAttributes attributes = (ServletRequestAttributes)
                 RequestContextHolder.getRequestAttributes();
-
-        //通过servletRequestAttributes获取request
-        HttpServletRequest request = attributes.getRequest();
-        //获取请求的相应参数
-        StringBuffer url = request.getRequestURL();
-        //写入请求的url
-        log.info("URL: " + url.toString());
-        String method = request.getMethod();
-        log.info("切面调用成功");
 
     }
 
@@ -53,16 +57,42 @@ public class OperationAspect {
         log.info("出参数结果" + ret);
     }
 
-    /**
-     * 是否存在注解，如果存在就获取
-     */
-    private static OperationLog getAnnotationLog(JoinPoint joinPoint) throws Exception {
-        Signature signature = joinPoint.getSignature();
-        MethodSignature methodSignature = (MethodSignature) signature;
-        Method method = methodSignature.getMethod();
-        if (method != null) {
-            return method.getAnnotation(OperationLog.class);
+    /** 获取日志信息 */
+    private SysLog getSysLog(JoinPoint joinPoint){
+        SysLog sysLog = new SysLog();
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        Method method = signature.getMethod();
+        // 功能描述
+        ApiOperation apiOperation = method.getAnnotation(ApiOperation.class);
+        if(apiOperation != null){
+            log.info(apiOperation.value());
         }
-        return null;
+
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        // 请求IP地址
+        sysLog.setIp(HttpUtils.getIpAddr(request));
+        // 请求的方法
+        sysLog.setMethod(request.getMethod());
+
+        OperationLog operationLog = method.getAnnotation(OperationLog.class);
+
+        // 服务名
+        String serverName = env.getProperty("spring.application.name");
+        if(!StringUtils.isEmpty(serverName)){
+            sysLog.setService(serverName.toUpperCase());
+        }
+
+        // 模快名
+        if(!StringUtils.isNotBlank(operationLog.module())){
+
+        }
+
+
+        return sysLog;
+
+
+
     }
+
+
 }
