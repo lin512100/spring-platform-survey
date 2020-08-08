@@ -2,6 +2,7 @@ package com.jtang.base.utils;
 
 
 import com.jtang.base.enums.ResultStatusEnums;
+import com.jtang.base.response.ResultCode;
 import lombok.Getter;
 
 import java.io.Serializable;
@@ -18,7 +19,7 @@ public class ResultUtils<T> implements Serializable {
     /**
      * 返回操作码（默认为正常）
      */
-    private Integer code = ResultStatusEnums.SUCCESS.getCode();
+    private int code = ResultStatusEnums.SUCCESS.getCode();
 
     /**
      * 返回数据信息
@@ -30,10 +31,6 @@ public class ResultUtils<T> implements Serializable {
      */
     private String msg = "";
 
-    /**
-     * 返回错误的消息信息
-     */
-    private String error = "";
 
     public static ResultUtils success = new ResultUtils();
     public static ResultUtils fail = new ResultUtils().code(ResultStatusEnums.FAIL.getCode());
@@ -61,17 +58,22 @@ public class ResultUtils<T> implements Serializable {
         return this;
     }
 
-    public ResultUtils error(String error) {
-        this.error = error;
+    public static ResultUtils<Object> errorMsg(String msg){
+        ResultUtils<Object> resultUtils = new ResultUtils<>();
+        resultUtils.code = ResultStatusEnums.FAIL.getCode();
+        resultUtils.msg = msg;
+        return resultUtils;
+
+    }
+
+    public ResultUtils error(String msg) {
+        this.msg = msg;
+        this.code = ResultStatusEnums.FAIL.getCode();
         return this;
     }
 
- /*   public ResultUtil<Xxx> getXxx(){
-        Xxx xxx = new Xxx();
-        return ResultUtil.build(xxx);
-        // return ResultUtil.success.data(xxx).msg("获取成功");
-        // return ResultUtil.fail.error("获取失败！");
-        // return ResultUtil.fail.code(ResultStatusEnums.FAIL.code()).error("登录过期！");
-        // return ResultUtil.fail.code(ResultStatusEnums.FAIL.code()).error(ResultStatusEnums.FAIL.msg());
-    }*/
+    public static <T> ResultUtils error(ResultCode resultCode){
+        return new ResultUtils().error(resultCode.message());
+    }
+
 }

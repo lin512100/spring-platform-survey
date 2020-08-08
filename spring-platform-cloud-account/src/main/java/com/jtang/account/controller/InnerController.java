@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * @author linjt
  * @date 2020/7/20
  */
-@Api(tags = "账户服务内部接口")
+@Api(value = "账户服务内部接口")
 @RestController
 @AllArgsConstructor
 @OperationLog
