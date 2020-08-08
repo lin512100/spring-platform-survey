@@ -60,7 +60,7 @@ public class OperationAspect {
             addLog(sysLog, proceed);
             return proceed;
         }catch (Throwable throwable){
-            return new ResultUtils<Object>().error(throwable.getMessage());
+            return ResultUtils.errorMsg(throwable.getMessage());
         }
     }
 
