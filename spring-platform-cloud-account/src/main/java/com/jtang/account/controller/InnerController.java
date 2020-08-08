@@ -4,6 +4,7 @@ import com.jtang.account.service.IPlatformMenuService;
 import com.jtang.account.service.IPlatformUserService;
 import com.jtang.account.service.InnerService;
 import com.jtang.base.client.InnerUrlConstants;
+import com.jtang.common.annotation.OperationLog;
 import com.jtang.common.model.account.response.HandleAllow;
 import com.jtang.base.utils.ResultUtils;
 import com.jtang.feign.model.UserDao;
@@ -25,9 +26,10 @@ import java.util.stream.Collectors;
  * @author linjt
  * @date 2020/7/20
  */
-@Api(tags = "账户服务内部接口")
+@Api(value = "账户服务内部接口")
 @RestController
 @AllArgsConstructor
+@OperationLog
 @RequestMapping(InnerUrlConstants.INNER_PRE)
 public class InnerController {
 
@@ -39,8 +41,6 @@ public class InnerController {
 
     @Autowired
     private IPlatformMenuService menuService;
-
-
 
     @GetMapping(InnerUrlConstants.ALLOW_HANDLE)
     @ApiOperation(value = "根据角色ID查询角色操作功能")

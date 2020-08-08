@@ -73,7 +73,6 @@ public class InitUrlService implements InitializingBean, ServletContextAware{
             }
             urlList.add(model);
         }
-        log.info("InitUrlService 反向加载URL完成");
     }
 
     @Override

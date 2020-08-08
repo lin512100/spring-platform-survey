@@ -11,7 +11,7 @@ import org.springframework.security.jwt.crypto.sign.RsaVerifier;
 
 @SpringBootTest
 class OauthApplicationTests {
-    @Test
+//    @Test
     void contextLoads() {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
@@ -35,7 +35,7 @@ class OauthApplicationTests {
         CodeGenerator.genertor(generatorParamDTO , dsc);
     }
 
-    @Test
+//    @Test
     void jwtTest(){
         //jwt令牌
         String token ="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHQiOiIxIiwicm9sZXMiOiJyMDEscjAyIiwibmFtZSI6Im1ydCIsI mlkIjoiMTIzIn0.KK7_67N5d1Dthd1PgDHMsbi0UlmjGRcm_XJUUwseJ2eZyJJWoPP2IcEZgAU3tUaaKEHUf9wSRwaDgwhrw fyIcSHbs8oy3zOQEL8j5AOjzBBs7vnRmB7DbSaQD7eJiQVJOXO1QpdmEFgjhc_IBCVTJCVWgZw60IEW1_Lg5tqaLvCiIl26K 48pJB5f‐le2zgYMzqR1L2LyTFkq39rG57VOqqSCi3dapsZQd4ctq95SJCXgGdrUDWtD52rp5o6_0uq‐ mrbRdRxkrQfsa1j8C5IW2‐T4eUmiN3f9wF9JxUK1__XC1OQkOn‐ZTBCdqwWIygDFbU7sf6KzfHJTm5vfjp6NIA";

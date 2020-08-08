@@ -14,12 +14,12 @@ public enum ResultStatusEnums {
     /**
      * 调用成功
      */
-    SUCCESS(0, "成功"),
+    SUCCESS(1, "成功"),
 
     /**
      * 调用失败
      */
-    FAIL(-1, "失败");
+    FAIL(0, "失败");
 
 
     /**

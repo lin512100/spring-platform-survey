@@ -3,7 +3,7 @@ package com.jtang.oauth.utils;
 import com.alibaba.fastjson.JSON;
 import com.jtang.common.model.account.AuthToken;
 import com.jtang.common.utils.CookieUtil;
-import com.jtang.common.utils.HttpUtils;
+import com.jtang.common.utils.HttpRequestUtils;
 import com.jtang.feign.properties.AuthProperties;
 import org.redisson.api.RedissonClient;
 
@@ -22,7 +22,7 @@ public class AuthCookieUtils {
 
     /** 将令牌存储到cookie */
     public static void saveCookie(String token, AuthProperties authProperties){
-        HttpServletResponse response = HttpUtils.getResponse();
+        HttpServletResponse response = HttpRequestUtils.getResponse();
         CookieUtil.addCookie(response,authProperties.getCookieDomain(),"/",COOKIE_NAME,token,authProperties.getCookieMaxAge(),false);
     }
 
@@ -42,7 +42,7 @@ public class AuthCookieUtils {
 
     /** 取出cookie中的身份令牌 */
     public static String getTokenFormCookie(){
-        HttpServletRequest request = HttpUtils.getRequest();
+        HttpServletRequest request = HttpRequestUtils.getRequest();
         Map<String, String> map = CookieUtil.readCookie(request, COOKIE_NAME);
         if(!map.isEmpty() && map.get(COOKIE_NAME)!=null){
             return map.get(COOKIE_NAME);
@@ -52,7 +52,7 @@ public class AuthCookieUtils {
 
     /** 从cookie删除token */
     public static void clearCookie(String token, String cookieDomain){
-        HttpServletResponse response = HttpUtils.getResponse();
+        HttpServletResponse response = HttpRequestUtils.getResponse();
         //HttpServletResponse response,String domain,String path, String name, String value, int maxAge,boolean httpOnly
         CookieUtil.addCookie(response,cookieDomain,"/",COOKIE_NAME, token,0,false);
     }
