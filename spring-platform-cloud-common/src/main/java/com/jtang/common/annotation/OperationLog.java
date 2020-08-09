@@ -18,7 +18,7 @@ public @interface OperationLog {
     boolean record() default true;
 
     /** 敏感字段信息 */
-    String[] sensitive() default {};
+    String[] sensitive() default {""};;
 
 
 }

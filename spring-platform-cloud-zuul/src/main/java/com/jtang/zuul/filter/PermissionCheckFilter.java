@@ -88,7 +88,6 @@ public class PermissionCheckFilter extends ZuulFilter {
         // 获取内容信息
         JSONObject jsonObject = JSONObject.parseObject(decode.getClaims());
         String authorities = jsonObject.get("authorities").toString();
-        log.info(authorities);
         String roleIds = authorities.substring(1,authorities.length() - 1).replace("\"","");
 
         // 超级管理员权限

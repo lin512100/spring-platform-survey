@@ -87,7 +87,7 @@ public class PlatformMenuController {
     }
 
     @GetMapping("/public/getTreeById/{userId}")
-    @ApiModelProperty(value = "根据用户ID查询树状图结构")
+    @ApiOperation(value = "根据用户ID查询树状图结构")
     public ResultUtils getTreeById(@PathVariable("userId") Long userId) throws Exception{
         return ResultUtils.build(service.getTreeById(userId));
     }
