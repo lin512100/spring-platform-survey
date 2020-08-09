@@ -53,18 +53,18 @@ public class OperationAspect {
     public Object around(ProceedingJoinPoint proceedingJoinPoint){
         // 获取代理的日志信息
         SysLog sysLog = getSysLogInfo(proceedingJoinPoint);
-        // 操作结果
-        Object proceed;
+        // 结果
+        Object object;
         // 日志信息
         try{
-            proceed = proceedingJoinPoint.proceed();
-            if(sysLog != null){
-                addLog(sysLog, proceed);
-            }
-            return proceed;
+            object = proceedingJoinPoint.proceed();
         }catch (Throwable throwable){
-            return ResultUtils.errorMsg(throwable.getMessage());
+            object =  ResultUtils.errorMsg(throwable.getMessage());
         }
+        if(sysLog != null){
+            addLog(sysLog, object);
+        }
+        return object;
     }
 
     /** 日志信息写入 */
