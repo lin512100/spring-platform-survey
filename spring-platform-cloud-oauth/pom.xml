@@ -11,7 +11,7 @@
 
     <version>1.0-SNAPSHOT</version>
     <artifactId>spring-platform-cloud-oauth</artifactId>
-    <name>spring-platform-cloud-oauth</name>
+    <name>服务-认证服务器-oauth</name>
 
     <dependencies>
         <dependency>

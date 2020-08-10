@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>spring-platform-cloud-account</artifactId>
-    <name>spring-platform-cloud-account</name>
+    <name>服务-账户服务器-account</name>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
