@@ -7,7 +7,7 @@ package com.jtang.base.client;
 public class ServiceConstants {
 
     /** 网关服务 */
-    public final static String GATEWAY_SERVICE = "platform-gateway";
+    public final static String GATEWAY_SERVICE = "platform-zuul";
 
     /** 授权服务 */
     public final static String OAUTH_SERVICE = "platform-auth";
