@@ -94,7 +94,6 @@ public class OperationAspect {
         Method method = signature.getMethod();
         OperationLog operationLog = method.getAnnotation(OperationLog.class);
 
-
         // 是否记录日志
         if(operationLog != null && !operationLog.record()){
             return null;
