@@ -3,7 +3,7 @@ package com.jtang.common.annotation;
 import java.lang.annotation.*;
 
 /**
- * @author linjt
+ * @author lin512100
  * @date 2020/8/4
  */
 @Documented

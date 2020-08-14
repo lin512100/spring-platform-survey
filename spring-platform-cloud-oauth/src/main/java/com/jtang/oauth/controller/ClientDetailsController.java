@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
 * 客户端信息 前端控制器
-* @author jtang
+* @author lin512100
 * @since 2020-07-01
 * @version v1.0
 */

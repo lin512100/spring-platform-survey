@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
 * 客户端信息 服务实现类
-* @author jtang
+* @author lin512100
 * @since 2020-07-01
 */
 @Service

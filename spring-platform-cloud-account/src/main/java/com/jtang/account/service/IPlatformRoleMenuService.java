@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
 *  服务类
-* @author jtang
+* @author lin512100
 * @since 2020-07-11
 */
 public interface IPlatformRoleMenuService extends IService<PlatformRoleMenu> {

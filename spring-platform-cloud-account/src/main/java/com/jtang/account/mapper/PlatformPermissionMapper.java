@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 权限 Mapper 接口
  *
- * @author jtang
+ * @author lin512100
  * @since 2020-06-30
  */
 public interface PlatformPermissionMapper extends BaseMapper<PlatformPermission> {

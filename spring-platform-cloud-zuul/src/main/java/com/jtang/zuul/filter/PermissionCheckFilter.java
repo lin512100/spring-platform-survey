@@ -32,7 +32,7 @@ import java.util.Set;
 
 /**
  * 链接权限校验器
- * @author linjt
+ * @author lin512100
  * @date 2020/7/20
  */
 @Slf4j

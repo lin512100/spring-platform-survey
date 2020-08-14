@@ -2,7 +2,7 @@ package com.jtang.feign.constant;
 
 /**
  * feign常量
- * @author linjt
+ * @author lin512100
  * @date 2020/8/10
  */
 public class FeignConstants {

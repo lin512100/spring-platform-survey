@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 /**
  * 资源服务配置
- * @author linjt
+ * @author lin512100
  * 放行所有链接地址
  */
 @Slf4j

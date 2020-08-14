@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * 客户端信息 Mapper 接口
- * @author jtang
+ * @author lin512100
  * @since 2020-07-01
  */
 public interface ClientDetailsMapper extends BaseMapper<OauthClientDetails> {

@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
 * 菜单表 服务类
-* @author jtang
+* @author lin512100
 * @since 2020-06-30
 */
 public interface IPlatformMenuService extends IService<PlatformMenu> {

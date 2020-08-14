@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * 内部接口服务类
- * @author linjt
+ * @author lin512100
  * @date 2020/7/20
  */
 public interface InnerService {

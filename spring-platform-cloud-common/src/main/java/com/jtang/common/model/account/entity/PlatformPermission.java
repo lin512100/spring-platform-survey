@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 
 /**
 * 权限
-* @author jtang
+* @author lin512100
 * @date 2020-06-30
 */
 @Data

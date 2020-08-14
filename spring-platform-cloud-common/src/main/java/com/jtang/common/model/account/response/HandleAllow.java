@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * 允许访问的操作
- * @author linjt
+ * @author lin512100
  * @date 2020/7/20
  */
 @Getter

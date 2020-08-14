@@ -8,7 +8,7 @@ import lombok.ToString;
 
 /**
 * 权限 查询类
-* @author jtang
+* @author lin512100
 * @since 2020-06-30
 * @version v1.0
 */

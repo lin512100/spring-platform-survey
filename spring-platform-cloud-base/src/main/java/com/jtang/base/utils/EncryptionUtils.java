@@ -8,7 +8,7 @@ import java.security.spec.InvalidKeySpecException;
 
 /**
  * 加密算法
- * @author linjt
+ * @author lin512100
  * @date 2020/7/7
  */
 public class EncryptionUtils {

@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * 用户 Mapper 接口
- * @author jtang
+ * @author lin512100
  * @since 2020-06-30
  */
 public interface PlatformUserMapper extends BaseMapper<PlatformUser> {

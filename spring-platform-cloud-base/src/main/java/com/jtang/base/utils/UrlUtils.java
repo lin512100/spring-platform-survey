@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * 请求路径编码解码
- * @author linjt
+ * @author lin512100
  * @date 2020/7/22
  */
 public class UrlUtils {

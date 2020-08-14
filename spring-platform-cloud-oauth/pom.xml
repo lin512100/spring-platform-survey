@@ -31,17 +31,11 @@
             <artifactId>spring-platform-cloud-generator</artifactId>
         </dependency>
 
-        <!-- Redis -->
+        <!--  Redisson组件模块-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <groupId>com.jtang</groupId>
+            <artifactId>spring-platform-cloud-redisson</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.redisson</groupId>
-            <artifactId>redisson</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>

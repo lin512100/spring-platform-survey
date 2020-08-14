@@ -1,9 +1,8 @@
 package com.jtang.account.config;
 
-import com.jtang.base.client.RedisConstants;
-import org.redisson.Redisson;
+import com.jtang.redisson.config.RedisHolder;
+import com.jtang.redisson.constants.RedisConstants;
 import org.redisson.api.RedissonClient;
-import org.redisson.config.Config;
 import org.redisson.spring.cache.CacheConfig;
 import org.redisson.spring.cache.RedissonSpringCacheManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +27,10 @@ public class RedisConfig {
     @Autowired
     private RedisProperties redisProperties;
 
-
-    /** Redission 配置*/
+    /** Redisson 配置*/
     @Bean
     public RedissonClient redissonClient(){
-        Config config = new Config();
-        String redisUrl = String.format("redis://%s:%s",redisProperties.getHost()+"",redisProperties.getPort()+"");
-        config.useSingleServer().setAddress(redisUrl).setPassword(redisProperties.getPassword());
-        config.useSingleServer().setDatabase(RedisConstants.REDIS_DATABASE_USER);
-        return Redisson.create(config);
+        return RedisHolder.getInstance(RedisConstants.REDIS_DATABASE_OAUTH);
     }
 
     @Bean

@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 
 /**
 * 菜单表
-* @author jtang
+* @author lin512100
 * @date 2020-06-30
 */
 @Data

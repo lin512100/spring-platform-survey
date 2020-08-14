@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
 * 角色 服务类
-* @author jtang
+* @author lin512100
 * @since 2020-06-30
 */
 public interface IPlatformRoleService extends IService<PlatformRole> {

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  *  Mapper 接口
  *
- * @author jtang
+ * @author lin512100
  * @since 2020-07-11
  */
 public interface PlatformRoleMenuMapper extends BaseMapper<PlatformRoleMenu> {
