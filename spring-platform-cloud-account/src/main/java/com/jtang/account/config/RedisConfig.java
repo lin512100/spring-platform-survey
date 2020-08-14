@@ -1,6 +1,6 @@
 package com.jtang.account.config;
 
-import com.jtang.redisson.config.RedisHolder;
+import com.jtang.redisson.core.RedisHolder;
 import com.jtang.redisson.constants.RedisConstants;
 import org.redisson.api.RedissonClient;
 import org.redisson.spring.cache.CacheConfig;

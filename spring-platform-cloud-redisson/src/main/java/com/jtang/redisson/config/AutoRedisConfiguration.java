@@ -2,6 +2,7 @@ package com.jtang.redisson.config;
 
 import com.jtang.redisson.core.DefaultRedisConfig;
 import com.jtang.redisson.core.RedisConfig;
+import com.jtang.redisson.core.RedisHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;

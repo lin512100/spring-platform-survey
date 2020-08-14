@@ -1,4 +1,4 @@
-package com.jtang.redisson.config;
+package com.jtang.redisson.core;
 
 import com.jtang.redisson.core.RedisConfig;
 import lombok.extern.slf4j.Slf4j;
