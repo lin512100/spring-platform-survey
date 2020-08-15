@@ -1,11 +1,9 @@
 package com.jtang.redisson.core;
 
-import com.jtang.redisson.core.RedisConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ConcurrentHashMap;
 
