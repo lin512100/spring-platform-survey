@@ -21,6 +21,9 @@ public class AuthServiceImpl implements AuthService {
     /** Authorization 前缀 */
     private final static String AUTH_PRE = "Bearer ";
 
+    @Autowired
+    private RedisHolder redisHolder;
+
 
     @Override
     public String getJwtFromHeader(HttpServletRequest request) {
@@ -52,6 +55,6 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public boolean isExpire(String accessToken) {
         String key = "user_token:"+accessToken;
-        return RedisHolder.getInstance(RedisConstants.REDIS_DATABASE_ZUUL).getBucket(key).get() == null;
+        return redisHolder.getInstance(RedisConstants.REDIS_DATABASE_ZUUL).getBucket(key).get() == null;
     }
 }

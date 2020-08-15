@@ -12,7 +12,6 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 
 
 import java.util.HashMap;
@@ -35,16 +34,19 @@ public class AutoRedisConfiguration {
     public RedisConfig redisConfig(){
         // 添加默认的实例
         log.info("组件默认初始化->添加默认组实例");
-        RedisHolder.addRedis(RedisHolder.DEFAULT_REDIS_GROUP, new DefaultRedisConfig());
         return new DefaultRedisConfig();
+    }
 
+    @Bean
+    public RedisHolder redisHolder(RedisConfig redisConfig){
+        return new RedisHolder(redisConfig);
     }
 
     /** 默认实例 */
     @Bean
     @ConditionalOnMissingBean
-    public RedissonClient redissonClient(){
-        return RedisHolder.getInstance(REDIS_DATABASE_DEFAULT);
+    public RedissonClient redissonClient(RedisHolder redisHolder){
+        return redisHolder.getInstance(REDIS_DATABASE_DEFAULT);
     }
 
     @Bean

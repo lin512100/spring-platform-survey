@@ -5,6 +5,7 @@ import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,8 +14,6 @@ import org.springframework.stereotype.Component;
  * @date 2020/8/14
  */
 @Slf4j
-@Component
-@ConditionalOnMissingBean
 public class DefaultRedisConfig implements RedisConfig {
 
     @Autowired

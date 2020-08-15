@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -24,11 +26,15 @@ public class RedisHolder {
     /** 默认组名 实例 */
     public final static String DEFAULT_REDIS_GROUP = "default";
 
+    public RedisHolder (RedisConfig redisConfig){
+        configMap.put(DEFAULT_REDIS_GROUP, redisConfig);
+    }
+
     /**
      * 获取Redis 默认实例
      * @param database 数据库号
      * */
-    public static RedissonClient getInstance(int database) {
+    public  RedissonClient getInstance(int database) {
         return getGroupInstance(DEFAULT_REDIS_GROUP, database);
     }
 
@@ -37,7 +43,7 @@ public class RedisHolder {
      * @param group 组名
      * @param database 数据库号
      * */
-    public static synchronized RedissonClient getGroupInstance(String group, int database) {
+    public  synchronized RedissonClient getGroupInstance(String group, int database) {
         String key = group + "-" +database;
         if (!queryHelperMap.containsKey(key)) {
             if(!configMap.containsKey(group)){
@@ -50,7 +56,7 @@ public class RedisHolder {
     }
 
     /** 配置类增强 */
-    private static Config enhanceConfig(Config config, int database){
+    private  Config enhanceConfig(Config config, int database){
         config.useSingleServer().setDatabase(database);
         return config;
     }
@@ -60,7 +66,7 @@ public class RedisHolder {
      * @param group 组名
      * @param redisConfig 实例配置
      * */
-    public synchronized static void addRedis(String group, RedisConfig redisConfig){
+    public synchronized  void addRedis(String group, RedisConfig redisConfig){
         configMap.put(group, redisConfig);
     }
 

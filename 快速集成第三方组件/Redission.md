@@ -17,8 +17,11 @@ RedisHolder.addRedis(String group, RedisConfig redisConfig);
 
 ### Redis调用实例的方法
 ```
-RedissonClient redissonClient = RedisHolder.getInstance(int database)
-RedissonClient.redissonClient = RedisHolder.getGroupInstance(String group, int database) 
+@Autowired
+private RedisHolder redisHolder;
+
+RedissonClient redissonClient = redisHolder.getInstance(int database)
+RedissonClient.redissonClient = redisHolder.getGroupInstance(String group, int database) 
 ```
 
 ### 内置redis库默认的配置
