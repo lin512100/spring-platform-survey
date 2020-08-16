@@ -13,6 +13,13 @@
     <artifactId>spring-platform-cloud-base</artifactId>
     <name>工具-基础工具类-base</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>ch.ethz.ganymed</groupId>
+            <artifactId>ganymed-ssh2</artifactId>
+            <version>262</version>
+        </dependency>
+    </dependencies>
 
 
 </project>
