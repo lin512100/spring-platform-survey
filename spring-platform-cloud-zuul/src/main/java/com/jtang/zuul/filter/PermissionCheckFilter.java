@@ -5,9 +5,6 @@ import com.jtang.base.client.InnerUrlConstants;
 import com.jtang.base.client.PublicUrlConstants;
 import com.jtang.base.utils.PathMatcherUtil;
 import com.jtang.common.model.account.response.HandleAllow;
-import com.jtang.feign.model.UserDao;
-import com.jtang.feign.model.UserJwt;
-import com.jtang.feign.service.UserApiService;
 import com.jtang.zuul.service.AuthService;
 import com.jtang.zuul.service.RoleService;
 import com.jtang.zuul.utils.RequestUtils;
@@ -17,7 +14,6 @@ import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.security.jwt.Jwt;
@@ -25,14 +21,12 @@ import org.springframework.security.jwt.JwtHelper;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
 /**
  * 链接权限校验器
- * @author linjt
+ * @author lin512100
  * @date 2020/7/20
  */
 @Slf4j
@@ -88,7 +82,6 @@ public class PermissionCheckFilter extends ZuulFilter {
         // 获取内容信息
         JSONObject jsonObject = JSONObject.parseObject(decode.getClaims());
         String authorities = jsonObject.get("authorities").toString();
-        log.info(authorities);
         String roleIds = authorities.substring(1,authorities.length() - 1).replace("\"","");
 
         // 超级管理员权限

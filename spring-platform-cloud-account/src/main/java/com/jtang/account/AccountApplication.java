@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
- * @author jtang
+ * @author lin512100
  * @date 2020/4/15 14:25
  */
 @SpringBootApplication

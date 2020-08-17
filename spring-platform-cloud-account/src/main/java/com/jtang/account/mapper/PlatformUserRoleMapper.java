@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * 用户角色 Mapper 接口
- * @author jtang
+ * @author lin512100
  * @since 2020-06-30
  */
 public interface PlatformUserRoleMapper extends BaseMapper<PlatformUserRole> {

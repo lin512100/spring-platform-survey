@@ -1,9 +1,10 @@
 package com.jtang.zuul.service.impl;
 
+import com.jtang.redisson.constants.RedisConstants;
+import com.jtang.redisson.core.RedisHolder;
 import com.jtang.zuul.service.AuthService;
 import com.jtang.zuul.utils.CookieUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +18,11 @@ import java.util.Map;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    /** 默认redis数据库 */
-    private static final int DEFAULT_REDIS_DATABASE = 0;
-
-    @Autowired
-    private RedissonClient redissonClient;
-
-
     /** Authorization 前缀 */
     private final static String AUTH_PRE = "Bearer ";
+
+    @Autowired
+    private RedisHolder redisHolder;
 
 
     @Override
@@ -58,6 +55,6 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public boolean isExpire(String accessToken) {
         String key = "user_token:"+accessToken;
-        return redissonClient.getBucket(key).get() == null;
+        return redisHolder.getInstance(RedisConstants.REDIS_DATABASE_ZUUL).getBucket(key).get() == null;
     }
 }

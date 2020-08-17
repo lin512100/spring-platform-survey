@@ -3,7 +3,7 @@ package com.jtang.common.annotation;
 import java.lang.annotation.*;
 
 /**
- * @author linjt
+ * @author lin512100
  * @date 2020/8/4
  */
 @Documented
@@ -18,7 +18,7 @@ public @interface OperationLog {
     boolean record() default true;
 
     /** 敏感字段信息 */
-    String[] sensitive() default {};
+    String[] sensitive() default {""};;
 
 
 }

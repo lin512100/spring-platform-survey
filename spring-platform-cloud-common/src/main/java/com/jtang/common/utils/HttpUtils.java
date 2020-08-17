@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * HTTP 请求信息工具类
- * @author linjt
+ * @author lin512100
  * @date 2020/8/7
  */
 public class HttpUtils {

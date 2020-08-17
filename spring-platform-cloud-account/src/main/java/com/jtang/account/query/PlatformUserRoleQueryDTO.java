@@ -6,7 +6,7 @@ import lombok.ToString;
 
 /**
 * 用户角色 查询类
-* @author jtang
+* @author lin512100
 * @since 2020-06-30
 * @version v1.0
 */

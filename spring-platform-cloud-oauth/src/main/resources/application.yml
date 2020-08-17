@@ -5,4 +5,4 @@ spring:
     active: eureka,mysql,oauth,redis
 server:
   port: 8089
-debug: true
+#debug: true

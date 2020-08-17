@@ -10,12 +10,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>spring-platform-cloud-message</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>组件-消息中间件-rocketmq</name>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.rocketmq/rocketmq-client -->
         <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-client</artifactId>
+            <version>4.7.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-common</artifactId>
             <version>4.7.0</version>
         </dependency>
     </dependencies>

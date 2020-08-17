@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>spring-platform-cloud-eureka</artifactId>
-    <name>spring-platform-cloud-eureka</name>
+    <name>服务-注册中心器-eureka</name>
     <version>1.0-SNAPSHOT</version>
 
 

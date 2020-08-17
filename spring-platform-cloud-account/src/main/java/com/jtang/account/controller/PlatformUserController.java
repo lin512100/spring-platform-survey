@@ -1,6 +1,7 @@
 package com.jtang.account.controller;
 
 import com.jtang.base.enums.UserStatusEnums;
+import com.jtang.common.annotation.OperationLog;
 import com.jtang.common.model.account.entity.PlatformUser;
 import com.jtang.common.model.account.response.PlatformUserDTO;
 import com.jtang.base.utils.ResultUtils;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 
 /**
 * 用户 前端控制器
-* @author jtang
+* @author lin512100
 * @since 2020-06-30
 * @version v1.0
 */
@@ -70,6 +71,7 @@ public class PlatformUserController {
     }
 
     @GetMapping("/status/list")
+    @OperationLog(record = false)
     public  ResultUtils getList(){
         return ResultUtils.build(UserStatusEnums.getMap());
     }

@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 网关处理工具类
- * @author linjt
+ * @author lin512100
  * @date 2020/7/20
  */
 @Slf4j

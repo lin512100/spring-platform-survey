@@ -4,7 +4,7 @@ import lombok.Getter;
 
 /**
  * 性别枚举
- * @author linjt
+ * @author lin512100
  * @date 2020/7/9
  */
 @Getter

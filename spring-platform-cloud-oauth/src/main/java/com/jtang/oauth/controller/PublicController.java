@@ -1,9 +1,12 @@
 package com.jtang.oauth.controller;
 
 import com.jtang.base.client.PublicUrlConstants;
+import com.jtang.common.annotation.OperationLog;
 import com.jtang.common.model.account.request.LoginRequest;
 import com.jtang.base.utils.ResultUtils;
 import com.jtang.oauth.service.AuthService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +30,7 @@ public class PublicController {
      * @param loginRequest {@link LoginRequest}
      * @return {@link LoginRequest}
      * */
+    @ApiOperation("用户登录")
     @PostMapping(PublicUrlConstants.LOGIN)
     public ResultUtils login(LoginRequest loginRequest) {
         return ResultUtils.build(authService.getToken(loginRequest));

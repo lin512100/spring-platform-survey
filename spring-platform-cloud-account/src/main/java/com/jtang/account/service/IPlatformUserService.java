@@ -9,7 +9,7 @@ import com.jtang.account.query.PlatformUserQueryDTO;
 
 /**
 * 用户 服务类
-* @author jtang
+* @author lin512100
 * @since 2020-06-30
 */
 public interface IPlatformUserService extends IService<PlatformUser> {

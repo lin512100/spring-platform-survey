@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
 * 权限 服务类
-* @author jtang
+* @author lin512100
 * @since 2020-06-30
 */
 public interface IPlatformPermissionService extends IService<PlatformPermission> {

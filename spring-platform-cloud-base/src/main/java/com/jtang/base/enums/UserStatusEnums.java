@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * 用户状态枚举
- * @author linjt
+ * @author lin512100
  * @date 2020/7/7
  */
 @Getter

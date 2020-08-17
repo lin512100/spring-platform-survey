@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * 反向加载URL信息工具类
- * @author linjt
+ * @author lin512100
  * @date 2020/7/22
  */
 @Slf4j

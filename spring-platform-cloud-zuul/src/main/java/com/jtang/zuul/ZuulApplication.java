@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 /**
  * 网关服务
- * @author linjt
+ * @author lin512100
  * @date 2020/6/12
  */
 @EnableZuulProxy

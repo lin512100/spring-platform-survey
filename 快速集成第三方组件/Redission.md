@@ -1,44 +1,30 @@
-## 快速集成Redission
+## 快速集成Redisson
 
 ### 依赖
 
 ```
+<!--  Redisson组件模块-->
 <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-data-redis</artifactId>
-</dependency>
-
-<dependency>
-    <groupId>org.redisson</groupId>
-    <artifactId>redisson</artifactId>
-    <version>3.8.2</version>
+    <groupId>com.jtang</groupId>
+    <artifactId>spring-platform-cloud-redisson</artifactId>
 </dependency>
 ```
 
-### 配置
-
-```java
-@Configuration
-public class RedisSessionConfig {
-
-    @Autowired
-    private RedisProperties redisProperties;
-
-    /** 默认redis数据库 */
-    private static final int DEFAULT_REDIS_DATABASE = 0;
-
-    @Bean
-    public RedissonClient redissonClient(){
-        Config config = new Config();
-        String redisUrl = String.format("redis://%s:%s",redisProperties.getHost()+"",redisProperties.getPort()+"");
-        config.useSingleServer().setAddress(redisUrl).setPassword(redisProperties.getPassword());
-        config.useSingleServer().setDatabase(DEFAULT_REDIS_DATABASE);
-        return Redisson.create(config);
-    }
-}
+### 添加第二个数据源
+```
+RedisHolder.addRedis(String group, RedisConfig redisConfig);
 ```
 
-### 配置
+### Redis调用实例的方法
+```
+@Autowired
+private RedisHolder redisHolder;
+
+RedissonClient redissonClient = redisHolder.getInstance(int database)
+RedissonClient.redissonClient = redisHolder.getGroupInstance(String group, int database) 
+```
+
+### 内置redis库默认的配置
 ```
 spring:
   redis:

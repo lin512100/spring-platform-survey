@@ -34,8 +34,8 @@
         <module>spring-platform-cloud-account</module>
         <module>spring-platform-cloud-generator</module>
         <module>spring-platform-cloud-feign</module>
-        <module>spring-platform-cloud-tools</module>
         <module>spring-platform-cloud-zuul</module>
+        <module>spring-platform-cloud-redisson</module>
         <module>spring-platform-cloud-message</module>
     </modules>
 
@@ -103,6 +103,13 @@
             <dependency>
                 <groupId>com.jtang</groupId>
                 <artifactId>spring-platform-cloud-feign</artifactId>
+                <version>${platform-version}</version>
+            </dependency>
+
+            <!--  Redisson模块-->
+            <dependency>
+                <groupId>com.jtang</groupId>
+                <artifactId>spring-platform-cloud-redisson</artifactId>
                 <version>${platform-version}</version>
             </dependency>
 

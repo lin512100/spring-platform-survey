@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 
 /**
  * 切面实现类
- * @author linjt
+ * @author lin512100
  * @date 2020/8/7
  */
 @Slf4j
@@ -53,31 +53,31 @@ public class OperationAspect {
     public Object around(ProceedingJoinPoint proceedingJoinPoint){
         // 获取代理的日志信息
         SysLog sysLog = getSysLogInfo(proceedingJoinPoint);
-        // 操作结果
-        Object proceed;
+        // 结果
+        Object object;
+        // 日志信息
         try{
-            proceed = proceedingJoinPoint.proceed();
-            addLog(sysLog, proceed);
-            return proceed;
+            object = proceedingJoinPoint.proceed();
         }catch (Throwable throwable){
-            return ResultUtils.errorMsg(throwable.getMessage());
+            object =  ResultUtils.errorMsg(throwable.getMessage());
         }
+        if(sysLog != null){
+            addLog(sysLog, object);
+        }
+        return object;
     }
 
-    /**
-     * 切入信息
-     * 日志写入
-     * */
+    /** 日志信息写入 */
     private void addLog(SysLog sysLog, Object object){
         // 设置操作结束时间
         sysLog.setEndDate(LocalDateTime.now());
-
         // 尝试解析统一返回的结果
         try{
-            ResultUtils resultUtils = JSONObject.parseObject(object.toString(), ResultUtils.class);
+            ResultUtils<Object> resultUtils = ResultUtils.getData(object.toString());
+            // 写入执行的状态
             sysLog.setSuccess(resultUtils.getCode());
             // 如果失败写入失败原因
-            if(resultUtils.getCode() == ResultStatusEnums.FAIL.getCode() ){
+            if(resultUtils.getCode() == ResultStatusEnums.FAIL.getCode()){
                 sysLog.setError(resultUtils.getMsg());
             }
         }catch (Exception error){
@@ -90,16 +90,50 @@ public class OperationAspect {
 
     /** 获取日志信息 */
     private SysLog getSysLogInfo(ProceedingJoinPoint joinPoint){
-        SysLog sysLog = new SysLog();
-        sysLog.setStartDate(LocalDateTime.now());
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
+        OperationLog operationLog = method.getAnnotation(OperationLog.class);
 
-        // 功能描述
-        ApiOperation apiOperation = method.getAnnotation(ApiOperation.class);
-        if(apiOperation != null){
-            sysLog.setFunction(apiOperation.value());
+        // 是否记录日志
+        if(operationLog != null && !operationLog.record()){
+            return null;
         }
+
+        // 敏感字段信息
+        String[] sensitive = new String[]{};
+        if(operationLog != null){
+             sensitive = operationLog.sensitive();
+
+        }
+
+        SysLog sysLog = getSwaggerUiDefaultInfo(joinPoint);
+
+
+        sysLog.setStartDate(LocalDateTime.now());
+
+        // 设置请求参数
+        String[] argNames = ((MethodSignature) joinPoint.getSignature()).getParameterNames();
+        final Object[] argValues = joinPoint.getArgs();
+        StringBuilder sb = new StringBuilder();
+
+
+        for (int i = 0; i < argNames.length; i++) {
+            if(argValues[i] == null){
+                continue;
+            }
+
+            String value =  argValues[i].toString();
+            // 如果请求参数含有敏感信息，则隐藏
+            for(String senStr : sensitive){
+                if (argNames[i].equals(senStr)) {
+                    value = "******";
+                    break;
+                }
+            }
+            sb.append(argNames[i]).append("=").append(value).append(",");
+        }
+        String paramStr = sb.length() > 0 ? sb.toString().substring(0, sb.length() - 1) + "]" : "";
+        sysLog.setParams(paramStr);
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         // 请求IP地址
@@ -109,23 +143,43 @@ public class OperationAspect {
         // 请求链接
         sysLog.setUrl(request.getServletPath());
 
-
         // 服务名
         String serverName = env.getProperty("spring.application.name");
         if(!StringUtils.isEmpty(serverName)){
             sysLog.setService(serverName.toUpperCase());
         }
 
-        OperationLog operationLog = method.getAnnotation(OperationLog.class);
+
         // 模快名 如果注解用在类上，则为null
-        if(operationLog != null){
-            if(!StringUtils.isNotBlank(operationLog.module())){
-                Api api = joinPoint.getTarget().getClass().getAnnotation(Api.class);
-                if(api != null){
-                    sysLog.setModule(api.value());
-                }
-            }else {
-                sysLog.setModule(operationLog.module());
+        if(operationLog != null && StringUtils.isNotBlank(operationLog.module())){
+            sysLog.setModule(operationLog.module());
+        }
+
+        return sysLog;
+    }
+
+    /** 默认日志信息，来自于Swagger*/
+    private SysLog getSwaggerUiDefaultInfo(ProceedingJoinPoint joinPoint){
+        SysLog sysLog = new SysLog();
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        Method method = signature.getMethod();
+
+        // 功能描述
+        ApiOperation apiOperation = method.getAnnotation(ApiOperation.class);
+        if(apiOperation != null){
+            sysLog.setFunction(apiOperation.value());
+        }
+
+        // 设置swagger默认的信息
+        Api api = joinPoint.getTarget().getClass().getAnnotation(Api.class);
+        if(api != null){
+            // swagger 设置的是value描述值
+            if(StringUtils.isNotBlank(api.value())){
+                sysLog.setModule(api.value());
+            }
+            // swagger 设置的是tag描述值
+            if(api.tags().length > 0){
+                sysLog.setModule(StringUtils.join(api.tags(),","));
             }
         }
         return sysLog;

@@ -23,10 +23,10 @@ import java.util.stream.Collectors;
 
 /**
  * 账户服务内部接口
- * @author linjt
+ * @author lin512100
  * @date 2020/7/20
  */
-@Api(value = "账户服务内部接口")
+@Api(value = "内部账户服务接口")
 @RestController
 @AllArgsConstructor
 @OperationLog

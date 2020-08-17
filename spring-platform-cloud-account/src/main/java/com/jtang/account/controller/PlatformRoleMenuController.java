@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
 *  前端控制器
-* @author jtang
+* @author lin512100
 * @since 2020-07-11
 * @version v1.0
 */
-@Api(tags = "模块")
+@Api(tags = "角色菜单模块")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/roleMenu")

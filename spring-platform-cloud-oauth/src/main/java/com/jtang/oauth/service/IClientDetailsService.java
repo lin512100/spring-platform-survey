@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
 * 客户端信息 服务类
-* @author jtang
+* @author lin512100
 * @since 2020-07-01
 */
 public interface IClientDetailsService extends IService<OauthClientDetails> {

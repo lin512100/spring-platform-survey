@@ -1,6 +1,6 @@
 package com.jtang.feign;
 
-import com.jtang.feign.enums.AuthMode;
+import com.jtang.feign.constant.FeignConstants;
 import com.jtang.feign.service.FeignService;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -21,13 +21,9 @@ public class InnerFeignRequest implements RequestInterceptor {
     @Autowired
     private FeignService feignService;
 
-    private static final String AUTHORIZATION_HEADER = "Authorization";
-
-    private static final String BEARER_TOKEN_TYPE = "Bearer";
-
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        requestTemplate.header(AUTHORIZATION_HEADER, String.format("%s %s", BEARER_TOKEN_TYPE,  feignService.getTokenByClientCredentials()));
+        requestTemplate.header(FeignConstants.AUTHORIZATION_HEADER, String.format("%s %s", FeignConstants.BEARER_TOKEN_TYPE,  feignService.getTokenByClientCredentials()));
     }
 
 

@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * 菜单表 Mapper 接口
- * @author jtang
+ * @author lin512100
  * @since 2020-06-30
  */
 public interface PlatformMenuMapper extends BaseMapper<PlatformMenu> {

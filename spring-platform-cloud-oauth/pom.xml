@@ -11,7 +11,7 @@
 
     <version>1.0-SNAPSHOT</version>
     <artifactId>spring-platform-cloud-oauth</artifactId>
-    <name>spring-platform-cloud-oauth</name>
+    <name>服务-认证服务器-oauth</name>
 
     <dependencies>
         <dependency>
@@ -31,15 +31,10 @@
             <artifactId>spring-platform-cloud-generator</artifactId>
         </dependency>
 
-        <!-- Redis -->
+        <!--  Redisson组件模块-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.redisson</groupId>
-            <artifactId>redisson</artifactId>
+            <groupId>com.jtang</groupId>
+            <artifactId>spring-platform-cloud-redisson</artifactId>
         </dependency>
 
         <dependency>

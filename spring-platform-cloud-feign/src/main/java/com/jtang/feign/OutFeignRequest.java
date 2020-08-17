@@ -1,6 +1,7 @@
 package com.jtang.feign;
 
 import com.jtang.common.utils.HttpRequestUtils;
+import com.jtang.feign.constant.FeignConstants;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,6 @@ public class OutFeignRequest implements RequestInterceptor {
     public void apply(RequestTemplate requestTemplate) {
         HttpServletRequest request = HttpRequestUtils.getRequest();
         //添加token
-        requestTemplate.header("Authorization", request.getHeader("Authorization"));
+        requestTemplate.header(FeignConstants.AUTHORIZATION_HEADER, request.getHeader(FeignConstants.AUTHORIZATION_HEADER));
     }
 }

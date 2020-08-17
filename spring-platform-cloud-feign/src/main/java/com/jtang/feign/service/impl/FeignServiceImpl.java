@@ -4,6 +4,7 @@ import com.jtang.base.client.ServiceConstants;
 import com.jtang.base.exception.ExceptionCast;
 import com.jtang.common.model.account.AuthToken;
 import com.jtang.common.model.account.response.AuthCode;
+import com.jtang.feign.constant.FeignConstants;
 import com.jtang.feign.enums.AuthMode;
 import com.jtang.feign.properties.AuthProperties;
 import com.jtang.feign.service.FeignService;
@@ -90,7 +91,7 @@ public class FeignServiceImpl implements FeignService {
     private ResponseEntity<Map> submit(String authUrl, LinkedMultiValueMap<String, String> body, LinkedMultiValueMap<String, String> header){
         //定义header
         String httpBasic = HttpUtils.getHttpBasic(authProperties.getClientId(), authProperties.getClientSecret());
-        header.add("Authorization",httpBasic);
+        header.add(FeignConstants.AUTHORIZATION_HEADER, httpBasic);
 
         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(body, header);
         //设置restTemplate远程调用时候，对400和401不让报错，正确返回数据

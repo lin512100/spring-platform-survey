@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthProperties {
+
     /** token存储到redis的过期时间 */
     private Integer tokenValiditySeconds;
     /** 客户端ID */

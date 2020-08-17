@@ -8,7 +8,7 @@ import java.util.Set;
 
 /**
  * 用户操作权限服务类
- * @author linjt
+ * @author lin512100
  * @date 2020/7/20
  */
 public interface RoleService {

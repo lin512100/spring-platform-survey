@@ -1,11 +1,15 @@
 package com.jtang.base.utils;
 
 
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.jtang.base.enums.ResultStatusEnums;
 import com.jtang.base.response.ResultCode;
 import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * 统一返回类
@@ -76,4 +80,32 @@ public class ResultUtils<T> implements Serializable {
         return new ResultUtils().error(resultCode.message());
     }
 
+    @Override
+    public String toString() {
+        JSONObject result = new JSONObject();
+        result.put("code",code);
+        if(StringUtils.isNotBlank(msg)){
+            result.put("msg",msg);
+        }
+        if(data != null){
+            result.put("data",data);
+        }
+        return result.toString();
+    }
+
+    public static ResultUtils<Object> getData(String data){
+        JSONObject jsonObject = JSONObject.parseObject(data);
+        ResultUtils<Object> resultUtils = new ResultUtils<>();
+        if(jsonObject.containsKey("code")){
+            resultUtils.code(Integer.parseInt(jsonObject.get("code").toString()));
+        }
+        if(jsonObject.containsKey("msg")){
+            resultUtils.msg(jsonObject.get("msg").toString());
+        }
+        if(jsonObject.containsKey("data")){
+            resultUtils.msg(jsonObject.get("data").toString());
+        }
+        return resultUtils;
+
+    }
 }
