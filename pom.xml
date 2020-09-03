@@ -40,6 +40,7 @@
         <module>spring-platform-cloud-redisson</module>
         <module>spring-platform-cloud-message</module>
         <module>spring-platform-cloud-nacos</module>
+        <module>spring-platform-make</module>
     </modules>
 
     <dependencies>
