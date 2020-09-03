@@ -2,6 +2,7 @@ package com.jtang.business.ctfile;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,6 +20,12 @@ public class CtfileController {
         request.setAttribute("name", "name");
         System.out.println("================");
         return "redirect";
+    }
+
+    @RequestMapping("/url")
+    @ResponseBody()
+    public String test(){
+        return "aa";
     }
 
 }
