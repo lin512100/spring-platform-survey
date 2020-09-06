@@ -23,8 +23,8 @@ public class AutoMakeTest {
 
         // 设置作者
         generatorParamDTO.setAuthor("jtang");
-        generatorParamDTO.setModuleName("make");
-        String[] includeTable = new String[]{"tb_resource_info","tb_resource_tag","tb_resource_address"};
+        generatorParamDTO.setModuleName("system");
+        String[] includeTable = new String[]{"sys_role","sys_user_role"};
         generatorParamDTO.setIncludeTableList(includeTable);
         CodeGenerator.genertor(generatorParamDTO , dsc);
     }

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 城通网盘
@@ -15,17 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/business/ctfile")
 public class CtfileController {
 
+    /** 路由转发功能 */
     @RequestMapping("/transfer")
-    public String transfer(HttpServletRequest request) throws Exception {
-        request.setAttribute("name", "name");
-        System.out.println("================");
-        return "redirect";
-    }
-
-    @RequestMapping("/url")
-    @ResponseBody()
-    public String test(){
-        return "aa";
+    public void transfer(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        response.sendRedirect("http://www.baidu.com");
     }
 
 }

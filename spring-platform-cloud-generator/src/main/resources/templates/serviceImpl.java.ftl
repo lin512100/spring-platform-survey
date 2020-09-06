@@ -15,7 +15,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 * @since ${date}
 */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 @Slf4j
 <#if kotlin>
 open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}>(), ${table.serviceName} {

@@ -1,4 +1,4 @@
-package com.jtang.config;
+package com.jtang.core.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
