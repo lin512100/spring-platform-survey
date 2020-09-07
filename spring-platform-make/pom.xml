@@ -27,6 +27,7 @@
 
 
     <build>
+        <finalName>spring-platform-make</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

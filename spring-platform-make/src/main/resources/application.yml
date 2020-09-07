@@ -3,5 +3,8 @@ spring:
     active: mysql,thymeleaf
 
 server:
-  port: 5000
-#debug: true
+  port: 5201
+
+system:
+  baseImagePath: /opt/software/imagePath
+  baseFilePath: /opt/software/filePath

@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class AutoMakeTest {
 
-    @Test
+//    @Test
     public void contextLoads() {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
@@ -23,8 +23,8 @@ public class AutoMakeTest {
 
         // 设置作者
         generatorParamDTO.setAuthor("jtang");
-        generatorParamDTO.setModuleName("system");
-        String[] includeTable = new String[]{"sys_role","sys_user_role"};
+        generatorParamDTO.setModuleName("resource");
+        String[] includeTable = new String[]{"tb_resource_account","tb_resource_info","tb_resource_tag","tb_resource_address"};
         generatorParamDTO.setIncludeTableList(includeTable);
         CodeGenerator.genertor(generatorParamDTO , dsc);
     }
