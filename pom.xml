@@ -22,7 +22,7 @@
         <platform-version>1.0-SNAPSHOT</platform-version>
         <swagger-version>2.9.2</swagger-version>
         <myabtis-version>3.3.1.tmp</myabtis-version>
-        <mysql-version>6.0.6</mysql-version>
+        <mysql-version>8.0.16</mysql-version>
         <spring-cloud-alibaba-version>2.2.1.RELEASE</spring-cloud-alibaba-version>
         <freemarker-version>2.3.29</freemarker-version>
         <druid-version>1.1.24</druid-version>
