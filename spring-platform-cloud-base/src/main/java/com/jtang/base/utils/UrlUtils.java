@@ -12,7 +12,7 @@ public class UrlUtils {
     private final static String ENCODE = "UTF-8";
 
     /** URL 解码 */
-    public static String getURLDecoderString(String str) {
+    public static String getUrlDecoderString(String str) {
         String result = "";
         if (null == str) {
             return "";

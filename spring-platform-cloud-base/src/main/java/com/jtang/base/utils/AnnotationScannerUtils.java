@@ -28,7 +28,7 @@ public class AnnotationScannerUtils {
         URL url = Thread.currentThread().getContextClassLoader().getResource(pkgDirName);
         if(url != null){
             String filePath = url.getFile().replace("/", File.separator).replace("\\", File.separator);
-            return UrlUtils.getURLDecoderString(filePath);
+            return UrlUtils.getUrlDecoderString(filePath);
         }
         return null;
     }

@@ -1,0 +1,3 @@
+springspring:
+  profiles:
+    active: zuul,eureka,mysql,redis

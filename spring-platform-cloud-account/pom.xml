@@ -50,7 +50,43 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <!-- 本地开发环境 -->
+            <id>dev</id>
+            <properties>
+                <!-- profiles.active 可以改为其他非关键字名字,env也可以,但是注意上下几个的标签要一致,本次统一使用的profiles.active-->
+                <profiles.active>dev</profiles.active>
+                <!--也可以配置其他属性,供使用;比如下面这个属性可以配置在maven打包跳过测试位置赋值 使用${skiptestconf}-->
+                <skiptestconf>false</skiptestconf>
+            </properties>
+            <activation>
+                <!-- 设置默认激活这个配置 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <!-- 发布环境 -->
+            <id>prod</id>
+            <properties>
+                <profiles.active>prod</profiles.active>
+                <skiptestconf>true</skiptestconf>
+            </properties>
+        </profile>
+        <profile>
+            <!-- 测试环境 -->
+            <id>test</id>
+            <properties>
+                <profiles.active>test</profiles.active>
+                <skiptestconf>true</skiptestconf>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
+        <filters>
+            <filter>src/main/resources/profiles/${profiles.active}/application.yml</filter>
+        </filters>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -66,5 +102,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

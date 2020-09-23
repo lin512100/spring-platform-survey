@@ -11,9 +11,5 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @RefreshScope
 public class SampleController {
-    @Value("${user.name}")
-    String userName;
-
-    @Value("${user.age}")
-    int age;
+//a
 }

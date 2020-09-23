@@ -14,9 +14,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * @author Ling
- * @description: TODO Linux 操作类
- * @date 2019/6/4 13:48
+ * 远程操作工具类
+ * @author lin512100
+ * @date 2020/9/22
  */
 @Component
 @Slf4j

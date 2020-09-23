@@ -1,7 +1,21 @@
 server:
-  port: 9000
+  port: 8081
 management:
   endpoints:
     web:
       exposure:
-        include: *
+        include: "*"
+
+spring:
+  main:
+    lazy-initialization: true
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*/*Mapper.xml
+  global-config:
+    banner: false
+    db-config:
+      id-type: AUTO
+      table-underline: true
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.jtang.oauth.controller.entity
