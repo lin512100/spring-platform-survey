@@ -4,10 +4,10 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: 10.7.1.24:8848
+        server-addr: 127.0.0.1:8848
         namespace: 73f8ec92-a874-4953-9a59-5b8202286403
         file-extension: yaml
         group: NACOS_MICROSERVICE_GROUP
       discovery:
-        server-addr: 10.7.1.24:8848
+        server-addr: 127.0.0.1:8848
         namespace: 73f8ec92-a874-4953-9a59-5b8202286403

@@ -14,7 +14,6 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
-
         <!--  Feign内部调用模块模块-->
         <dependency>
             <groupId>com.jtang</groupId>

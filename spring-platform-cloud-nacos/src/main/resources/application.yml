@@ -6,9 +6,6 @@ management:
       exposure:
         include: "*"
 
-spring:
-  main:
-    lazy-initialization: true
 mybatis-plus:
   mapper-locations: classpath:/mapper/*/*Mapper.xml
   global-config:

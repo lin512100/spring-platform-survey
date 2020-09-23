@@ -23,7 +23,7 @@
             <groupId>com.jtang</groupId>
             <artifactId>spring-platform-cloud-generator</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
