@@ -1,27 +1,32 @@
 package com.jtang;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author huanglian
- * @date 2020/8/26
- * @description nacos注册中心
- */
-@EnableDiscoveryClient
-@SpringBootApplication(exclude={
-        DataSourceAutoConfiguration.class,
-//        HibernateJpaAutoConfiguration.class, //（如果使用Hibernate时，需要加）
-        DataSourceTransactionManagerAutoConfiguration.class,
-})
+ * @author Administrator
+ * @version 1.0
+ **/
+@SpringBootApplication
+@RestController
 public class NacosApplication {
-
     public static void main(String[] args) {
-        SpringApplication.run(NacosApplication.class, args);
+        SpringApplication.run(NacosApplication.class,args);
+    }
 
+//    @Autowired
+//    ConfigurableApplicationContext applicationContext;
+    //通过value注解读取配置信息
+    @Value("${common.name}")
+    private String config1;
+
+    @GetMapping("/configs")
+    public String getConfigs(){
+        //读取配置信息
+        return config1;
     }
 
 }
