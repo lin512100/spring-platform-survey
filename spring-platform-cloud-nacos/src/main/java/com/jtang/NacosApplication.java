@@ -17,9 +17,6 @@ public class NacosApplication {
         SpringApplication.run(NacosApplication.class,args);
     }
 
-//    @Autowired
-//    ConfigurableApplicationContext applicationContext;
-    //通过value注解读取配置信息
     @Value("${common.name}")
     private String config1;
 
