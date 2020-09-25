@@ -1,0 +1,7 @@
+server:
+  port: 8089 #启动端口 命令行注入
+spring:
+  application:
+    name: platform-auth
+  profiles:
+    active: dev

@@ -1,6 +1,0 @@
-encrypt:
-  key-store:
-    location: classpath:/xc.keystore
-    secret: xuechengkeystore
-    alias: xckey
-    password: xuecheng

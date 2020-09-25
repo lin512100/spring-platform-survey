@@ -12,8 +12,6 @@ import org.springframework.context.annotation.ComponentScan;
  */
 
 @SpringCloudApplication
-@ComponentScan(basePackages = {"com.jtang.*"})
-@MapperScan(basePackages = "com.jtang.*.mapper")
 public class OauthApplication {
 
     public static void main(String[] args) {

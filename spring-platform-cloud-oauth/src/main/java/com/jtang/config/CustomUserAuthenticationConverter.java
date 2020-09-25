@@ -1,4 +1,4 @@
-package com.jtang.oauth.config;
+package com.jtang.config;
 
 import com.jtang.feign.model.UserJwt;
 import org.springframework.beans.factory.annotation.Autowired;

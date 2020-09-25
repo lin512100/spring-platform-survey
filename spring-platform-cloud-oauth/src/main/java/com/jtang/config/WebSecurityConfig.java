@@ -1,4 +1,4 @@
-package com.jtang.oauth.config;
+package com.jtang.config;
 
 import com.jtang.base.client.PublicUrlConstants;
 import org.springframework.context.annotation.Bean;

@@ -1,8 +1,7 @@
-package com.jtang.oauth.config;
+package com.jtang.config;
 
 import com.jtang.oauth.service.impl.CustomerClientDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.bootstrap.encrypt.KeyProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

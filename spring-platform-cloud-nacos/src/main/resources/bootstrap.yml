@@ -1,17 +1,7 @@
 server:
   port: 56010 #启动端口 命令行注入
-
 spring:
   application:
     name: nacos
-  cloud:
-    nacos:
-      config:
-        #enabled: false #关闭配置
-        server-addr: 127.0.0.1:8848
-        file-extension: yaml
-        namespace: 73f8ec92-a874-4953-9a59-5b8202286403
-        group: NACOS_MICROSERVICE_GROUP
-      discovery:
-        server-addr: 127.0.0.1:8848
-        namespace: 73f8ec92-a874-4953-9a59-5b8202286403
+  profiles:
+    active: dev

@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: platform-auth
-  profiles:
-    active: eureka,mysql,oauth,redis
-server:
-  port: 8089
-#debug: true
