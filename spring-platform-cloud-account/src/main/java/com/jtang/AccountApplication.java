@@ -1,4 +1,4 @@
-package com.jtang.account;
+package com.jtang;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

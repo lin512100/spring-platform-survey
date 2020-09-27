@@ -18,6 +18,11 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
         <!--  集成网页基础服务模块-->
         <dependency>
             <groupId>com.jtang</groupId>
@@ -29,16 +34,13 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-<!--        &lt;!&ndash;  Redisson组件模块&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-redis</artifactId>-->
-<!--        </dependency>-->
-
+        <!--  Redisson组件模块-->
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+
+
 
     </dependencies>
 </project>
