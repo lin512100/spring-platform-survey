@@ -14,7 +14,7 @@
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
-        <spring-boot.version>2.2.1.RELEASE</spring-boot.version>
+        <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
         <maven-compiler.version>3.8.1</maven-compiler.version>
         <maven-compiler-configuration.source.version>1.8</maven-compiler-configuration.source.version>
         <maven-compiler-configuration.target.version>1.8</maven-compiler-configuration.target.version>

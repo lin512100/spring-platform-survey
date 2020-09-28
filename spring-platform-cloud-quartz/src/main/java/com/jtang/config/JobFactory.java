@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.scheduling.quartz.AdaptableJobFactory;
 import org.springframework.stereotype.Component;
-
-
 @Component
-@NonNullApi
+@NonNullApi()
 public class JobFactory extends AdaptableJobFactory {
     //这个对象Spring会帮我们自动注入进来,也属于Spring技术范畴.
     //为什么需要这个类呢，在我写的这个demo中，大家可以将此类删掉，发现程序也可以政策运营，可是我为什么还是加上呢。

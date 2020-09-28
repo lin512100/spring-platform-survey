@@ -8,18 +8,17 @@ import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 /**
  * 计划任务管理
- * @author https://github.com/allanzhuo/yyblog/tree/0a202113c9577d7ec077ea8faac85b382cbcd80f/src/main/java/net/laoyeye/yyblog/service
- * @date 2018年6月17日
- * @website www.laoyeye.net
+ * @author lin512100
+ * @date 2020/9/28
  */
-@Service
 @Slf4j
+@Service
 public class QuartzManager {
     @Autowired
     private Scheduler scheduler;
@@ -27,7 +26,7 @@ public class QuartzManager {
     /**
      * 添加任务
      *
-     * @throws SchedulerException
+     * @param task 任务
      */
     @SuppressWarnings("unchecked")
     public void addJob(TbTask task) {
@@ -37,11 +36,13 @@ public class QuartzManager {
 
             Class<? extends Job> jobClass = (Class<? extends Job>) (Class.forName(task.getBeanClass()).newInstance()
                     .getClass());
-            JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(task.getJobName(), task.getJobGroup())// 任务名称和组构成任务key
+            // 任务名称和组构成任务key
+            JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(task.getJobName(), task.getJobGroup())
                     .build();
             // 定义调度触发规则
             // 使用cornTrigger规则
-            Trigger trigger = TriggerBuilder.newTrigger().withIdentity(task.getJobName(), task.getJobGroup())// 触发器key
+            // 触发器key
+            Trigger trigger = TriggerBuilder.newTrigger().withIdentity(task.getJobName(), task.getJobGroup())
                     .startAt(DateBuilder.futureDate(1, IntervalUnit.SECOND))
                     .withSchedule(CronScheduleBuilder.cronSchedule(task.getCronExpression())).startNow().build();
             // 把作业和触发器注册到任务调度中
@@ -54,61 +55,20 @@ public class QuartzManager {
             e.printStackTrace();
         }
     }
-//	public void addJob(ScheduleJob job) throws SchedulerException {
-//		if (job == null || !ScheduleJob.STATUS_RUNNING.equals(job.getJobStatus())) {
-//			return;
-//		}
-//
-//		TriggerKey triggerKey = TriggerKey.triggerKey(job.getJobName(), job.getJobGroup());
-//
-//		CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
-//
-//		// 不存在，创建一个
-//
-//		if (null == trigger) {
-//			Class<? extends Job> clazz = ScheduleJob.CONCURRENT_IS.equals(job.getIsConcurrent())
-//					? QuartzJobFactory.class
-//					: QuartzJobFactoryDisallowConcurrentExecution.class;
-//
-//			JobDetail jobDetail = JobBuilder.newJob(clazz).withIdentity(job.getJobName(), job.getJobGroup()).build();
-//
-//			jobDetail.getJobDataMap().put("scheduleJob", job);
-//
-//			CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCronExpression());
-//
-//			trigger = TriggerBuilder.newTrigger().withIdentity(job.getJobName(), job.getJobGroup())
-//					.withSchedule(scheduleBuilder).build();
-//
-//			scheduler.scheduleJob(jobDetail, trigger);
-//		} else {
-//			// Trigger已存在，那么更新相应的定时设置
-//
-//			CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCronExpression());
-//
-//			// 按新的cronExpression表达式重新构建trigger
-//
-//			trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
-//
-//			// 按新的trigger重新设置job执行
-//
-//			scheduler.rescheduleJob(triggerKey, trigger);
-//		}
-//	}
 
     /**
      * 获取所有计划中的任务列表
      *
-     * @return
-     * @throws SchedulerException
+     * @throws SchedulerException 异常
      */
-    public List<TaskDO> getAllJob() throws SchedulerException {
+    public List<TbTask> getAllJob() throws SchedulerException {
         GroupMatcher<JobKey> matcher = GroupMatcher.anyJobGroup();
         Set<JobKey> jobKeys = scheduler.getJobKeys(matcher);
-        List<TaskDO> jobList = new ArrayList<TaskDO>();
+        List<TbTask> jobList = new ArrayList<TbTask>();
         for (JobKey jobKey : jobKeys) {
             List<? extends Trigger> triggers = scheduler.getTriggersOfJob(jobKey);
             for (Trigger trigger : triggers) {
-                TaskDO job = new TaskDO();
+                TbTask job = new TbTask();
                 job.setJobName(jobKey.getName());
                 job.setJobGroup(jobKey.getGroup());
                 job.setDescription("触发器:" + trigger.getKey());
@@ -128,14 +88,13 @@ public class QuartzManager {
     /**
      * 所有正在运行的job
      *
-     * @return
-     * @throws SchedulerException
+     * @throws SchedulerException 异常
      */
-    public List<TaskDO> getRunningJob() throws SchedulerException {
+    public List<TbTask> getRunningJob() throws SchedulerException {
         List<JobExecutionContext> executingJobs = scheduler.getCurrentlyExecutingJobs();
-        List<TaskDO> jobList = new ArrayList<TaskDO>(executingJobs.size());
+        List<TbTask> jobList = new ArrayList<>(executingJobs.size());
         for (JobExecutionContext executingJob : executingJobs) {
-            TaskDO job = new TaskDO();
+            TbTask job = new TbTask();
             JobDetail jobDetail = executingJob.getJobDetail();
             JobKey jobKey = jobDetail.getKey();
             Trigger trigger = executingJob.getTrigger();
@@ -156,11 +115,8 @@ public class QuartzManager {
 
     /**
      * 暂停一个job
-     *
-     * @param task
-     * @throws SchedulerException
      */
-    public void pauseJob(TaskDO task) throws SchedulerException {
+    public void pauseJob(TbTask task) throws SchedulerException {
         JobKey jobKey = JobKey.jobKey(task.getJobName(), task.getJobGroup());
         scheduler.pauseJob(jobKey);
     }
@@ -168,10 +124,10 @@ public class QuartzManager {
     /**
      * 恢复一个job
      *
-     * @param task
-     * @throws SchedulerException
+     * @param task 任务
+     * @throws SchedulerException 异常
      */
-    public void resumeJob(TaskDO task) throws SchedulerException {
+    public void resumeJob(TbTask task) throws SchedulerException {
         JobKey jobKey = JobKey.jobKey(task.getJobName(), task.getJobGroup());
         scheduler.resumeJob(jobKey);
     }
@@ -179,8 +135,8 @@ public class QuartzManager {
     /**
      * 删除一个job
      *
-     * @param task
-     * @throws SchedulerException
+     * @param task 任务
+     * @throws SchedulerException 异常
      */
     public void deleteJob(TbTask task) throws SchedulerException {
         JobKey jobKey = JobKey.jobKey(task.getJobName(), task.getJobGroup());
@@ -191,10 +147,10 @@ public class QuartzManager {
     /**
      * 立即执行job
      *
-     * @param task
-     * @throws SchedulerException
+     * @param task 任务
+     * @throws SchedulerException 异常
      */
-    public void runJobNow(TaskDO task) throws SchedulerException {
+    public void runJobNow(TbTask task) throws SchedulerException {
         JobKey jobKey = JobKey.jobKey(task.getJobName(), task.getJobGroup());
         scheduler.triggerJob(jobKey);
     }
@@ -202,8 +158,8 @@ public class QuartzManager {
     /**
      * 更新job时间表达式
      *
-     * @param task
-     * @throws SchedulerException
+     * @param task 任务
+     * @throws SchedulerException 异常
      */
     public void updateJobCron(TbTask task) throws SchedulerException {
 

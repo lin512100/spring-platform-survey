@@ -1,0 +1,1 @@
+{"id":"txManager160100008244400001","wasCommitted":false,"participants":[{"uri":"txManager1","state":"TERMINATED","expires":1601000093042,"resourceName":"accountDataSource"},{"uri":"txManager2","state":"TERMINATED","expires":1601000093042,"resourceName":"systemDataSource"}]}

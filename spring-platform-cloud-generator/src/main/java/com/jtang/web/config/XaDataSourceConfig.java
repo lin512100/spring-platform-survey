@@ -2,8 +2,6 @@ package com.jtang.web.config;
 
 import com.atomikos.icatch.jta.UserTransactionManager;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.jta.JtaTransactionManager;
@@ -14,10 +12,8 @@ import org.springframework.transaction.jta.JtaTransactionManager;
  * @date 2020/9/25
  */
 
-@EnableAutoConfiguration(exclude={
-        DataSourceAutoConfiguration.class,
-        DataSourceTransactionManagerAutoConfiguration.class,
-})
+@Configuration
+@EnableAutoConfiguration
 public class XaDataSourceConfig {
 
     /**

@@ -5,12 +5,14 @@ spring:
         server-addr: 127.0.0.1:8848
         file-extension: yml
         namespace: 73f8ec92-a874-4953-9a59-5b8202286403
+        timeout: 10000
         extension-configs:
           - data-id: mysql.yml
             group: ACCOUNT_GROUP
+            refresh: true
           - data-id: redis.yml
             group: ACCOUNT_GROUP
-
+            refresh: true
       discovery:
         server-addr: 127.0.0.1:8848
         namespace: 73f8ec92-a874-4953-9a59-5b8202286403

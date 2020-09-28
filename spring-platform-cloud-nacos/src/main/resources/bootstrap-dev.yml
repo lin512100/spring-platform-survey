@@ -11,6 +11,9 @@ spring:
           - data-id: nacos-mysql.yml
             group: NACOS_MICROSERVICE_GROUP
             refresh: true
+          - data-id: redis.yml
+            group: NACOS_MICROSERVICE_GROUP
+            refresh: true
 
       discovery:
         server-addr: 127.0.0.1:8848

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Administrator
  * @version 1.0
  **/
-@RestController
 @SpringBootApplication
 public class NacosApplication {
     public static void main(String[] args) {
