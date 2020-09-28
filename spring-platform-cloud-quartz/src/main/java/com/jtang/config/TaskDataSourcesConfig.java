@@ -22,9 +22,9 @@ import javax.sql.DataSource;
         sqlSessionFactoryRef = "tasksSqlSessionFactory")
 public class TaskDataSourcesConfig {
 
-    public static final String DATABASE_PREFIX = "spring.datasource.tasks.";
+    public static final String DATABASE_PREFIX = "spring.datasource.task.";
 
-    public static final String DATA_SOURCE_NAME = "tasksDataSource";
+    public static final String DATA_SOURCE_NAME = "taskDataSource";
     public static final String SQL_SESSION_FACTORY = "tasksSqlSessionFactory";
 
     /**

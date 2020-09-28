@@ -33,9 +33,11 @@ public class TbTaskServiceImpl extends ServiceImpl<TbTaskMapper, TbTask> impleme
     public void initSchedule() throws SchedulerException {
         // 这里获取任务信息数据
         List<TbTask> jobList = list();
+        log.info("正在获取队列任务......");
         for (TbTask task : jobList) {
             if (JobStatusEnum.RUNNING.getCode().equals(task.getJobStatus())) {
                 quartzManager.addJob(task);
+                quartzManager.runJobNow(task);
             }
         }
     }

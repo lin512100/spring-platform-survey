@@ -1,8 +1,0 @@
-server:
-  port: 3000
-spring:
-  application:
-    name: platform-task
-  profiles:
-    active: dev
-
