@@ -3,7 +3,7 @@ package com.jtang.task.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.jtang.business.query.TbTaskQueryDTO;
+import com.jtang.task.query.TbTaskQueryDTO;
 import com.jtang.task.entity.TbTask;
 import com.jtang.task.service.ITbTaskService;
 import com.jtang.web.utils.PageUtils;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
 * 定时任务 前端控制器
 * @author jtang
-* @since 2020-09-25
+* @since 2020-09-28
 * @version v1.0
 */
 @Api(tags = "定时任务模块")

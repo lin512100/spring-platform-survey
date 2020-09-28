@@ -1,4 +1,4 @@
-package com.jtang.business.query;
+package com.jtang.task.query;
 
 import com.jtang.common.base.BaseQuery;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.ToString;
 /**
 * 定时任务 查询类
 * @author jtang
-* @since 2020-09-25
+* @since 2020-09-28
 * @version v1.0
 */
 @Getter
