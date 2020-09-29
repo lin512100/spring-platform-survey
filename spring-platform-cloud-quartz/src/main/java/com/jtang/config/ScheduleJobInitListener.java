@@ -6,6 +6,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+/**
+ * 任务监听
+ * @author lin512100
+ * @date 2020/9/29
+ */
 @Component
 @Order(value = 1)
 public class ScheduleJobInitListener implements CommandLineRunner {

@@ -14,7 +14,6 @@
     <name>组件-定时任务器-quartz</name>
 
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-quartz</artifactId>

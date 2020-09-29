@@ -3,23 +3,5 @@ server:
 spring:
   application:
     name: platform-task
-#  profiles:
-#    active: dev
-
-  jta:
-    transaction-manager-id: taskManager
-  datasource:
-    type: com.alibaba.druid.pool.xa.DruidXADataSource
-    driverClassName: com.mysql.cj.jdbc.Driver
-    minimum-idle: 5
-    idle-timeout: 180000
-    maximum-pool-size: 10
-    auto-commit: true
-    pool-name: MyHikariCP
-    max-lifetime: 1800000
-    connection-timeout: 30000
-    test-query: SELECT 1
-    task:
-      url: jdbc:mysql://129.204.1.173:3306/platform-task?useUnicode=true&serverTimezone=UTC&useSSL=false&characterEncoding=UTF-8
-      username: root
-      password: Jtang!14010025
+  profiles:
+    active: dev

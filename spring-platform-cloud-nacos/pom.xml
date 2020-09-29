@@ -40,6 +40,10 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.jtang</groupId>
+            <artifactId>spring-platform-cloud-quartz</artifactId>
+        </dependency>
 
 
     </dependencies>

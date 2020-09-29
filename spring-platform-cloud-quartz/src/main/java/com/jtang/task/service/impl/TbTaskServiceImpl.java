@@ -6,6 +6,7 @@ import com.jtang.task.entity.TbTask;
 import com.jtang.task.mapper.TbTaskMapper;
 import com.jtang.task.service.ITbTaskService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jtang.task.service.ScheduleService;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +30,15 @@ public class TbTaskServiceImpl extends ServiceImpl<TbTaskMapper, TbTask> impleme
     @Autowired
     private QuartzManager quartzManager;
 
+    @Autowired
+    private ScheduleService scheduleService;
+
     @Override
     public void initSchedule() throws SchedulerException {
         // 这里获取任务信息数据
         List<TbTask> jobList = list();
-        log.info("正在获取队列任务......");
-        for (TbTask task : jobList) {
-            if (JobStatusEnum.RUNNING.getCode().equals(task.getJobStatus())) {
-                quartzManager.addJob(task);
-                quartzManager.runJobNow(task);
-            }
+        if(jobList != null && jobList.size() > 0){
+            scheduleService.initSchedule(jobList);
         }
     }
 

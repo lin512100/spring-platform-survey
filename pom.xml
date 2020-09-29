@@ -138,10 +138,18 @@
                 <artifactId>spring-platform-cloud-redisson</artifactId>
                 <version>${platform-version}</version>
             </dependency>
-            <!--  Redisson模块-->
+
+            <!--  测试模快-->
             <dependency>
                 <groupId>com.jtang</groupId>
                 <artifactId>spring-platform-cloud-nacos</artifactId>
+                <version>${platform-version}</version>
+            </dependency>
+
+            <!-- 定时任务模快-->
+            <dependency>
+                <groupId>com.jtang</groupId>
+                <artifactId>spring-platform-cloud-quartz</artifactId>
                 <version>${platform-version}</version>
             </dependency>
 

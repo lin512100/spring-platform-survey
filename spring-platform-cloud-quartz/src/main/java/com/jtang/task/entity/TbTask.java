@@ -40,7 +40,7 @@ public class TbTask implements Serializable {
     private String beanClass;
 
     @ApiModelProperty(value = "任务状态")
-    private String jobStatus;
+    private Integer jobStatus;
 
     @ApiModelProperty(value = "任务分组")
     private String jobGroup;
@@ -49,11 +49,12 @@ public class TbTask implements Serializable {
     private String createUser;
 
     @ApiModelProperty(value = "更新者")
+    private String updateUser;
+
+    @ApiModelProperty(value = "更新者")
     private LocalDateTime createTime;
 
     @ApiModelProperty(value = "更新时间")
-    private LocalDateTime updateUser;
-
     private LocalDateTime updateTime;
 
 
