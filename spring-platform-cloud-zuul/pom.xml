@@ -15,6 +15,18 @@
 
 
     <dependencies>
+        <!-- 注册中心-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!-- 配置中心-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.jtang</groupId>
             <artifactId>spring-platform-cloud-base</artifactId>
@@ -23,11 +35,6 @@
         <dependency>
             <groupId>com.jtang</groupId>
             <artifactId>spring-platform-cloud-feign</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
         <dependency>
@@ -49,10 +56,10 @@
         </dependency>
 
         <!--  集成网页基础服务模块-->
-        <dependency>
-            <groupId>com.jtang</groupId>
-            <artifactId>spring-platform-cloud-generator</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.jtang</groupId>-->
+<!--            <artifactId>spring-platform-cloud-generator</artifactId>-->
+<!--        </dependency>-->
 
     </dependencies>
 

@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+
 import javax.sql.DataSource;
 
 /**
@@ -61,6 +63,7 @@ public class DataSourceUtil {
         sessionFactoryBean.setDataSource(dataSource);
         MybatisConfiguration configuration = new MybatisConfiguration();
         sessionFactoryBean.setConfiguration(configuration);
+        sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/**/*Mapper.xml"));
         return sessionFactoryBean.getObject();
     }
 

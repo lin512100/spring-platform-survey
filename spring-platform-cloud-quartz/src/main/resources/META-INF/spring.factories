@@ -1,4 +1,3 @@
 # Auto Configuration
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    com.jtang.config.QuartzConfig,\
-    com.jtang.config.TaskDataSourcesConfig
+    com.jtang.config.QuartzConfig

@@ -7,11 +7,11 @@ spring:
         namespace: 73f8ec92-a874-4953-9a59-5b8202286403
         extension-configs:
           - data-id: mysql.yml
-            group: OAUTH_GROUP
+            group: ZUUL_GROUP
           - data-id: redis.yml
-            group: OAUTH_GROUP
-          - data-id: oauth.yml
-            group: OAUTH_GROUP
+            group: ZUUL_GROUP
+          - data-id: zuul.yml
+            group: ZUUL_GROUP
 
       discovery:
         server-addr: 127.0.0.1:8848

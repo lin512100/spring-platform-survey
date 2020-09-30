@@ -59,6 +59,7 @@ public class OperationAspect {
         try{
             object = proceedingJoinPoint.proceed();
         }catch (Throwable throwable){
+            throwable.printStackTrace();
             object =  ResultUtils.errorMsg(throwable.getMessage());
         }
         if(sysLog != null){

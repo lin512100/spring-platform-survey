@@ -1,0 +1,11 @@
+server:
+  port: 5000
+zuul:
+  # 默认过滤敏感头信息
+  sensitiveHeaders:
+spring:
+  application:
+    name: platform-zuul
+  profiles:
+    active: dev
+

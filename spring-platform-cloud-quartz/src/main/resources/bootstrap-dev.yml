@@ -9,5 +9,3 @@ spring:
           - data-id: mysql.yml
             group: TASK_GROUP
             refresh: true
-
-

@@ -1,4 +1,5 @@
-### 配置Nacos数据源
+### 常规配置Nacos数据源
+
 测试环境
 ```shell script
 - data-id: mysql.yml
