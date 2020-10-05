@@ -24,7 +24,10 @@ public class DefaultRedisConfig implements RedisConfig {
         Config config = new Config();
         try{
             String redisUrl = String.format("redis://%s:%s",redisProperties.getHost()+"",redisProperties.getPort()+"");
-            config.useSingleServer().setAddress(redisUrl).setPassword(redisProperties.getPassword());
+            config.useSingleServer().setAddress(redisUrl).setPassword(redisProperties.getPassword()).setTimeout(1000)
+                    .setRetryAttempts(3)
+                    .setRetryInterval(1000)
+                    .setPingConnectionInterval(1000);
         }catch (Exception e){
             log.error("Redis 数据库配置异常："+ e.getMessage());
             e.printStackTrace();

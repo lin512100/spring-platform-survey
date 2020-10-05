@@ -82,6 +82,7 @@ public class OperationAspect {
                 sysLog.setError(resultUtils.getMsg());
             }
         }catch (Exception error){
+            error.printStackTrace();
             sysLog.setError(error.getMessage());
         }
         // 调用日志写入接口

@@ -18,10 +18,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class RedisHolder {
 
     /** Redisson 操作实体类 */
-    private static ConcurrentHashMap<String, RedissonClient> queryHelperMap = new ConcurrentHashMap<String, RedissonClient>();
+    private static final ConcurrentHashMap<String, RedissonClient> queryHelperMap = new ConcurrentHashMap<String, RedissonClient>();
 
     /** 维护组对应的配置实例 */
-    private static ConcurrentHashMap<String, RedisConfig> configMap = new ConcurrentHashMap<String, RedisConfig>();
+    private static final ConcurrentHashMap<String, RedisConfig> configMap = new ConcurrentHashMap<String, RedisConfig>();
 
     /** 默认组名 实例 */
     public final static String DEFAULT_REDIS_GROUP = "default";

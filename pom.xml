@@ -40,7 +40,6 @@
         <module>spring-platform-cloud-redisson</module>
         <module>spring-platform-cloud-message</module>
         <module>spring-platform-cloud-nacos</module>
-        <module>spring-platform-cloud-quartz</module>
     </modules>
 
     <dependencies>
